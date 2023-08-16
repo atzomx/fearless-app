@@ -1,3 +1,15 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es5", "es6", "es2017"],
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["src/core/*"],
+      "@ui/*": ["src/core/ui/*"],
+      "@e/*": ["src/entities/*"],
+      "@env": [".env.js"]
+    },
+    "types": ["@types/styled-components-react-native", "@types/jest"]
+  }
 }
