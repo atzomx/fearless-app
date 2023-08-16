@@ -1,0 +1,10 @@
+export { default as CameraIcon } from './CameraIcon';
+export { default as ChatIcon } from './ChatIcon';
+export { default as CloseIcon } from './CloseIcon';
+export { default as FaceIcon } from './FaceIcon';
+export { default as FilterIcon } from './FilterIcon';
+export { default as FlameIcon } from './FlameIcon';
+export { default as HeartIcon } from './HeartIcon';
+export { default as LogoIcon } from './LogoIcon';
+export { default as SearchIcon } from './SearchIcon';
+export { default as NotificationIcon } from './NotificationIcon';
