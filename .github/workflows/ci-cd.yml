@@ -1,0 +1,33 @@
+name: Continuous Integration
+
+on: [pull_request]
+
+jobs:
+  avoid_redundancy:
+    name: Avoid redundancy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previus Redundat Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+  test:
+    name: Test check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Test
+        run: yarn test:coverage
+  lint:
+    name: Lint check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Lint
+        run: yarn lint

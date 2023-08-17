@@ -1,0 +1,11 @@
+{
+  "input": {
+    "username": "Nombre de usuario",
+    "password": "Contraseña"
+  },
+  "text": {
+    "signin": "Inicia Sesión",
+    "recover": "Recuperar contraseña",
+    "signup": "Registrate"
+  }
+}
