@@ -1,0 +1,11 @@
+{
+  "input": {
+    "username": "Username",
+    "password": "Password"
+  },
+  "text": {
+    "signin": "Sign In",
+    "recover": "Recovery password",
+    "signup": "Sign Up"
+  }
+}
