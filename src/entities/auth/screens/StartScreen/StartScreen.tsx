@@ -1,37 +1,28 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 
-import { useTranslation } from 'react-i18next';
+import { useTheme } from 'styled-components/native';
 
-import { useNavigate } from '@core/hooks';
-import { Spacer } from '@core/ui';
-import ROUTES from '@e/auth/constants/routes';
-import { LogoLayout } from '@e/auth/layouts';
+import { SafeLayout } from '@core/layouts';
+import { Text, Button } from '@core/ui';
 
 import * as S from './StartScreen.styled';
 
 const StartScreen = () => {
-  const { t } = useTranslation();
-  const navigator = useNavigate();
-
-  const onPressButton = () => {
-    navigator.replace(ROUTES.login);
-  };
-
+  const theme = useTheme();
   return (
-    <LogoLayout>
-      <S.Title color="primary" variant="h4">
-        {t('auth.start.text.title')}
-      </S.Title>
-      <Spacer spacing={2} />
-      <S.SubTitle color="secondary" variant="body1">
-        {t('auth.start.text.subtitle1')}{' '}
-        <S.Caption variant="body1">{t('auth.start.text.caption')}</S.Caption>{' '}
-        {t('auth.start.text.subtitle2')}
-      </S.SubTitle>
-      <Spacer spacing={2} />
-      <S.Button onPress={onPressButton} color="primary" title="Comencemos" />
-      <Spacer spacing={2} />
-    </LogoLayout>
+    <SafeLayout sx={{ padding: 16 }}>
+      <S.Container>
+        <StatusBar translucent backgroundColor={theme.pallete.primary.main} />
+        <Text align="center" color="white" variant="h1">
+          Selyz
+        </Text>
+        <Button title="Hola" color="primary" variant="contained" />
+        <Button title="Hola" color="primary" variant="outlined" />
+        <Button title="Hola" color="secondary" variant="contained" />
+        <Button title="Hola" color="secondary" variant="outlined" />
+      </S.Container>
+    </SafeLayout>
   );
 };
 

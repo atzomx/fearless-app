@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
+import { View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -9,7 +10,6 @@ import { InputControl } from '@core/components';
 import { useUserSingUp } from '@core/graphql/mutations';
 import { useNavigate } from '@core/hooks';
 import { Button, Spacer, Stack, Text } from '@core/ui';
-import { LogoLayout } from '@e/auth/layouts';
 import { TFormSignUp } from '@e/auth/schemas/signUp.schema';
 import signUpSchema from '@e/auth/schemas/signUp.schema';
 // import INTERACTION_ROUTES from '@e/interaction/constants/routes';
@@ -41,7 +41,7 @@ const SignUpScreen = () => {
   });
 
   return (
-    <LogoLayout>
+    <View>
       <Stack spacing={2} fullWidth>
         <Text variant="h4" color="secondary.dark" align="center">
           {t('auth.signup.text.signup')}
@@ -82,7 +82,7 @@ const SignUpScreen = () => {
           title={t('auth.signup.text.signup')}
         />
       </Stack>
-    </LogoLayout>
+    </View>
   );
 };
 

@@ -9,7 +9,7 @@ const Badge: BadgeBase = {
   },
   value: {
     fontSize: 10,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Inter-Regular',
     fontWeight: 900,
     color: '#fff',
   },

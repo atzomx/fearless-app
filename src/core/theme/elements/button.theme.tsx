@@ -1,23 +1,22 @@
 import type { ButtonBase } from '../types';
 
+const BASE = {
+  height: 56,
+  borderRadius: 20,
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingLeft: 16,
+  paddingRight: 16,
+};
+
 const Button: ButtonBase = {
   contained: {
-    height: 52,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: 16,
-    paddingRight: 16,
+    ...BASE,
   },
   outlined: {
-    height: 52,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...BASE,
     borderStyle: 'solid',
     borderWidth: 1,
-    paddingLeft: 16,
-    paddingRight: 16,
   },
 };
 
