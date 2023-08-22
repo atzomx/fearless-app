@@ -3,6 +3,8 @@ import { CSSObject } from 'styled-components';
 export type ButtonBase = {
   outlined: CSSObject;
   contained: CSSObject;
+  disabled?: CSSObject;
+  soft?: CSSObject;
 };
 
 export type BadgeBase = {
@@ -55,6 +57,8 @@ export type PalleteTextColor = {
   'secondary.main': string;
   'secondary.light': string;
   'secondary.dark': string;
+  black: string;
+  white: string;
 };
 
 export type TextColor = keyof PalleteTextColor;

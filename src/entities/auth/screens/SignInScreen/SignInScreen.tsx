@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 // import { useUserLogin } from '@core/graphql/mutations';
@@ -9,7 +10,6 @@ import { InputControl } from '@core/components';
 import { useNavigate } from '@core/hooks';
 import { Button, Spacer, Stack, Text } from '@core/ui';
 import AUTH_ROUTES from '@e/auth/constants/routes';
-import { LogoLayout } from '@e/auth/layouts';
 import loginSchema from '@e/auth/schemas/login.schema';
 
 type TFormLogin = { userName: string; password: string };
@@ -42,7 +42,7 @@ const SignInScreen = () => {
   };
 
   return (
-    <LogoLayout>
+    <View>
       <Stack spacing={2} fullWidth>
         <Text variant="h4" color="secondary.dark" align="center">
           {t('auth.signin.text.signin')}
@@ -80,7 +80,7 @@ const SignInScreen = () => {
           title={t('auth.signin.text.signup')}
         />
       </Stack>
-    </LogoLayout>
+    </View>
   );
 };
 
