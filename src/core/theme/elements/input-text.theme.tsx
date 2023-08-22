@@ -13,7 +13,7 @@ const InputText: InputTextBase = {
     padding: '0px 10px',
     marginTop: 5,
     fontSize: 11,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Inter-Regular',
   },
   adorment: {
     width: '6px',
@@ -22,13 +22,13 @@ const InputText: InputTextBase = {
     padding: '0px 10px',
     fontSize: 14,
     fontWeight: 400,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Inter-Regular',
   },
   helper: {
     paddingLeft: '16px',
     fontSize: 10,
     fontWeight: 400,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Inter-Regular',
   },
 };
 

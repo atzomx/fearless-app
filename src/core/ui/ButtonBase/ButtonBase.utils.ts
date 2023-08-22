@@ -24,6 +24,7 @@ export const getButtonVariantStyle = ({
   const currentColor = disable
     ? theme.pallete.action.disabledBackground
     : theme.pallete[color].main;
+
   const variants = {
     contained: {
       backgroundColor: currentColor,
@@ -41,9 +42,7 @@ export const getContentVariantStyle = ({
   color,
   disable,
 }: TButtonVariantStyle) => {
-  return disable
-    ? theme.pallete.action.disabled
-    : variant === 'contained'
-    ? theme.pallete[color].contrastText
-    : theme.pallete[color].main;
+  if (disable) return theme.pallete.action.disabled;
+  if (variant === 'contained') return theme.pallete[color].contrastText;
+  return theme.pallete[color].main;
 };
