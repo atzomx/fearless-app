@@ -1,9 +1,9 @@
 import { PalletBase } from '../types';
 
 export const ColorPrimary = {
-  light: '#ed83a9',
-  main: '#e96494',
-  dark: '#a34667',
+  light: '#000',
+  main: '#000',
+  dark: '#000',
   contrastText: '#fff',
 };
 
@@ -14,12 +14,14 @@ export const ColorSecondary = {
   contrastText: '#fff',
 };
 
+export const CommonColors = {
+  black: '#000',
+  white: '#FFF',
+};
+
 export const pallete: PalletBase = {
   background: '#fff',
-  common: {
-    black: '#000',
-    white: '#FFF',
-  },
+  common: CommonColors,
   action: {
     disabled: '#00000042',
     disabledBackground: '#0000001f',
@@ -48,6 +50,7 @@ export const pallete: PalletBase = {
     'secondary.main': ColorSecondary.main,
     'secondary.light': ColorSecondary.light,
     'secondary.dark': ColorSecondary.dark,
+    ...CommonColors,
   },
   error: {
     main: '#d32f2f',
