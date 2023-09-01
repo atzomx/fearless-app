@@ -1,2 +1,2 @@
-export { default as ChatsListScreen } from './chatsList';
-export { default as ConversationScreen } from './conversation';
+export { default as ChatsListScreen } from './ChatsList';
+export { default as ConversationScreen } from './Conversation';
