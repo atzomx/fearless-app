@@ -1,25 +1,26 @@
 import React, { FC } from 'react';
 import { TextProps as RNTextProps } from 'react-native';
 
-import { TextVariant, TextColor, AlignText } from '@core/theme/theme';
-
+import { TextProps } from './Text.model';
 import * as S from './Text.style';
 
-export type TextProps = RNTextProps & {
-  color?: TextColor;
-  variant?: TextVariant;
-  align?: AlignText;
-};
-
-const Text: FC<TextProps> = ({
-  color = 'primary',
-  variant = 'body1',
+const Text: FC<RNTextProps & TextProps> = ({
   children,
   align = 'left',
+  color = 'primary',
+  fontSize,
+  fontWeight,
+  variant = 'body1',
   ...props
 }) => {
   return (
-    <S.Text align={align} color={color} variant={variant} {...props}>
+    <S.Text
+      align={align}
+      color={color}
+      variant={variant}
+      fontWeight={fontWeight}
+      fontSize={fontSize}
+      {...props}>
       {children}
     </S.Text>
   );
