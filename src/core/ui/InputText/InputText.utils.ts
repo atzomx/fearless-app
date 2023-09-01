@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components/native';
 
-import { ColorVariant } from '@core/theme/theme';
+import { ColorVariant } from '@core/theme';
 
 import { InputStatus } from './InputText.types';
 

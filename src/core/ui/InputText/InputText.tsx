@@ -10,7 +10,7 @@ import {
 
 import { useTheme } from 'styled-components/native';
 
-import { ColorVariant } from '@core/theme/theme';
+import { ColorVariant } from '@core/theme';
 
 import * as S from './InputText.style';
 
