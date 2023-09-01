@@ -11,7 +11,7 @@ import * as S from './StartScreen.styled';
 const StartScreen = () => {
   const theme = useTheme();
   return (
-    <SafeLayout sx={{ padding: 16 }}>
+    <SafeLayout>
       <S.Container>
         <StatusBar translucent backgroundColor={theme.pallete.primary.main} />
         <Text align="center" color="white" variant="h1">
