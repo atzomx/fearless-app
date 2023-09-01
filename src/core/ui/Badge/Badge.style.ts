@@ -5,7 +5,7 @@ import {
   AlignVertical,
   BadgeVariant,
   ColorVariant,
-} from '@core/theme/theme';
+} from '@core/theme';
 
 import { getBadgeVariantStyle, getBadgeValueVariantStyle } from './Badge.utils';
 
