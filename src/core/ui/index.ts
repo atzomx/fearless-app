@@ -20,4 +20,7 @@ export { default as Badge } from './Badge';
 export * from './Badge';
 
 export { default as IconButton } from './IconButton';
-export * from './Badge';
+export * from './IconButton';
+
+export { default as Card } from './Card';
+export * from './Card';
