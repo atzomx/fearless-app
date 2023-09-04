@@ -1,6 +1,6 @@
 import { CSSObject } from 'styled-components';
 
-import { ButtonVariant, ColorVariant, Theme } from '@core/theme/theme';
+import { ButtonVariant, ColorVariant, Theme } from '@core/theme';
 
 export type TButtonVariantStyle = {
   variant: ButtonVariant;

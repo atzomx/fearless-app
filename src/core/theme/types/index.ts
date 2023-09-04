@@ -91,6 +91,26 @@ export type InputTextBase = {
   helper: CSSObject;
 };
 
+export type TextWeight =
+  | 100
+  | 200
+  | 300
+  | 400
+  | 500
+  | 600
+  | 700
+  | 800
+  | 900
+  | 'Thin'
+  | 'ExtraLight'
+  | 'Light'
+  | 'Regular'
+  | 'Medium'
+  | 'SemiBold'
+  | 'Bold'
+  | 'ExtraBold'
+  | 'Back';
+
 export type TextBase = {
   h1: CSSObject;
   h2: CSSObject;
@@ -106,6 +126,14 @@ export type TextBase = {
   caption: CSSObject;
 };
 
+export type SubColor =
+  | 'primary.main'
+  | 'primary.light'
+  | 'primary.dark'
+  | 'secondary.main'
+  | 'secondary.light'
+  | 'secondary.dark';
+
 export type PalletBase = {
   background: string;
   common: {
@@ -120,15 +148,7 @@ export type PalletBase = {
   secondary: PalleteMainColor;
   grey: PalleteFullColor;
   text: PalleteTextColor & {
-    [
-      s:
-        | 'primary.main'
-        | 'primary.light'
-        | 'primary.dark'
-        | 'secondary.main'
-        | 'secondary.light'
-        | 'secondary.dark'
-    ]: string;
+    [key in SubColor]: string;
   };
   error: PalleteMainColor;
   warning: PalleteMainColor;

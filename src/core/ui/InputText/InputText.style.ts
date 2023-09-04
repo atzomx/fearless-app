@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { ColorVariant } from '@core/theme/theme';
+import { ColorVariant } from '@core/theme';
 
 import { InputStatus } from './InputText.types';
 import {
@@ -21,9 +21,9 @@ export const InputAdorment = styled.View<{
   backgroundColor: getInputAdormentStatus(theme, color, status),
 }));
 
-export const InputContainer = styled.View(() => ({
+export const InputContainer = styled.View({
   flex: 1,
-}));
+});
 
 export const Label = styled.Text<{ color: ColorVariant; status: InputStatus }>(
   ({ theme, color, status }) => ({

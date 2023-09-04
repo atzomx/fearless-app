@@ -4,20 +4,21 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from 'styled-components/native';
 
-import AUTH_ROUTES from '@e/auth/constants/routes';
 import LoginRoutes from '@e/auth/routes';
 import ChatRoutes from '@e/chats/routes';
+import DEALS_ROUTES from '@e/deals/constants/routes';
+import DealsRoutes from '@e/deals/routes';
 
 const Stack = createStackNavigator();
 
-const ROUTES = [...LoginRoutes, ...ChatRoutes];
+const ROUTES = [...LoginRoutes, ...ChatRoutes, ...DealsRoutes];
 
 const RootRouter = () => {
   const theme = useTheme();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={AUTH_ROUTES.start}
+        initialRouteName={DEALS_ROUTES.home}
         screenOptions={{
           cardStyle: {
             backgroundColor: theme.pallete.background,

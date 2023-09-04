@@ -6,3 +6,6 @@ export * from './ScrollLayout';
 
 export { default as SafeLayout } from './SafeLayout';
 export * from './SafeLayout';
+
+export { default as SpacingLayout } from './SpacingLayout';
+export * from './SpacingLayout';

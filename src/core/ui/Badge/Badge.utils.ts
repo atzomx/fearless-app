@@ -1,10 +1,6 @@
 import { CSSObject } from 'styled-components';
 
-import {
-  AlignHorizontal,
-  AlignVertical,
-  BadgeVariant,
-} from '@core/theme/theme';
+import { AlignHorizontal, AlignVertical, BadgeVariant } from '@core/theme';
 
 export const getBadgeAligmentStyle = ({
   horizontal,

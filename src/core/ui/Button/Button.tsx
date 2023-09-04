@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { ButtonVariant, ColorVariant } from '@core/theme/theme';
+import { ButtonVariant, ColorVariant } from '@core/theme';
 
 import * as S from './Button.style';
 
