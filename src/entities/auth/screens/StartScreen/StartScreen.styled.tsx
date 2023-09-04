@@ -6,4 +6,5 @@ export const Container = styled(View)(({ theme }) => ({
   justifyContent: 'center',
   flex: 1,
   backgroundColor: theme.pallete.primary.main,
+  padding: theme.spacing(1),
 }));

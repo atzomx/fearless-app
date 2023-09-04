@@ -1,4 +1,5 @@
 const BASE_SPACING = 8;
+
 export const spacing = (...spaces: number[]) =>
   spaces
     .slice(0, 4)
