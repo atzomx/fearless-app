@@ -1,16 +1,23 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { FC } from 'react';
-import { StyleSheet } from 'react-native';
+import { ScrollView, ScrollViewProps } from 'react-native';
 
-import { ScrollView } from 'react-native-gesture-handler';
+import { useTheme } from 'styled-components/native';
 
-const ScrollLayout: FC<React.PropsWithChildren> = ({ children }) => {
-  return <ScrollView style={styles.container}>{children}</ScrollView>;
+const ScrollLayout: FC<
+  React.PropsWithChildren & ScrollViewProps & { p?: number }
+> = ({ children, p = 0, ...props }) => {
+  const theme = useTheme();
+  return (
+    <ScrollView
+      {...props}
+      contentContainerStyle={{
+        padding: theme.spacingSingle(p),
+        overflow: 'visible',
+      }}>
+      {children}
+    </ScrollView>
+  );
 };
 
 export default ScrollLayout;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'yellow',
-  },
-});
