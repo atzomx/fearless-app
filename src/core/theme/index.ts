@@ -17,7 +17,7 @@ import type {
   PalletBase,
   TextBase,
 } from './types';
-import { fade, spacing, font } from './utils';
+import { fade, spacing, font, spacingSingle } from './utils';
 
 declare module 'styled-components' {
   export interface DefaultTheme extends Theme {}
@@ -34,6 +34,7 @@ export type Theme = {
     IconButton: ButtonBase;
   };
   spacing: typeof spacing;
+  spacingSingle: typeof spacingSingle;
   fade: typeof fade;
   font: typeof font;
 };
@@ -55,6 +56,7 @@ export const theme: Theme = {
   },
   font,
   spacing,
+  spacingSingle,
   fade,
 };
 
