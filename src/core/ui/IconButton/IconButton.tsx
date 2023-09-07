@@ -9,7 +9,7 @@ import {
 import { SvgProps } from 'react-native-svg';
 import { useTheme } from 'styled-components/native';
 
-import { ButtonVariant, ColorVariant } from '@core/theme/types';
+import type { ButtonVariant, ColorVariant } from '@core/theme/types';
 
 import * as S from './IconButton.style';
 
@@ -23,9 +23,10 @@ export type IconButtonProps = Omit<ButtonPropsRN, 'title' | 'children'> & {
   disable?: boolean;
   icon: (props: SvgProps) => JSX.Element;
   sx?: {
-    button: StyleProp<TextStyle>;
-    icon: StyleProp<TextStyle>;
+    button?: StyleProp<TextStyle>;
+    icon?: StyleProp<TextStyle>;
   };
+  iconColor?: string;
 };
 
 const IconButton: FC<IconButtonProps> = ({
@@ -35,11 +36,13 @@ const IconButton: FC<IconButtonProps> = ({
   onPress,
   style,
   icon: Icon,
+  sx,
+  iconColor,
   ...props
 }) => {
   const theme = useTheme();
   return (
-    <ButtonBase style={[style]}>
+    <ButtonBase style={style}>
       {({ fadeIn, fadeOut }) => (
         <S.Button
           onPressIn={fadeIn}
@@ -48,11 +51,21 @@ const IconButton: FC<IconButtonProps> = ({
           color={color}
           disable={disable}
           onPress={disable ? undefined : onPress}
+          style={sx?.button}
           {...props}>
           <Icon
             height={24}
             width={24}
-            fill={getContentVariantStyle({ variant, theme, color, disable })}
+            fill={
+              iconColor ||
+              getContentVariantStyle({
+                variant,
+                theme,
+                color,
+                disable,
+              })
+            }
+            style={sx?.icon}
           />
         </S.Button>
       )}
