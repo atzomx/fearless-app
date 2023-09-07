@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { SpacingLayout } from '@core/layouts';
 import { Text } from '@core/ui';
 
@@ -21,6 +23,8 @@ export type DealCardProps = {
 
 const DealCard = ({ deal }: DealCardProps) => {
   const { status, itemStatus, id, name, description, amount, dealer } = deal;
+  const { t } = useTranslation();
+
   return (
     <S.CardContainer>
       <SpacingLayout spacing={0.75}>
@@ -48,7 +52,7 @@ const DealCard = ({ deal }: DealCardProps) => {
               {amount}
             </Text>
             <Text color="#909090" fontWeight="Regular" fontSize={10}>
-              Valor
+              {t('deals.card.value')}
             </Text>
           </S.AmountContainer>
           <S.DealerContainer>
@@ -56,7 +60,7 @@ const DealCard = ({ deal }: DealCardProps) => {
               {dealer}
             </Text>
             <Text color="#909090" fontWeight="Regular" fontSize={10}>
-              Tratante
+              {t('deals.card.dealer')}
             </Text>
           </S.DealerContainer>
         </S.FooterContainer>
