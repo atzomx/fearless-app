@@ -3,3 +3,9 @@ export * from './DealCard';
 
 export { default as DealStatus } from './DealStatus';
 export * from './DealStatus';
+
+export { default as DealHeader } from './DealHeader';
+export * from './DealHeader';
+
+export { default as DealFilters } from './DealFilters';
+export * from './DealFilters';

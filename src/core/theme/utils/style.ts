@@ -6,6 +6,8 @@ export const spacing = (...spaces: number[]) =>
     .map(space => `${space * BASE_SPACING}px`)
     .join(' ');
 
+export const spacingSingle = (space: number) => space * BASE_SPACING;
+
 export const fade = (hex: string, alpha = 1) => {
   if (!/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) throw new Error('Bad Hex Color');
   const r = parseInt(hex.slice(1, 3), 16),

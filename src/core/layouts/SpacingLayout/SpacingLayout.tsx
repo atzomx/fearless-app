@@ -1,20 +1,41 @@
 import React from 'react';
+import { StyleProp, View, ViewStyle } from 'react-native';
 
-import { Spacer } from '../../ui';
+import { useTheme } from 'styled-components/native';
 
-export type SpacingLayoutProps = React.PropsWithChildren & { spacing?: number };
+export type SpacingLayoutProps = React.PropsWithChildren & {
+  spacing?: number;
+  direction?: 'horizontal' | 'vertical';
+};
 
-const SpacingLayout: React.FC<SpacingLayoutProps> = ({ children, spacing }) => {
+const PARSER = Object.freeze({
+  horizontal: 'marginRight',
+  vertical: 'marginBottom',
+});
+
+const SpacingLayout: React.FC<SpacingLayoutProps> = ({
+  children,
+  spacing = 0,
+  direction = 'vertical',
+}) => {
+  const theme = useTheme();
   const ArrayChildren = React.Children.toArray(children);
+
+  const styleSpacing = (index: number): StyleProp<ViewStyle> => {
+    if (index === ArrayChildren.length - 1) return undefined;
+    return {
+      [PARSER[direction]]: theme.spacingSingle(spacing),
+    };
+  };
+
   return (
     <>
       {ArrayChildren.map((child, index) => (
-        <React.Fragment key={`spacing-layout-fragment-${index}`}>
+        <View
+          key={`spacing-layout-fragment-${index}`}
+          style={styleSpacing(index)}>
           {child}
-          {index !== ArrayChildren.length - 1 && (
-            <Spacer key={`spacing-layout-spacer-${index}`} spacing={spacing} />
-          )}
-        </React.Fragment>
+        </View>
       ))}
     </>
   );

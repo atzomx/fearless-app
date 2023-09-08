@@ -7,9 +7,9 @@ const Avatar: AvatarBase = {
     borderRadius: 36 / 2,
   },
   medium: {
-    height: 40,
-    width: 40,
-    borderRadius: 40 / 2,
+    height: 42,
+    width: 42,
+    borderRadius: 42 / 2,
   },
   large: {
     height: 48,
