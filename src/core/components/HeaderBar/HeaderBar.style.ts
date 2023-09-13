@@ -1,12 +1,10 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View(({ theme }) => ({
+export const Container = styled.View({
   flexDirection: 'row',
   justifyContent: 'space-between',
   justifyItems: 'center',
-  marginTop: theme.spacing(1),
-  marginBottom: theme.spacing(1),
-}));
+});
 
 export const ContainerTitle = styled.View({
   alignContent: 'center',
