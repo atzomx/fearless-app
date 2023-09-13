@@ -50,5 +50,8 @@ export const IconContainer = styled.View<{ variant: VariantStatus }>(
     position: 'absolute',
     top: -1,
     left: -1,
+
+    justifyContent: 'center',
+    alignItems: 'center',
   }),
 );

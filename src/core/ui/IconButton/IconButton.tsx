@@ -54,9 +54,9 @@ const IconButton: FC<IconButtonProps> = ({
           style={sx?.button}
           {...props}>
           <Icon
-            height={24}
-            width={24}
-            fill={
+            height={18}
+            width={18}
+            color={
               iconColor ||
               getContentVariantStyle({
                 variant,

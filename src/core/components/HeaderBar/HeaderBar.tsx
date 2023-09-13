@@ -3,7 +3,7 @@ import { ViewProps } from 'react-native';
 
 import { useTheme } from 'styled-components/native';
 
-import { CameraIcon } from '@core/icons';
+import { BackIcon } from '@core/icons';
 import { Avatar, Badge, IconButton, Text } from '@core/ui';
 
 import * as S from './HeaderBar.style';
@@ -38,8 +38,8 @@ const HeaderBar: FC<HeaderBarProps & ViewProps> = ({
                 backgroundColor: theme.pallete.grey['100'],
               },
             }}
-            icon={CameraIcon}
-            iconColor={theme.pallete.grey[500]}
+            icon={BackIcon}
+            iconColor={theme.pallete.grey[600]}
           />
         )}
       </S.ContainerBack>
