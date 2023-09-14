@@ -33,3 +33,9 @@ export * from './Tab';
 
 export { default as TabPanel } from './TabPanel';
 export * from './TabPanel';
+
+export { default as Container } from './Container';
+export * from './Container';
+
+export { default as FloatButton } from './FloatButton';
+export * from './FloatButton';
