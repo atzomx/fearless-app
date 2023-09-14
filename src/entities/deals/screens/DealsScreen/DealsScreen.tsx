@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 
+import { useTheme } from 'styled-components/native';
+
 import { HeaderBar } from '@core/components';
+import { useNavigate } from '@core/hooks';
+import { FilterIcon } from '@core/icons';
 import { SafeLayout, ScrollLayout, SpacingLayout } from '@core/layouts';
-import { Tab, TabPanel, Tabs, Text } from '@core/ui';
+import { FloatButton, Tab, TabPanel, Tabs, Text } from '@core/ui';
 import { DealCard, DealFilters, DealHeader } from '@e/deals/components';
+import DEALS_ROUTES from '@e/deals/constants/routes';
 
 const deal = {
   status: 'Espeando Confirmacion',
@@ -19,7 +24,9 @@ const deal = {
 const DEALS = [deal, deal, deal, deal, deal];
 
 const DealsScreen = () => {
+  const theme = useTheme();
   const [tab, setTab] = useState(0);
+  const router = useNavigate();
   return (
     <SafeLayout>
       <ScrollLayout p={2}>
@@ -45,6 +52,9 @@ const DealsScreen = () => {
           </TabPanel>
         </SpacingLayout>
       </ScrollLayout>
+      <FloatButton onPress={() => router.push(DEALS_ROUTES.new)}>
+        <FilterIcon width={20} height={20} color={theme.pallete.common.white} />
+      </FloatButton>
     </SafeLayout>
   );
 };

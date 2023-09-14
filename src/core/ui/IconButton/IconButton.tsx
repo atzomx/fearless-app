@@ -16,12 +16,13 @@ import * as S from './IconButton.style';
 import ButtonBase from '../ButtonBase';
 import { getContentVariantStyle } from '../ButtonBase/ButtonBase.utils';
 
-export type IconButtonProps = Omit<ButtonPropsRN, 'title' | 'children'> & {
+export type IconButtonProps = Omit<ButtonPropsRN, 'title'> & {
   variant?: ButtonVariant;
   color?: ColorVariant;
   style?: StyleProp<ViewStyle>;
   disable?: boolean;
-  icon: (props: SvgProps) => JSX.Element;
+  icon?: React.ReactNode | ((props: SvgProps) => JSX.Element);
+  children?: React.ReactNode;
   sx?: {
     button?: StyleProp<TextStyle>;
     icon?: StyleProp<TextStyle>;
@@ -38,9 +39,11 @@ const IconButton: FC<IconButtonProps> = ({
   icon: Icon,
   sx,
   iconColor,
+  children,
   ...props
 }) => {
   const theme = useTheme();
+
   return (
     <ButtonBase style={style}>
       {({ fadeIn, fadeOut }) => (
@@ -53,20 +56,24 @@ const IconButton: FC<IconButtonProps> = ({
           onPress={disable ? undefined : onPress}
           style={sx?.button}
           {...props}>
-          <Icon
-            height={18}
-            width={18}
-            color={
-              iconColor ||
-              getContentVariantStyle({
-                variant,
-                theme,
-                color,
-                disable,
-              })
-            }
-            style={sx?.icon}
-          />
+          {typeof Icon === 'function' ? (
+            <Icon
+              height={18}
+              width={18}
+              color={
+                iconColor ||
+                getContentVariantStyle({
+                  variant,
+                  theme,
+                  color,
+                  disable,
+                })
+              }
+              style={sx?.icon}
+            />
+          ) : (
+            <>{(Icon as React.ReactNode) || children}</>
+          )}
         </S.Button>
       )}
     </ButtonBase>
