@@ -9,3 +9,6 @@ export * from './DealHeader';
 
 export { default as DealFilters } from './DealFilters';
 export * from './DealFilters';
+
+export { default as NewDealPage } from './NewDealPage';
+export * from './NewDealPage';

@@ -12,3 +12,6 @@ export * from './ChatItem';
 
 export { default as ImageCarrousel } from './ImageCarrousel';
 export * from './ImageCarrousel';
+
+export { default as BackButton } from './BackButton';
+export * from './BackButton';

@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { Text } from '@core/ui';
-import Container from '@core/ui/Container';
+import { Wizard } from '@core/ui';
+import { NewDealPage } from '@e/deals/components';
 
 const NewDealScreen = () => {
   return (
-    <Container>
-      <Text>Hola</Text>
-    </Container>
+    <Wizard>
+      <NewDealPage
+        title="Crea un nuevo trato"
+        subtitle="¡Amigo, cuéntame qué vendes, descríbelo en pocas palabras!"
+      />
+      <NewDealPage />
+      <NewDealPage />
+    </Wizard>
   );
 };
 

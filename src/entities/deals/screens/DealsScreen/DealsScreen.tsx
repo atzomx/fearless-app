@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components/native';
 
 import { HeaderBar } from '@core/components';
 import { useNavigate } from '@core/hooks';
-import { FilterIcon } from '@core/icons';
+import { PlusIcon } from '@core/icons';
 import { SafeLayout, ScrollLayout, SpacingLayout } from '@core/layouts';
 import { FloatButton, Tab, TabPanel, Tabs, Text } from '@core/ui';
 import { DealCard, DealFilters, DealHeader } from '@e/deals/components';
@@ -53,7 +53,7 @@ const DealsScreen = () => {
         </SpacingLayout>
       </ScrollLayout>
       <FloatButton onPress={() => router.push(DEALS_ROUTES.new)}>
-        <FilterIcon width={20} height={20} color={theme.pallete.common.white} />
+        <PlusIcon width={20} height={20} color={theme.pallete.common.white} />
       </FloatButton>
     </SafeLayout>
   );
