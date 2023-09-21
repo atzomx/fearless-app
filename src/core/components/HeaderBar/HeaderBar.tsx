@@ -3,10 +3,11 @@ import { ViewProps } from 'react-native';
 
 import { useTheme } from 'styled-components/native';
 
-import { BackIcon } from '@core/icons';
-import { Avatar, Badge, IconButton, Text } from '@core/ui';
+import { Avatar, Badge, Text } from '@core/ui';
 
 import * as S from './HeaderBar.style';
+
+import BackButton from '../BackButton';
 
 const URL = 'https://avatars.githubusercontent.com/u/43711671?v=4';
 
@@ -27,21 +28,7 @@ const HeaderBar: FC<HeaderBarProps & ViewProps> = ({
   return (
     <S.Container {...props}>
       <S.ContainerBack>
-        {onBack && (
-          <IconButton
-            variant="contained"
-            color="secondary"
-            sx={{
-              button: {
-                height: 42,
-                width: 42,
-                backgroundColor: theme.pallete.grey['100'],
-              },
-            }}
-            icon={BackIcon}
-            iconColor={theme.pallete.grey[600]}
-          />
-        )}
+        {onBack && <BackButton onPress={onBack} />}
       </S.ContainerBack>
       <S.ContainerTitle>
         {title && (

@@ -39,3 +39,6 @@ export * from './Container';
 
 export { default as FloatButton } from './FloatButton';
 export * from './FloatButton';
+
+export { default as Wizard } from './Wizard';
+export * from './Wizard';
