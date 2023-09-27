@@ -42,3 +42,6 @@ export * from './FloatButton';
 
 export { default as Wizard } from './Wizard';
 export * from './Wizard';
+
+export { default as InputInvisible } from './InputInvisible';
+export * from './InputInvisible';
