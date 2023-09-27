@@ -1,18 +1,21 @@
 import React from 'react';
 
+import { SafeLayout } from '@core/layouts';
 import { Wizard } from '@core/ui';
-import { NewDealPage } from '@e/deals/components';
+import { NewDealStepOne, NewDealStepTwo } from '@e/deals/components';
+import { NewDealContext } from '@e/deals/context';
 
 const NewDealScreen = () => {
   return (
-    <Wizard>
-      <NewDealPage
-        title="Crea un nuevo trato"
-        subtitle="¡Amigo, cuéntame qué vendes, descríbelo en pocas palabras!"
-      />
-      <NewDealPage />
-      <NewDealPage />
-    </Wizard>
+    <NewDealContext>
+      <SafeLayout>
+        <Wizard>
+          <NewDealStepOne />
+          <NewDealStepTwo />
+          <NewDealStepOne />
+        </Wizard>
+      </SafeLayout>
+    </NewDealContext>
   );
 };
 

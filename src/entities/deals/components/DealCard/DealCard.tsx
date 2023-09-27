@@ -2,8 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { SpacingLayout } from '@core/layouts';
-import { Text } from '@core/ui';
+import { Container, Text } from '@core/ui';
 
 import * as S from './DealCard.style';
 
@@ -27,7 +26,7 @@ const DealCard = ({ deal }: DealCardProps) => {
 
   return (
     <S.CardContainer>
-      <SpacingLayout spacing={0.75}>
+      <Container spacing={0.75}>
         <S.FooterContainer>
           <DealStatus variant="WAITING">{status}</DealStatus>
           <S.ItemStatus>
@@ -64,7 +63,7 @@ const DealCard = ({ deal }: DealCardProps) => {
             </Text>
           </S.DealerContainer>
         </S.FooterContainer>
-      </SpacingLayout>
+      </Container>
     </S.CardContainer>
   );
 };

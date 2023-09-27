@@ -10,5 +10,11 @@ export * from './DealHeader';
 export { default as DealFilters } from './DealFilters';
 export * from './DealFilters';
 
-export { default as NewDealPage } from './NewDealPage';
-export * from './NewDealPage';
+export { default as NewDealHeader } from './NewDealHeader';
+export * from './NewDealHeader';
+
+export { default as NewDealStepOne } from './NewDealStepOne';
+export * from './NewDealStepOne';
+
+export { default as NewDealStepTwo } from './NewDealStepTwo';
+export * from './NewDealStepTwo';
