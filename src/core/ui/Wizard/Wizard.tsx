@@ -14,6 +14,8 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 
+import Actions from './Actions';
+import Body from './Body';
 import Page, { WIZARD_PAGE_WIDTH } from './Page';
 
 export type WizardProps = React.PropsWithChildren & {
@@ -22,6 +24,8 @@ export type WizardProps = React.PropsWithChildren & {
 
 type WizardSubComponets = React.PropsWithChildren & {
   Page: FC<PropsWithChildren>;
+  Actions: FC<PropsWithChildren>;
+  Body: FC<PropsWithChildren>;
 };
 
 export const WizardContext = createContext(
@@ -101,5 +105,7 @@ const styles = StyleSheet.create({
 });
 
 Wizard.Page = Page;
+Wizard.Body = Body;
+Wizard.Actions = Actions;
 
 export default Wizard;
