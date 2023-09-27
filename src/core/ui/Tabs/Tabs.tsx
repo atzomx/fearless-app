@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
 import { ViewProps } from 'react-native';
 
-import { ScrollLayout, SpacingLayout } from '@core/layouts';
+import { ScrollLayout } from '@core/layouts';
 
 import * as S from './Tabs.style';
+
+import Container from '../Container';
 
 export type TabsProps = React.PropsWithChildren &
   ViewProps & {
@@ -23,7 +25,7 @@ const Tabs: FC<TabsProps> = ({
   return (
     <S.TabsContainer {...props}>
       <ScrollLayout horizontal showsHorizontalScrollIndicator={false}>
-        <SpacingLayout direction="horizontal">
+        <Container direction="horizontal">
           {Childs.map((child, index) => {
             return (
               <S.TabContent
@@ -36,7 +38,7 @@ const Tabs: FC<TabsProps> = ({
               </S.TabContent>
             );
           })}
-        </SpacingLayout>
+        </Container>
       </ScrollLayout>
       <S.ActionsContainer>{actions}</S.ActionsContainer>
     </S.TabsContainer>
