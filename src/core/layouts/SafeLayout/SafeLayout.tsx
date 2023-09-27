@@ -14,7 +14,7 @@ type SafeLayoutProps = React.PropsWithChildren & {
 const SafeLayout: FC<SafeLayoutProps> = ({ children, sx }) => {
   return (
     <GestureHandlerRootView style={styles.container}>
-      <SafeAreaView style={[styles.area, sx]}>{children}</SafeAreaView>
+      <SafeAreaView style={[styles.container, sx]}>{children}</SafeAreaView>
     </GestureHandlerRootView>
   );
 };
@@ -23,9 +23,6 @@ export default SafeLayout;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  area: {
     flex: 1,
   },
 });
