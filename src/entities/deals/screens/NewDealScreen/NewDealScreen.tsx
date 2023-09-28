@@ -1,13 +1,21 @@
 import React from 'react';
 
-import { Text } from '@core/ui';
-import Container from '@core/ui/Container';
+import { SafeLayout } from '@core/layouts';
+import { Wizard } from '@core/ui';
+import { NewDealStepOne, NewDealStepTwo } from '@e/deals/components';
+import { NewDealContext } from '@e/deals/context';
 
 const NewDealScreen = () => {
   return (
-    <Container>
-      <Text>Hola</Text>
-    </Container>
+    <NewDealContext>
+      <SafeLayout>
+        <Wizard>
+          <NewDealStepOne />
+          <NewDealStepTwo />
+          <NewDealStepOne />
+        </Wizard>
+      </SafeLayout>
+    </NewDealContext>
   );
 };
 

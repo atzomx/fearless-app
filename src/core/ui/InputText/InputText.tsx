@@ -72,7 +72,7 @@ const InputText: FC<InputTextProps> = ({
             {required ? '*' : ''}
           </S.Label>
           <S.Input
-            ref={ref as React.Ref<TextInput> | undefined}
+            ref={ref as React.Ref<TextInput>}
             style={sx?.input}
             placeholderTextColor={theme.pallete.grey[400]}
             onFocus={handleOnFocus}

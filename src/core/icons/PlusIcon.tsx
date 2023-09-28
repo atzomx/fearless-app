@@ -2,20 +2,19 @@ import * as React from 'react';
 
 import Svg, { SvgProps, Path } from 'react-native-svg';
 
-const BackIcon = ({ width = 24, height = 24, ...props }: SvgProps) => (
+const PlusIcon = ({ width = 24, height = 24, ...props }: SvgProps) => (
   <Svg
     fill="none"
     stroke="currentColor"
-    strokeWidth={1}
     viewBox="0 0 24 24"
-    {...{ width, height }}
+    {...{ height, width }}
     {...props}>
     <Path
       strokeLinecap="round"
       strokeLinejoin="round"
-      d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+      d="M12 4.5v15m7.5-7.5h-15"
     />
   </Svg>
 );
 
-export default BackIcon;
+export default PlusIcon;

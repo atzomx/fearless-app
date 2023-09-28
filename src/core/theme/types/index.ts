@@ -12,7 +12,7 @@ export type BadgeBase = {
   value: CSSObject;
 };
 
-export type ColorVariant = 'primary' | 'secondary';
+export type ColorVariant = 'primary' | 'secondary' | string;
 
 export type BadgeVariant = 'dot' | 'standard';
 
