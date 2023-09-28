@@ -1,9 +1,9 @@
 {
   "one": {
-    "title": "Crea un nuevo trato",
-    "subtitle": "¡Amigo, cuéntame qué vendes, descríbelo en pocas palabras!",
-    "name": "¿Qué traes a la venta, malabarista?",
-    "description": "Cuéntame todo, sin rodeos",
-    "action": "Siguiente"
+    "title": "Create a new deal",
+    "subtitle": "Friend, tell me what you sell, describe it in a few words!",
+    "name": "What do you have for sale, juggler?",
+    "description": "Tell me everything, bluntly",
+    "action": "Continue"
   }
 }

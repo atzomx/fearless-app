@@ -28,8 +28,6 @@ const NewDealContext: FC<PropsWithChildren> = ({ children }) => {
     setData(old => ({ ...old, ...newData }));
   };
 
-  console.log(data);
-
   return (
     <ContextNewDeal.Provider value={{ data, setInfo, setFiles }}>
       {children}
