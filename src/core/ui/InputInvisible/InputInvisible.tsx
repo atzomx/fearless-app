@@ -15,9 +15,6 @@ import { InputTextProps } from '../InputText';
 import Text from '../Text';
 
 export type InputInvisibleProps = InputTextProps & {
-  label?: string | null;
-  helperText?: string;
-  error?: boolean;
   fontSize?: number;
   fontWeight?: TextWeight;
 };
