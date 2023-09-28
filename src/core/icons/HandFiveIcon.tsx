@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Svg, { SvgProps, Path } from 'react-native-svg';
 
-const SvgComponent = ({ width = 24, height = 24, ...props }: SvgProps) => (
+const HandFiveIcon = ({ width = 24, height = 24, ...props }: SvgProps) => (
   <Svg
     fill="none"
     stroke="currentColor"
@@ -17,4 +17,5 @@ const SvgComponent = ({ width = 24, height = 24, ...props }: SvgProps) => (
     />
   </Svg>
 );
-export default SvgComponent;
+
+export default HandFiveIcon;

@@ -1,22 +1,30 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-import { useController, Control } from 'react-hook-form';
+import { Control, useController } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { InputText, InputTextProps } from '@core/ui';
 
-type InputControlProps = InputTextProps & {
+type InputControlCommonProps<D> = Pick<
+  InputTextProps,
+  'helperText' | 'error' | 'value' | 'onChangeText' | 'onBlur'
+> & {
   control: Control<any, any>;
   name: string;
-};
+  //@ts-ignore
+  component?: D;
+  //@ts-ignore
+} & React.ComponentProps<D>;
 
-const InputControl: FC<InputControlProps> = ({
+function InputControl<D>({
   control,
   name,
   helperText,
   error,
+  //@ts-ignore
+  component: Component = InputText,
   ...props
-}) => {
+}: InputControlCommonProps<D>) {
   const { t } = useTranslation();
   const { field, fieldState } = useController({
     control,
@@ -31,7 +39,8 @@ const InputControl: FC<InputControlProps> = ({
   const errorStatus = !!fieldState.error || error;
 
   return (
-    <InputText
+    //@ts-ignore
+    <Component
       {...props}
       error={!!errorStatus}
       value={field.value}
@@ -40,6 +49,6 @@ const InputControl: FC<InputControlProps> = ({
       helperText={errorHelperText}
     />
   );
-};
+}
 
 export default InputControl;

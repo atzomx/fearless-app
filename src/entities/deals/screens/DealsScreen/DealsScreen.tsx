@@ -4,9 +4,9 @@ import { useTheme } from 'styled-components/native';
 
 import { HeaderBar } from '@core/components';
 import { useNavigate } from '@core/hooks';
-import { FilterIcon } from '@core/icons';
-import { SafeLayout, ScrollLayout, SpacingLayout } from '@core/layouts';
-import { FloatButton, Tab, TabPanel, Tabs, Text } from '@core/ui';
+import { PlusIcon } from '@core/icons';
+import { SafeLayout, ScrollLayout } from '@core/layouts';
+import { Container, FloatButton, Tab, TabPanel, Tabs, Text } from '@core/ui';
 import { DealCard, DealFilters, DealHeader } from '@e/deals/components';
 import DEALS_ROUTES from '@e/deals/constants/routes';
 
@@ -30,7 +30,7 @@ const DealsScreen = () => {
   return (
     <SafeLayout>
       <ScrollLayout p={2}>
-        <SpacingLayout spacing={1}>
+        <Container spacing={1}>
           <HeaderBar />
           <DealHeader />
           <Tabs
@@ -41,19 +41,19 @@ const DealsScreen = () => {
             <Tab>Finalizados</Tab>
           </Tabs>
           <TabPanel value={tab} index={0}>
-            <SpacingLayout spacing={2}>
+            <Container spacing={2}>
               <DealCard deal={DEALS[0]} />
               <DealCard deal={DEALS[0]} />
               <DealCard deal={DEALS[0]} />
-            </SpacingLayout>
+            </Container>
           </TabPanel>
           <TabPanel value={tab} index={1}>
             <Text>Noting to show</Text>
           </TabPanel>
-        </SpacingLayout>
+        </Container>
       </ScrollLayout>
       <FloatButton onPress={() => router.push(DEALS_ROUTES.new)}>
-        <FilterIcon width={20} height={20} color={theme.pallete.common.white} />
+        <PlusIcon width={20} height={20} color={theme.pallete.common.white} />
       </FloatButton>
     </SafeLayout>
   );
