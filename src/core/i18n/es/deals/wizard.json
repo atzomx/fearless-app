@@ -5,5 +5,8 @@
     "name": "¿Qué traes a la venta, malabarista?",
     "description": "Cuéntame todo, sin rodeos",
     "action": "Siguiente"
+  },
+  "two": {
+    "description": "¡Muestra pruebas de que 'tá chido!"
   }
 }
