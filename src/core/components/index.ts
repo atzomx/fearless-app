@@ -15,3 +15,6 @@ export * from './ImageCarrousel';
 
 export { default as BackButton } from './BackButton';
 export * from './BackButton';
+
+export { default as MultipleImageChoose } from './MultipleImageChoose';
+export * from './MultipleImageChoose';

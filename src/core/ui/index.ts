@@ -45,3 +45,6 @@ export * from './Wizard';
 
 export { default as InputInvisible } from './InputInvisible';
 export * from './InputInvisible';
+
+export { default as InputFile } from './InputFile';
+export * from './InputFile';
