@@ -2,7 +2,11 @@ import React from 'react';
 
 import { SafeLayout } from '@core/layouts';
 import { Wizard } from '@core/ui';
-import { NewDealStepOne, NewDealStepTwo } from '@e/deals/components';
+import {
+  NewDealStepOne,
+  NewDealStepThree,
+  NewDealStepTwo,
+} from '@e/deals/components';
 import { NewDealContext } from '@e/deals/context';
 
 const NewDealScreen = () => {
@@ -12,7 +16,7 @@ const NewDealScreen = () => {
         <Wizard>
           <NewDealStepOne />
           <NewDealStepTwo />
-          <NewDealStepOne />
+          <NewDealStepThree />
         </Wizard>
       </SafeLayout>
     </NewDealContext>
