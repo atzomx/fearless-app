@@ -1,6 +1,7 @@
 import React, { FC, useMemo, useCallback } from 'react';
 import { View, ViewProps, StyleProp, ViewStyle } from 'react-native';
 
+import { FlexAlignType } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 import { useTheme } from 'styled-components/native';
 
 import { ISpacingContainer } from '@core/interfaces';
@@ -12,7 +13,9 @@ type ContainerProps = React.PropsWithChildren &
     fullWidth?: boolean;
     spacing?: number;
     direction?: 'horizontal' | 'vertical';
+    spacingArround?: boolean;
     position?: 'absolute' | 'relative';
+    alignSelf?: FlexAlignType;
     style?: ViewProps['style'];
   };
 
@@ -47,7 +50,8 @@ const Container: FC<ContainerProps> = ({
   fullHeight = false,
   fullWidth = false,
   direction = 'vertical',
-  position,
+  spacingArround = false,
+  ...props
 }) => {
   const theme = useTheme();
   const ArrayChildren = useMemo(
@@ -57,12 +61,17 @@ const Container: FC<ContainerProps> = ({
 
   const styleSpacing = useCallback(
     (index: number): StyleProp<ViewStyle> => {
+      if (spacingArround)
+        return {
+          margin: theme.spacingSingle(spacing),
+        };
       if (index === ArrayChildren.length - 1) return undefined;
+
       return {
         [PARSER_MARGIN[direction]]: theme.spacingSingle(spacing),
       };
     },
-    [ArrayChildren.length, direction, spacing, theme],
+    [ArrayChildren.length, direction, spacing, theme, spacingArround],
   );
 
   const CHILDREN = useMemo(() => {
@@ -95,7 +104,7 @@ const Container: FC<ContainerProps> = ({
           mv,
           mh,
         }),
-        { position },
+        { ...props },
         { ...(fullHeight && { flex: 1 }) },
         { ...(fullWidth && { width: '100%' }) },
         { ...(direction && { flexDirection: PARSER_DIRECTION[direction] }) },
