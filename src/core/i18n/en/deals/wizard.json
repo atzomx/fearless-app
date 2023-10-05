@@ -5,5 +5,8 @@
     "name": "What do you have for sale, juggler?",
     "description": "Tell me everything, bluntly",
     "action": "Continue"
+  },
+  "two": {
+    "description": "Show proof that it's cool!"
   }
 }
