@@ -18,3 +18,12 @@ export * from './BackButton';
 
 export { default as MultipleImageChoose } from './MultipleImageChoose';
 export * from './MultipleImageChoose';
+
+export { default as ImagePreviewer } from './ImagePreviewer';
+export * from './ImagePreviewer';
+
+export { default as ImageCarrouselViewer } from './ImageCarrouselViewer';
+export * from './ImageCarrouselViewer';
+
+export { default as NumberKeyboard } from './NumberKeyboard';
+export * from './NumberKeyboard';

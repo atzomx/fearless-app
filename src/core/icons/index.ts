@@ -6,3 +6,4 @@ export { default as CameraIcon } from './CameraIcon';
 export { default as GalleryIcon } from './GalleryIcon';
 export { default as FileIcon } from './FileIcon';
 export { default as CloseIcon } from './CloseIcon';
+export { default as BackSpaceIcon } from './BackSpaceIcon';

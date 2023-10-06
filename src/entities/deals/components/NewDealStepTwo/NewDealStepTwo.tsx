@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { MultipleImageChoose } from '@core/components';
@@ -10,27 +8,25 @@ import { File } from '@core/interfaces/IFile';
 import { ScrollLayout } from '@core/layouts';
 import { Button, Container, Text, Wizard } from '@core/ui';
 import { useNewDeal } from '@e/deals/hooks';
-import { newDealStepOne } from '@e/deals/schemas/NewDeal';
 
 import NewDealHeader from '../NewDealHeader';
 
-type FormStep1 = { name: string; description: string };
+const MIN_FILES = 6;
 
 const NewDealStepTwo = () => {
   const { t } = useTranslation();
   const wizard = useWizard();
   const newDeal = useNewDeal();
 
-  const [file, setFile] = useState<File[]>([]);
+  const [file, setFile] = useState<File[]>(newDeal.data.files ?? []);
 
-  const { handleSubmit } = useForm<FormStep1>({
-    resolver: yupResolver(newDealStepOne),
-    defaultValues: { name: '', description: '' },
-    mode: 'onBlur',
-  });
+  const onChangeFiles = useCallback((files: File[]) => {
+    setFile(files);
+  }, []);
 
-  const onSubmit = (data: FormStep1) => {
-    console.log(data);
+  const onSubmit = () => {
+    if (MIN_FILES > file.length) return;
+    newDeal.setFiles({ files: file });
     wizard.onNext();
   };
 
@@ -45,23 +41,20 @@ const NewDealStepTwo = () => {
           />
           <Container pb={12} pt={3} spacing={1}>
             <Text fontSize={14} fontWeight="Medium" align="center">
-              ¡Muestra pruebas de que 'tá chido!
+              {t('deals.wizard.two.description')}
             </Text>
             <MultipleImageChoose
               files={file}
-              onChange={files => setFile(files)}
+              onChange={onChangeFiles}
               maxSpaces={10}
-              spaces={6}
+              spaces={MIN_FILES}
               allowMore
             />
           </Container>
         </ScrollLayout>
       </Wizard.Body>
       <Wizard.Actions>
-        <Button
-          title={t('deals.wizard.one.action')}
-          onPress={handleSubmit(onSubmit)}
-        />
+        <Button title={t('deals.wizard.one.action')} onPress={onSubmit} />
       </Wizard.Actions>
     </Wizard.Page>
   );

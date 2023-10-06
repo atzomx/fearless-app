@@ -18,3 +18,6 @@ export * from './NewDealStepOne';
 
 export { default as NewDealStepTwo } from './NewDealStepTwo';
 export * from './NewDealStepTwo';
+
+export { default as NewDealStepThree } from './NewDealStepThree';
+export * from './NewDealStepThree';

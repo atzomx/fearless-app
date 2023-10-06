@@ -1,11 +1,11 @@
 import React, { FC, useCallback, useMemo, useState } from 'react';
 
-import ImageView from 'react-native-image-viewing';
-
 import { File } from '@core/interfaces/IFile';
 import { InputFile } from '@core/ui';
 
 import * as S from './MultipleImageChoose.style';
+
+import ImageCarrouselViewer from '../ImageCarrouselViewer';
 
 type MultipleImageChooseProps = {
   files: File[];
@@ -36,7 +36,6 @@ const MultipleImageChoose: FC<MultipleImageChooseProps> = ({
 
   const onAttachFile = useCallback(
     (data?: File | File[]) => {
-      console.log(data);
       if (!data) return;
       if (Array.isArray(data)) onChange([...files, ...data]);
       else onChange([...files, data as File]);
@@ -86,7 +85,7 @@ const MultipleImageChoose: FC<MultipleImageChooseProps> = ({
         direction="horizontal">
         {ITERATOR}
       </S.Container>
-      <ImageView
+      <ImageCarrouselViewer
         images={files}
         imageIndex={currentFile ?? 0}
         visible={currentFile !== null}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { createContext, FC, PropsWithChildren, useState } from 'react';
 
+import { File } from '@core/interfaces/IFile';
+
 const initialForm = {
   name: '',
   description: '',
