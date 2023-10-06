@@ -8,5 +8,8 @@
   },
   "two": {
     "description": "Show proof that it's cool!"
+  },
+  "three": {
+    "description": "How much is the least?"
   }
 }
