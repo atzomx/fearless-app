@@ -8,5 +8,8 @@
   },
   "two": {
     "description": "¡Muestra pruebas de que 'tá chido!"
+  },
+  "three": {
+    "description": "Cúanto es lo menos?"
   }
 }
