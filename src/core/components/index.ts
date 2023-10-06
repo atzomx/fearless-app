@@ -24,3 +24,6 @@ export * from './ImagePreviewer';
 
 export { default as ImageCarrouselViewer } from './ImageCarrouselViewer';
 export * from './ImageCarrouselViewer';
+
+export { default as NumberKeyboard } from './NumberKeyboard';
+export * from './NumberKeyboard';
