@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { ImagePreviewer } from '@core/components';
+import { ImagePreviewer, NumberKeyboard } from '@core/components';
 import { useWizard } from '@core/hooks';
 import { ScrollLayout } from '@core/layouts';
 import { Button, Container, Wizard } from '@core/ui';
@@ -14,6 +14,8 @@ const NewDealStepThree = () => {
   const { t } = useTranslation();
   const wizard = useWizard();
   const newDeal = useNewDeal();
+
+  const [input, setInput] = useState('');
 
   const onSubmit = () => {
     wizard.onNext();
@@ -28,8 +30,13 @@ const NewDealStepThree = () => {
             subtitle={newDeal.data.description}
             onBack={wizard.onBack}
           />
-          <Container pb={12} pt={3} spacing={1}>
+          <Container pb={12} pt={0}>
             <ImagePreviewer images={newDeal.data.files} maxShowed={3} />
+            <NumberKeyboard
+              title={t('deals.wizard.three.description')}
+              value={input}
+              onChangeText={text => setInput(text)}
+            />
           </Container>
         </ScrollLayout>
       </Wizard.Body>
