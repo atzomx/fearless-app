@@ -48,3 +48,9 @@ export * from './InputInvisible';
 
 export { default as InputFile } from './InputFile';
 export * from './InputFile';
+
+export { default as Divider } from './Divider';
+export * from './Divider';
+
+export { default as Checkbox } from './Checkbox';
+export * from './Checkbox';
