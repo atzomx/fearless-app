@@ -28,16 +28,17 @@ const ImagePreviewer: FC<ImagePreviewerProps> = ({ images, maxShowed }) => {
         <S.Image source={{ uri }} />
       </S.ImageContainer>
     ));
-    IMAGES.push(
-      <S.More
-        activeOpacity={0.8}
-        onPress={() => setCurrentFile(maxShowed)}
-        key={`image-preview-${Math.random()}`}>
-        <Text fontWeight="Regular" fontSize={20}>
-          {moreNumbrer}+
-        </Text>
-      </S.More>,
-    );
+    if (moreNumbrer > 0)
+      IMAGES.push(
+        <S.More
+          activeOpacity={0.8}
+          onPress={() => setCurrentFile(maxShowed)}
+          key={`image-preview-${Math.random()}`}>
+          <Text fontWeight="Regular" fontSize={20}>
+            {moreNumbrer}+
+          </Text>
+        </S.More>,
+      );
     return IMAGES;
   }, [images, maxShowed]);
 
