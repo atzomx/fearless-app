@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components/native';
 
 import { BackSpaceIcon } from '@core/icons';
 import { Container, Text } from '@core/ui';
+import Money from '@core/utils/Money';
 
 import * as S from './NumberKeyboard.style';
 
@@ -24,15 +25,6 @@ const KeyButton: React.FC<KeyboardButton> = ({ text, children, onPress }) => {
       {children}
     </S.Button>
   );
-};
-
-const format = (value: number) => {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    minimumFractionDigits: 2,
-    currency: 'USD',
-  });
-  return formatter.format(value);
 };
 
 export type NumberKeyboardProps = {
@@ -90,7 +82,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({
       )}
       <Container mb={2}>
         <Text color="black" align="center" fontWeight="Regular" fontSize={32}>
-          {format(Number(value))}
+          {Money.fromString(value, 0).toFormat()}
         </Text>
       </Container>
       <Container alignSelf="center" spacing={0}>
