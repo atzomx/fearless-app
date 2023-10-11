@@ -11,5 +11,12 @@
   },
   "three": {
     "description": "How much is the least?"
+  },
+  "four": {
+    "product_amount": "Product cost",
+    "product_service": "Service cost",
+    "income_amount": "You will receive",
+    "term_conditons": "I accept the terms and conditions",
+    "action": "Confirm"
   }
 }
