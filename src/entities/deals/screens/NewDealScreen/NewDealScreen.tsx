@@ -3,6 +3,7 @@ import React from 'react';
 import { SafeLayout } from '@core/layouts';
 import { Wizard } from '@core/ui';
 import {
+  NewDealStepFour,
   NewDealStepOne,
   NewDealStepThree,
   NewDealStepTwo,
@@ -17,6 +18,7 @@ const NewDealScreen = () => {
           <NewDealStepOne />
           <NewDealStepTwo />
           <NewDealStepThree />
+          <NewDealStepFour />
         </Wizard>
       </SafeLayout>
     </NewDealContext>
