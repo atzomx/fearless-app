@@ -1,7 +1,10 @@
 import React, { FC, useMemo, useCallback } from 'react';
 import { View, ViewProps, StyleProp, ViewStyle } from 'react-native';
 
-import { FlexAlignType } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import {
+  FlexAlignType,
+  FlexStyle,
+} from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 import { useTheme } from 'styled-components/native';
 
 import { ISpacingContainer } from '@core/interfaces';
@@ -17,7 +20,7 @@ type ContainerProps = React.PropsWithChildren &
     position?: 'absolute' | 'relative';
     alignSelf?: FlexAlignType;
     style?: ViewProps['style'];
-  };
+  } & Omit<FlexStyle, 'direction'>;
 
 const PARSER_MARGIN = Object.freeze({
   horizontal: 'marginRight',

@@ -70,6 +70,7 @@ const MultipleImageChoose: FC<MultipleImageChooseProps> = ({
           key={`inputfile-extra${Math.random()}`}
           value={undefined}
           onChange={onAttachFile}
+          limit={hiddenEmptySpaces}
         />,
       );
 

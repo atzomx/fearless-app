@@ -11,5 +11,12 @@
   },
   "three": {
     "description": "Cúanto es lo menos?"
+  },
+  "four": {
+    "product_amount": "Costo del producto",
+    "product_service": "Costo por servicio",
+    "income_amount": "Recibirás",
+    "term_conditons": "Acepto terminos y condiciones",
+    "action": "Confirmar"
   }
 }

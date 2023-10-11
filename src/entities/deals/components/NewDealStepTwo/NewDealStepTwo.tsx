@@ -11,7 +11,7 @@ import { useNewDeal } from '@e/deals/hooks';
 
 import NewDealHeader from '../NewDealHeader';
 
-const MIN_FILES = 6;
+const MIN_FILES = 1;
 
 const NewDealStepTwo = () => {
   const { t } = useTranslation();
