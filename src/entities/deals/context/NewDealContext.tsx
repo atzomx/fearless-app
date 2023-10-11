@@ -6,6 +6,7 @@ import { File } from '@core/interfaces/IFile';
 const initialForm = {
   name: '',
   description: '',
+  amount: '',
   files: [] as File[],
 };
 
@@ -16,6 +17,7 @@ export const ContextNewDeal = createContext(
     data: FormNewDeal;
     setInfo: (newData: Pick<FormNewDeal, 'name' | 'description'>) => void;
     setFiles: (newData: Pick<FormNewDeal, 'files'>) => void;
+    setAmount: (newData: Pick<FormNewDeal, 'amount'>) => void;
   },
 );
 
@@ -30,8 +32,12 @@ const NewDealContext: FC<PropsWithChildren> = ({ children }) => {
     setData(old => ({ ...old, ...newData }));
   };
 
+  const setAmount = (newData: Pick<FormNewDeal, 'amount'>) => {
+    setData(old => ({ ...old, ...newData }));
+  };
+
   return (
-    <ContextNewDeal.Provider value={{ data, setInfo, setFiles }}>
+    <ContextNewDeal.Provider value={{ data, setInfo, setFiles, setAmount }}>
       {children}
     </ContextNewDeal.Provider>
   );

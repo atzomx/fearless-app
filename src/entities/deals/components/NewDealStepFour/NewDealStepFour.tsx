@@ -2,23 +2,22 @@ import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { ImagePreviewer, NumberKeyboard } from '@core/components';
+import { ImagePreviewer } from '@core/components';
 import { useWizard } from '@core/hooks';
-import { Button, Container, Wizard } from '@core/ui';
+import { Button, Checkbox, Container, Wizard } from '@core/ui';
+import Money from '@core/utils/Money';
 import { useNewDeal } from '@e/deals/hooks';
 
+import DealSummary from '../DealSummary';
 import NewDealHeader from '../NewDealHeader';
 
-const NewDealStepThree = () => {
+const NewDealStepFour = () => {
   const { t } = useTranslation();
   const wizard = useWizard();
   const newDeal = useNewDeal();
-
-  const [amount, setAmount] = useState(newDeal.data.amount ?? '');
+  const [check, setCheck] = useState(false);
 
   const onSubmit = () => {
-    if (+amount <= 0 || isNaN(+amount)) return;
-    newDeal.setAmount({ amount });
     wizard.onNext();
   };
 
@@ -32,18 +31,25 @@ const NewDealStepThree = () => {
         />
         <Container pb={12} pt={0}>
           <ImagePreviewer images={newDeal.data.files} maxShowed={3} />
-          <NumberKeyboard
-            title={t('deals.wizard.three.description')}
-            value={amount}
-            onChangeText={text => setAmount(text)}
+          <DealSummary
+            product={Money.fromString(newDeal.data.amount).toNumber()}
+            // TODO: ADD THIS VALUE FROM SERVICE
+            service={80}
           />
         </Container>
       </Wizard.Body>
       <Wizard.Actions>
-        <Button title={t('deals.wizard.one.action')} onPress={onSubmit} />
+        <Container alignItems="center" mb={2}>
+          <Checkbox
+            label={t('deals.wizard.four.term_conditons')}
+            value={check}
+            onChange={value => setCheck(value)}
+          />
+        </Container>
+        <Button title={t('deals.wizard.four.action')} onPress={onSubmit} />
       </Wizard.Actions>
     </Wizard.Page>
   );
 };
 
-export default NewDealStepThree;
+export default NewDealStepFour;
