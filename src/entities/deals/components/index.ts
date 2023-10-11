@@ -21,3 +21,9 @@ export * from './NewDealStepTwo';
 
 export { default as NewDealStepThree } from './NewDealStepThree';
 export * from './NewDealStepThree';
+
+export { default as NewDealStepFour } from './NewDealStepFour';
+export * from './NewDealStepFour';
+
+export { default as DealSummary } from './DealSummary';
+export * from './DealSummary';
