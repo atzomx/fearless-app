@@ -3,7 +3,7 @@ import { StackNavigationOptions } from '@react-navigation/stack';
 import { IRoute } from '@core/interfaces/IRoutes';
 
 import ROUTES from '../constants/routes';
-import { DealsScreen, NewDealScreen } from '../screens';
+import { DealScreen, DealsScreen, NewDealScreen } from '../screens';
 
 const options: StackNavigationOptions = {
   headerShown: false,
@@ -33,6 +33,11 @@ const DealsRoutes: IRoute[] = [
   {
     key: ROUTES.new,
     component: NewDealScreen,
+    options,
+  },
+  {
+    key: ROUTES.one,
+    component: DealScreen,
     options,
   },
 ];

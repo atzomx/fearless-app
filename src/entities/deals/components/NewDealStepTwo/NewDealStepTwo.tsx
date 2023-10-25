@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { MultipleImageChoose } from '@core/components';
+import { HeaderBar, MultipleImageChoose } from '@core/components';
 import { useWizard } from '@core/hooks';
 import { File } from '@core/interfaces/IFile';
 import { ScrollLayout } from '@core/layouts';
@@ -11,7 +11,7 @@ import { useNewDeal } from '@e/deals/hooks';
 
 import NewDealHeader from '../NewDealHeader';
 
-const MIN_FILES = 1;
+const MIN_FILES = 8;
 
 const NewDealStepTwo = () => {
   const { t } = useTranslation();
@@ -33,11 +33,11 @@ const NewDealStepTwo = () => {
   return (
     <Wizard.Page>
       <Wizard.Body>
+        <HeaderBar onBack={() => wizard.onBack()} />
         <ScrollLayout>
           <NewDealHeader
             title={newDeal.data.name}
             subtitle={newDeal.data.description}
-            onBack={wizard.onBack}
           />
           <Container pb={12} pt={3} spacing={1}>
             <Text fontSize={14} fontWeight="Medium" align="center">
