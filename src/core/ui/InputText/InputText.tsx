@@ -14,12 +14,15 @@ import { ColorVariant } from '@core/theme';
 
 import * as S from './InputText.style';
 
+import Container from '../Container';
+
 export type InputTextProps = TextInputProps & {
   label?: string | null;
   helperText?: string;
   color?: ColorVariant;
   error?: boolean;
   required?: boolean;
+  icon?: JSX.Element;
   sx?: {
     label: StyleProp<TextStyle>;
     input: StyleProp<TextStyle>;
@@ -38,6 +41,7 @@ const InputText: FC<InputTextProps> = ({
   required,
   style,
   sx,
+  icon,
   ...props
 }) => {
   const theme = useTheme();
@@ -81,6 +85,11 @@ const InputText: FC<InputTextProps> = ({
             {...props}
           />
         </S.InputContainer>
+        {icon && (
+          <Container justifyContent="center" alignItems="center" p={1}>
+            {icon}
+          </Container>
+        )}
       </S.Container>
       {helperText && <S.HelperText status={status}>{helperText}</S.HelperText>}
     </>

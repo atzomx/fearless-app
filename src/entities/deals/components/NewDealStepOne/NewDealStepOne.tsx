@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useTheme } from 'styled-components/native';
 
-import { InputControl } from '@core/components';
+import { HeaderBar, InputControl } from '@core/components';
 import { useNavigate, useWizard } from '@core/hooks';
 import { Button, Container, InputInvisible, Wizard } from '@core/ui';
 import { useNewDeal } from '@e/deals/hooks';
@@ -37,6 +37,7 @@ const NewDealStepOne = () => {
   return (
     <Wizard.Page>
       <Wizard.Body>
+        <HeaderBar onBack={() => navigator.pop(1)} />
         <KeyboardAwareScrollView
           enableOnAndroid
           enableAutomaticScroll
@@ -44,7 +45,6 @@ const NewDealStepOne = () => {
           <NewDealHeader
             title={t('deals.wizard.one.title')}
             subtitle={t('deals.wizard.one.subtitle')}
-            onBack={() => navigator.pop(1)}
           />
           <Container pt={6} spacing={6}>
             <InputControl

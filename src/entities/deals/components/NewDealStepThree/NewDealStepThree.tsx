@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { ImagePreviewer, NumberKeyboard } from '@core/components';
+import { HeaderBar, ImagePreviewer, NumberKeyboard } from '@core/components';
 import { useWizard } from '@core/hooks';
 import { Button, Container, Wizard } from '@core/ui';
 import { useNewDeal } from '@e/deals/hooks';
@@ -25,10 +25,10 @@ const NewDealStepThree = () => {
   return (
     <Wizard.Page>
       <Wizard.Body>
+        <HeaderBar onBack={() => wizard.onBack()} />
         <NewDealHeader
           title={newDeal.data.name}
           subtitle={newDeal.data.description}
-          onBack={wizard.onBack}
         />
         <Container pb={12} pt={0}>
           <ImagePreviewer images={newDeal.data.files} maxShowed={3} />
