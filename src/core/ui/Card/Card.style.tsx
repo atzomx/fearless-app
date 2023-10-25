@@ -1,7 +1,7 @@
 import { Shadow as ShadowBase } from 'react-native-shadow-2';
 import styled from 'styled-components/native';
 
-export const Container = styled.View(({ theme }) => ({
+export const Container = styled.TouchableOpacity(({ theme }) => ({
   borderRadius: theme.spacing(2),
 }));
 
