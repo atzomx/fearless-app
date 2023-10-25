@@ -18,14 +18,15 @@ export type DealCardProps = {
     amount: string;
     dealer: string;
   };
+  onPress?: () => void;
 };
 
-const DealCard = ({ deal }: DealCardProps) => {
+const DealCard = ({ deal, onPress }: DealCardProps) => {
   const { status, itemStatus, id, name, description, amount, dealer } = deal;
   const { t } = useTranslation();
 
   return (
-    <S.CardContainer>
+    <S.CardContainer onPress={onPress}>
       <Container spacing={0.75}>
         <S.FooterContainer>
           <DealStatus variant="WAITING">{status}</DealStatus>

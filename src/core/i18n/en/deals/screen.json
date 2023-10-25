@@ -1,0 +1,14 @@
+{
+  "title": "Deals",
+  "subtitle": "Take a look at your business party!",
+  "tabs": {
+    "active": "Active",
+    "finished": "Finished"
+  },
+  "modal": {
+    "input": {
+      "label": "Search",
+      "placeholder": "Ej. Graphic card..."
+    }
+  }
+}

@@ -8,14 +8,17 @@ export const Container = styled.TouchableOpacity(({ theme }) => ({
 
 export const Modal = styled.View(({ theme }) => ({
   backgroundColor: theme.pallete.common.white,
-  borderTopLeftRadius: theme.spacingSingle(2),
-  borderTopRightRadius: theme.spacingSingle(2),
+  borderTopLeftRadius: theme.spacingSingle(3),
+  borderTopRightRadius: theme.spacingSingle(3),
   minHeight: 150,
-  zIndex: 1000,
+}));
+
+export const GestureContainer = styled.View(({ theme }) => ({
+  paddingTop: theme.spacingSingle(1),
+  paddingBottom: theme.spacingSingle(1),
 }));
 
 export const Line = styled.View(({ theme }) => ({
-  backgroundColor: theme.pallete.grey[200],
   borderRadius: theme.spacingSingle(2),
   width: theme.spacingSingle(5),
   height: theme.spacingSingle(0.5),

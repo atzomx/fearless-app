@@ -1,20 +1,24 @@
 import React, { FC } from 'react';
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import {
-  SafeAreaView,
-  SafeAreaViewProps,
-} from 'react-native-safe-area-context';
+import { SafeAreaViewProps } from 'react-native-safe-area-context';
+import { useTheme } from 'styled-components/native';
 
 type SafeLayoutProps = React.PropsWithChildren & {
   sx?: Pick<SafeAreaViewProps, 'style'>['style'];
 };
 
-const SafeLayout: FC<SafeLayoutProps> = ({ children, sx }) => {
+const SafeLayout: FC<SafeLayoutProps> = ({ children }) => {
+  const theme = useTheme();
   return (
     <GestureHandlerRootView style={styles.container}>
-      <SafeAreaView style={[styles.container, sx]}>{children}</SafeAreaView>
+      <StatusBar
+        translucent
+        backgroundColor={theme.pallete.common.white}
+        barStyle="dark-content"
+      />
+      {children}
     </GestureHandlerRootView>
   );
 };

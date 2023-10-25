@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { ImagePreviewer } from '@core/components';
+import { HeaderBar, ImagePreviewer } from '@core/components';
 import { useWizard } from '@core/hooks';
 import { Button, Checkbox, Container, Wizard } from '@core/ui';
 import Money from '@core/utils/Money';
@@ -24,10 +24,10 @@ const NewDealStepFour = () => {
   return (
     <Wizard.Page>
       <Wizard.Body>
+        <HeaderBar onBack={() => wizard.onBack()} />
         <NewDealHeader
           title={newDeal.data.name}
           subtitle={newDeal.data.description}
-          onBack={wizard.onBack}
         />
         <Container pb={12} pt={0}>
           <ImagePreviewer images={newDeal.data.files} maxShowed={3} />

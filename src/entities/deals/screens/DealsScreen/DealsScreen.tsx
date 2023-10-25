@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components/native';
 
 import { HeaderBar } from '@core/components';
-import { useNavigate } from '@core/hooks';
-import { PlusIcon } from '@core/icons';
+import ProfileButton from '@core/components/ProfileButton';
+import { useModal, useNavigate } from '@core/hooks';
+import { PlusIcon, SearchIcon } from '@core/icons';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
-import { Container, FloatButton, Tab, TabPanel, Tabs, Text } from '@core/ui';
+import {
+  Button,
+  Container,
+  FloatButton,
+  InputText,
+  Modal,
+  Spacer,
+  Tab,
+  TabPanel,
+  Tabs,
+  Text,
+} from '@core/ui';
 import { DealCard, DealFilters, DealHeader } from '@e/deals/components';
 import DEALS_ROUTES from '@e/deals/constants/routes';
 
@@ -25,26 +38,41 @@ const DEALS = [deal, deal, deal, deal, deal];
 
 const DealsScreen = () => {
   const theme = useTheme();
-  const [tab, setTab] = useState(0);
+  const modal = useModal();
   const router = useNavigate();
+
+  const [tab, setTab] = useState(0);
+  const { t } = useTranslation();
+
   return (
     <SafeLayout>
+      <HeaderBar action={<ProfileButton />}>
+        <Container />
+      </HeaderBar>
       <ScrollLayout p={2}>
         <Container spacing={1}>
-          <HeaderBar />
           <DealHeader />
           <Tabs
             value={tab}
             onChange={current => setTab(current)}
-            actions={<DealFilters />}>
-            <Tab>Activos</Tab>
-            <Tab>Finalizados</Tab>
+            actions={<DealFilters onPress={modal.open} />}>
+            <Tab>{t('deals.screen.tabs.active')}</Tab>
+            <Tab>{t('deals.screen.tabs.finished')}</Tab>
           </Tabs>
           <TabPanel value={tab} index={0}>
             <Container spacing={2}>
-              <DealCard deal={DEALS[0]} />
-              <DealCard deal={DEALS[0]} />
-              <DealCard deal={DEALS[0]} />
+              <DealCard
+                deal={DEALS[0]}
+                onPress={() => router.push(DEALS_ROUTES.one)}
+              />
+              <DealCard
+                deal={DEALS[0]}
+                onPress={() => router.push(DEALS_ROUTES.one)}
+              />
+              <DealCard
+                deal={DEALS[0]}
+                onPress={() => router.push(DEALS_ROUTES.one)}
+              />
             </Container>
           </TabPanel>
           <TabPanel value={tab} index={1}>
@@ -55,6 +83,17 @@ const DealsScreen = () => {
       <FloatButton onPress={() => router.push(DEALS_ROUTES.new)}>
         <PlusIcon width={20} height={20} color={theme.pallete.common.white} />
       </FloatButton>
+      <Modal open={modal.isOpen} onClose={modal.close} title="Filtros">
+        <Container p={2}>
+          <InputText
+            label={t('deals.screen.modal.input.label')}
+            placeholder={t('deals.screen.modal.input.placeholder')}
+            icon={<SearchIcon color={theme.pallete.grey[400]} />}
+          />
+          <Spacer spacing={2} />
+          <Button title="Hecho" />
+        </Container>
+      </Modal>
     </SafeLayout>
   );
 };

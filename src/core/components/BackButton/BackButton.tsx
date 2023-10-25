@@ -13,8 +13,8 @@ const BackButton: FC<IconButtonProps> = props => {
       color="secondary"
       sx={{
         button: {
-          height: 42,
-          width: 42,
+          height: 36,
+          width: 36,
           backgroundColor: theme.pallete.grey['100'],
         },
       }}
