@@ -17,9 +17,7 @@ Actions.displayName = 'Wizard.Actions';
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    bottom: spacingSingle(5),
-    zIndex: 1,
+    marginBottom: spacingSingle(5),
   },
 });
 
