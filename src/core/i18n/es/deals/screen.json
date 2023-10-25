@@ -1,0 +1,14 @@
+{
+  "title": "Tratos",
+  "subtitle": "¡Echa un ojo a tu fiesta de negocios!",
+  "tabs": {
+    "active": "Activos",
+    "finished": "Finalizados"
+  },
+  "modal": {
+    "input": {
+      "label": "Buscar",
+      "placeholder": "Ej. Tarjeta de..."
+    }
+  }
+}
