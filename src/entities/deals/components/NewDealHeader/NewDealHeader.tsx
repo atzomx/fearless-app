@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 
-import { BackButton } from '@core/components';
 import { Container, Text } from '@core/ui';
 
 import * as S from './NewDealHeader.style';
@@ -8,13 +7,11 @@ import * as S from './NewDealHeader.style';
 type NewDealHeaderProps = {
   title: string;
   subtitle: string;
-  onBack: () => void;
 };
 
-const NewDealHeader: FC<NewDealHeaderProps> = ({ title, subtitle, onBack }) => {
+const NewDealHeader: FC<NewDealHeaderProps> = ({ title, subtitle }) => {
   return (
     <Container p={2}>
-      <BackButton onPress={onBack} />
       <S.Header>
         <Text fontWeight="SemiBold" fontSize={28} color="#000000">
           {title.length < 35 ? `${title}` : `${title.substring(0, 32)}...`}
