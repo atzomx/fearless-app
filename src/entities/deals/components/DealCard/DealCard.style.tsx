@@ -15,7 +15,7 @@ export const DealerContainer = styled.View({
 export const CardContainer = styled(Card)(({ theme }) => ({
   padding: theme.spacing(2),
   backgroundColor: theme.pallete.common.white,
-  borderColor: '#E7E7E7',
+  borderColor: theme.pallete.grey[200],
   borderWidth: 1,
   borderStyle: 'solid',
 }));
