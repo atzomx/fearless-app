@@ -1,9 +1,20 @@
+import { Dimensions } from 'react-native';
+
 import styled from 'styled-components/native';
 
-export const Container = styled.TouchableOpacity(({ theme }) => ({
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('screen');
+
+export const Container = styled.TouchableOpacity({
   flex: 1,
   justifyContent: 'flex-end',
-  backgroundColor: theme.fade('#000000', 0.2),
+  backgroundColor: 'transparent',
+});
+
+export const Backdrop = styled.View(({ theme }) => ({
+  backgroundColor: theme.fade(theme.pallete.common.black, 0.2),
+  position: 'absolute',
+  height: SCREEN_HEIGHT,
+  width: SCREEN_WIDTH,
 }));
 
 export const Modal = styled.View(({ theme }) => ({

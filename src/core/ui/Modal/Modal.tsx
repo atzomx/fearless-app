@@ -32,7 +32,7 @@ type ModalProps = PropsWithChildren & {
 type TContext = { translateX: number; translateY: number };
 
 const AnimatedModal = Animated.createAnimatedComponent(S.Modal);
-const AnimatedBackdrop = Animated.createAnimatedComponent(S.Container);
+const AnimatedBackdrop = Animated.createAnimatedComponent(S.Backdrop);
 const AnimatedLine = Animated.createAnimatedComponent(S.Line);
 const AnimatedDrag = Animated.createAnimatedComponent(S.GestureContainer);
 
@@ -108,13 +108,22 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
     return { backgroundColor: color };
   }, []);
 
+  // const rBackdropStyle = useAnimatedStyle(() => {
+  //   const opacity = interpolate(translateY.value, [0, 1], [0, 1]);
+  //   console.log(opacity);
+  //   return { opacity };
+  // });
+
   return (
     <RNModal
       transparent
       animationType="none"
       visible={open}
+      statusBarTranslucent
+      presentationStyle="overFullScreen"
       onRequestClose={handleOnClose}>
-      <AnimatedBackdrop activeOpacity={1} onPress={handleOnClose}>
+      <AnimatedBackdrop />
+      <S.Container onPress={handleOnClose} activeOpacity={1}>
         <GestureHandlerRootView>
           <AnimatedModal
             ref={aref}
@@ -122,7 +131,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
             onStartShouldSetResponder={() => true}>
             <PanGestureHandler onGestureEvent={panGestureEvent}>
               <AnimatedDrag>
-                <AnimatedLine style={[rHoldStyle]} />
+                <AnimatedLine style={rHoldStyle} />
               </AnimatedDrag>
             </PanGestureHandler>
             <Container pb={2}>
@@ -135,7 +144,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
             </Container>
           </AnimatedModal>
         </GestureHandlerRootView>
-      </AnimatedBackdrop>
+      </S.Container>
     </RNModal>
   );
 };

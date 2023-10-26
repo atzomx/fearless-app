@@ -12,7 +12,7 @@ type AvatarProps = ImageProps & {
 
 const Avatar: FC<AvatarProps> = ({ size = 'medium', onPress, ...props }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
       <S.Image {...props} size={size} />
     </TouchableOpacity>
   );
