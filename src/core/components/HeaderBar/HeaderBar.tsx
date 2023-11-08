@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import { ViewProps } from 'react-native';
 
-import { useTheme } from 'styled-components/native';
-
 import { Text } from '@core/ui';
 
 import * as S from './HeaderBar.style';
@@ -18,14 +16,11 @@ export type HeaderBarProps = React.PropsWithChildren & {
 
 const HeaderBar: FC<HeaderBarProps & ViewProps> = ({
   onBack,
-  subtitle,
   title,
   children,
   action,
   ...props
 }) => {
-  const theme = useTheme();
-
   return (
     <S.ContainerView edges={['top']}>
       <S.Container {...props}>
@@ -34,17 +29,12 @@ const HeaderBar: FC<HeaderBarProps & ViewProps> = ({
         </S.ContainerBack>
         <S.ContainerTitle>
           {title && (
-            <Text fontWeight="Bold" color="black" align="center" fontSize={12}>
-              {title}
-            </Text>
-          )}
-          {subtitle && (
             <Text
-              fontWeight="Regular"
-              color={theme.pallete.grey['400']}
+              fontWeight="SemiBold"
+              color="black"
               align="center"
-              fontSize={12}>
-              {subtitle}
+              fontSize={20}>
+              {title}
             </Text>
           )}
         </S.ContainerTitle>

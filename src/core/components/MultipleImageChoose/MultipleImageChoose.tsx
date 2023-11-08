@@ -83,7 +83,7 @@ const MultipleImageChoose: FC<MultipleImageChooseProps> = ({
         alignSelf="center"
         spacingArround
         spacing={2}
-        direction="horizontal">
+        direction="row">
         {ITERATOR}
       </S.Container>
       <ImageCarrouselViewer
