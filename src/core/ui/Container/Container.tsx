@@ -1,5 +1,5 @@
-import React, { FC, useMemo, useCallback } from 'react';
-import { View, ViewProps, StyleProp, ViewStyle } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 
 import {
   FlexAlignType,
@@ -10,29 +10,29 @@ import { useTheme } from 'styled-components/native';
 import { ISpacingContainer } from '@core/interfaces';
 import { createSpacingStyle } from '@core/utils/createSpacingStyle';
 
-type ContainerProps = React.PropsWithChildren &
+type ContainerProps<D> = React.PropsWithChildren &
   ISpacingContainer & {
     fullHeight?: boolean;
     fullWidth?: boolean;
     spacing?: number;
-    direction?: 'horizontal' | 'vertical';
+    direction?: FlexStyle['flexDirection'];
     spacingArround?: boolean;
     position?: 'absolute' | 'relative';
     alignSelf?: FlexAlignType;
     style?: ViewProps['style'];
-  } & Omit<FlexStyle, 'direction'>;
+    component?: D;
+  } & Omit<FlexStyle, 'direction'> &
+  //@ts-ignore
+  React.ComponentProps<D>;
 
 const PARSER_MARGIN = Object.freeze({
-  horizontal: 'marginRight',
-  vertical: 'marginBottom',
+  row: 'marginRight',
+  ['row-reverse']: 'marginRight',
+  column: 'marginBottom',
+  ['column-reverse']: 'marginBottom',
 });
 
-const PARSER_DIRECTION = Object.freeze({
-  horizontal: 'row',
-  vertical: 'column',
-});
-
-const Container: FC<ContainerProps> = ({
+function Container<D>({
   children,
   style,
   p = 0,
@@ -52,10 +52,12 @@ const Container: FC<ContainerProps> = ({
   spacing = 1,
   fullHeight = false,
   fullWidth = false,
-  direction = 'vertical',
+  direction = 'column',
   spacingArround = false,
+  //@ts-ignore
+  component: Component = View,
   ...props
-}) => {
+}: ContainerProps<D>) {
   const theme = useTheme();
   const ArrayChildren = useMemo(
     () => React.Children.toArray(children),
@@ -89,7 +91,8 @@ const Container: FC<ContainerProps> = ({
   }, [ArrayChildren, spacing, styleSpacing]);
 
   return (
-    <View
+    //@ts-ignore
+    <Component
       style={[
         createSpacingStyle(theme, {
           p,
@@ -110,12 +113,12 @@ const Container: FC<ContainerProps> = ({
         { ...props },
         { ...(fullHeight && { flex: 1 }) },
         { ...(fullWidth && { width: '100%' }) },
-        { ...(direction && { flexDirection: PARSER_DIRECTION[direction] }) },
+        { ...(direction && { flexDirection: direction }) },
         style,
       ]}>
       {CHILDREN}
-    </View>
+    </Component>
   );
-};
+}
 
 export default Container;

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components/native';
 
-import { HeaderBar } from '@core/components';
+import { HeaderBar, HomeHeaderBar } from '@core/components';
 import ProfileButton from '@core/components/ProfileButton';
 import { useModal, useNavigate } from '@core/hooks';
 import { PlusIcon, SearchIcon } from '@core/icons';
@@ -46,9 +46,7 @@ const DealsScreen = () => {
 
   return (
     <SafeLayout>
-      <HeaderBar action={<ProfileButton />}>
-        <Container />
-      </HeaderBar>
+      <HomeHeaderBar />
       <ScrollLayout p={2}>
         <Container spacing={1}>
           <DealHeader />
