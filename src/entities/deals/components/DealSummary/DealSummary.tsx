@@ -21,7 +21,7 @@ const DealSummary: FC<DealSummaryProps> = ({ product, service }) => {
 
   return (
     <Container p={4} mv={2}>
-      <Container direction="horizontal" justifyContent="space-between">
+      <Container direction="row" justifyContent="space-between">
         <Text fontSize={16} color={theme.pallete.grey[500]}>
           {t('deals.wizard.four.product_amount')}
         </Text>
@@ -29,7 +29,7 @@ const DealSummary: FC<DealSummaryProps> = ({ product, service }) => {
           {Money.fromNumber(product).toFormat()}
         </Text>
       </Container>
-      <Container direction="horizontal" justifyContent="space-between">
+      <Container direction="row" justifyContent="space-between">
         <Text fontSize={16} color={theme.pallete.grey[500]}>
           {t('deals.wizard.four.product_service')}
         </Text>
@@ -38,7 +38,7 @@ const DealSummary: FC<DealSummaryProps> = ({ product, service }) => {
         </Text>
       </Container>
       <Divider />
-      <Container direction="horizontal" justifyContent="space-between">
+      <Container direction="row" justifyContent="space-between">
         <Text fontSize={16} color={theme.pallete.common.black}>
           {t('deals.wizard.four.income_amount')}
         </Text>

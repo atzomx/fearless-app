@@ -13,7 +13,7 @@ import Animated, {
 import * as S from './Drawer.style';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('screen');
-const TIMING_IN = 400;
+const TIMING_IN = 300;
 
 export type DrawerProps = React.PropsWithChildren & {
   open: boolean;
@@ -40,7 +40,7 @@ const Drawer: FC<DrawerProps> = ({ open, onClose, children }) => {
     const translation = interpolate(
       translateX.value,
       [0, 1],
-      [SCREEN_WIDTH, SCREEN_WIDTH * 0.3],
+      [SCREEN_WIDTH, SCREEN_WIDTH * 0.25],
     );
     return {
       transform: [{ translateX: translation }],

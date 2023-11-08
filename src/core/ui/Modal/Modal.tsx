@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren, useEffect } from 'react';
-import { Dimensions, Modal as RNModal } from 'react-native';
+import { Dimensions, Modal as RNModal, Keyboard } from 'react-native';
 
 import {
   GestureHandlerRootView,
@@ -7,6 +7,7 @@ import {
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import Animated, {
+  interpolate,
   interpolateColor,
   measure,
   runOnJS,
@@ -36,7 +37,7 @@ const AnimatedBackdrop = Animated.createAnimatedComponent(S.Backdrop);
 const AnimatedLine = Animated.createAnimatedComponent(S.Line);
 const AnimatedDrag = Animated.createAnimatedComponent(S.GestureContainer);
 
-let INITIAL_POSITION = Dimensions.get('screen').height;
+const INITIAL_POSITION = Dimensions.get('screen').height;
 const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
   const theme = useTheme();
   const translateY = useSharedValue(0);
@@ -80,6 +81,9 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
 
   const handleOnClose = () => {
     'worklet';
+    const isKeyboardVisible = Keyboard.isVisible();
+    if (isKeyboardVisible) Keyboard.dismiss();
+
     translateY.value = withTiming(
       INITIAL_POSITION,
       {
@@ -95,6 +99,16 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
     if (open) translateY.value = withTiming(0, { duration: 300 });
   }, [open, translateY]);
 
+  useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', () => {
+      const metrics = Keyboard.metrics();
+      translateY.value = -(metrics?.height ?? 0);
+    });
+    return () => {
+      Keyboard.removeAllListeners('keyboardDidShow');
+    };
+  }, [translateY]);
+
   const rBottomSheetStyle = useAnimatedStyle(() => {
     return { transform: [{ translateY: translateY.value }] };
   }, []);
@@ -108,11 +122,14 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
     return { backgroundColor: color };
   }, []);
 
-  // const rBackdropStyle = useAnimatedStyle(() => {
-  //   const opacity = interpolate(translateY.value, [0, 1], [0, 1]);
-  //   console.log(opacity);
-  //   return { opacity };
-  // });
+  const rBackdropStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      translateY.value,
+      [INITIAL_POSITION, 0],
+      [0, 1],
+    );
+    return { opacity };
+  });
 
   return (
     <RNModal
@@ -122,7 +139,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
       statusBarTranslucent
       presentationStyle="overFullScreen"
       onRequestClose={handleOnClose}>
-      <AnimatedBackdrop />
+      <AnimatedBackdrop style={rBackdropStyle} />
       <S.Container onPress={handleOnClose} activeOpacity={1}>
         <GestureHandlerRootView>
           <AnimatedModal
