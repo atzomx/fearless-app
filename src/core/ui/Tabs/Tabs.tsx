@@ -25,7 +25,7 @@ const Tabs: FC<TabsProps> = ({
   return (
     <S.TabsContainer {...props}>
       <ScrollLayout horizontal showsHorizontalScrollIndicator={false}>
-        <Container direction="horizontal">
+        <Container direction="row">
           {Childs.map((child, index) => {
             return (
               <S.TabContent

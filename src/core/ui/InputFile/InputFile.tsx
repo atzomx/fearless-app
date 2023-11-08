@@ -137,7 +137,7 @@ const InputFile: FC<InputFileProps> = ({
         title="Selecciona una opcion"
         open={modal}
         onClose={() => setModal(false)}>
-        <Container mt={1} spacing={4} direction="horizontal" alignSelf="center">
+        <Container mt={1} spacing={4} direction="row" alignSelf="center">
           <IconButtonTitle
             onPress={onChooseCamera}
             title="Camara"

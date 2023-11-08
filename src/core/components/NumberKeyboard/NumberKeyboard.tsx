@@ -86,22 +86,22 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({
         </Text>
       </Container>
       <Container alignSelf="center" spacing={0}>
-        <Container direction="horizontal" spacing={4}>
+        <Container direction="row" spacing={4}>
           <KeyButton text="1" onPress={buildNumber('1')} />
           <KeyButton text="2" onPress={buildNumber('2')} />
           <KeyButton text="3" onPress={buildNumber('3')} />
         </Container>
-        <Container direction="horizontal" spacing={4}>
+        <Container direction="row" spacing={4}>
           <KeyButton text="4" onPress={buildNumber('4')} />
           <KeyButton text="5" onPress={buildNumber('5')} />
           <KeyButton text="6" onPress={buildNumber('6')} />
         </Container>
-        <Container direction="horizontal" spacing={4}>
+        <Container direction="row" spacing={4}>
           <KeyButton text="7" onPress={buildNumber('7')} />
           <KeyButton text="8" onPress={buildNumber('8')} />
           <KeyButton text="9" onPress={buildNumber('9')} />
         </Container>
-        <Container direction="horizontal" spacing={4}>
+        <Container direction="row" spacing={4}>
           <KeyButton text="." onPress={buildNumber('.')} />
           <KeyButton text="0" onPress={buildNumber('0')} />
           <KeyButton onPress={deleteLast}>

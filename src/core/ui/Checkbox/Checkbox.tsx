@@ -29,7 +29,7 @@ const Checkbox: FC<CheckboxProps> = ({ label, value, onChange }) => {
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={toggleCheckbox}>
-      <Container direction="horizontal" alignSelf="flex-start">
+      <Container direction="row" alignSelf="flex-start">
         <View>{getCheckboxSvg()}</View>
         {label && <Text>{label}</Text>}
       </Container>

@@ -6,4 +6,5 @@ export type TextProps = {
   fontSize?: number;
   fontWeight?: TextWeight;
   variant?: TextVariant;
+  elipsis?: number;
 };

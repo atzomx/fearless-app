@@ -15,8 +15,8 @@ export const ColorSecondary = {
 };
 
 export const CommonColors = {
-  black: '#000',
-  white: '#FFF',
+  black: '#000000',
+  white: '#FFFFFF',
 };
 
 export const ColorsTheme = {
