@@ -27,3 +27,6 @@ export * from './ImageCarrouselViewer';
 
 export { default as NumberKeyboard } from './NumberKeyboard';
 export * from './NumberKeyboard';
+
+export { default as HomeHeaderBar } from './HomeHeaderBar';
+export * from './HomeHeaderBar';
