@@ -5,7 +5,7 @@ const GalleryIcon = ({ width = 24, height = 24, ...props }: SvgProps) => (
   <Svg
     fill="none"
     stroke="currentColor"
-    strokeWidth={1}
+    strokeWidth={1.5}
     viewBox="0 0 24 24"
     {...{ width, height }}
     {...props}>

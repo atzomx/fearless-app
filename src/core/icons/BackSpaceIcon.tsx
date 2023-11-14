@@ -6,6 +6,7 @@ const BackSpaceIcon = ({ width = 24, height = 24, ...props }: SvgProps) => (
   <Svg
     fill="currentColor"
     viewBox="0 0 24 24"
+    strokeWidth={1.5}
     {...{ width, height }}
     {...props}>
     <Path
