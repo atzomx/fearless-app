@@ -1,8 +1,11 @@
 import styled from 'styled-components/native';
 
+import BaseScrollLayout from '@core/layouts/ScrollLayout';
+
 export const TabsContainer = styled.View({
   flex: 1,
   flexDirection: 'row',
+  backgroundColor: 'transparent',
 });
 
 export const TabContent = styled.TouchableOpacity<{ active: boolean }>(
@@ -18,7 +21,6 @@ export const TabContent = styled.TouchableOpacity<{ active: boolean }>(
   }),
 );
 
-export const ActionsContainer = styled.View({
-  justifyContent: 'center',
-  alignItems: 'center',
+export const ScrollLayout = styled(BaseScrollLayout)({
+  height: 30,
 });
