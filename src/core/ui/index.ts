@@ -63,3 +63,6 @@ export * from './Drawer';
 
 export { default as ItemList } from './ItemList';
 export * from './ItemList';
+
+export { default as SearchBar } from './SearchBar';
+export * from './SearchBar';

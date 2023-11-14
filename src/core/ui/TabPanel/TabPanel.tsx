@@ -6,7 +6,7 @@ type TabPanelProps = React.PropsWithChildren & { value: number; index: number };
 
 const TabPanel: FC<TabPanelProps> = ({ value, index, children }) => {
   return (
-    <View style={{ display: value === index ? 'flex' : 'none' }}>
+    <View style={{ display: value === index ? 'flex' : 'none', flex: 1 }}>
       {children}
     </View>
   );

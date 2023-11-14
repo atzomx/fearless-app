@@ -37,7 +37,7 @@ const NewDealStepOne = () => {
   return (
     <Wizard.Page>
       <Wizard.Body>
-        <HeaderBar onBack={() => navigator.pop(1)} />
+        <HeaderBar onBack={() => navigator.goBack()} />
         <KeyboardAwareScrollView
           enableOnAndroid
           enableAutomaticScroll
