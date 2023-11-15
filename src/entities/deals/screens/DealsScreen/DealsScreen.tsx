@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
+import { FlatList } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components/native';
 
-import { HeaderBar, HomeHeaderBar } from '@core/components';
-import ProfileButton from '@core/components/ProfileButton';
+import { HomeHeaderBar } from '@core/components';
 import { useModal, useNavigate } from '@core/hooks';
-import { PlusIcon, SearchIcon } from '@core/icons';
+import { SearchIcon } from '@core/icons';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import {
   Button,
   Container,
-  FloatButton,
   InputText,
   Modal,
   Spacer,
@@ -47,40 +46,32 @@ const DealsScreen = () => {
   return (
     <SafeLayout>
       <HomeHeaderBar />
-      <ScrollLayout p={2}>
-        <Container spacing={1}>
+      <ScrollLayout showsVerticalScrollIndicator={false}>
+        <Container ph={2} spacing={1} flex={1}>
           <DealHeader />
-          <Tabs
-            value={tab}
-            onChange={current => setTab(current)}
-            actions={<DealFilters onPress={modal.open} />}>
+          <DealFilters onPress={modal.open} />
+          <Tabs value={tab} onChange={current => setTab(current)}>
             <Tab>{t('deals.screen.tabs.active')}</Tab>
             <Tab>{t('deals.screen.tabs.finished')}</Tab>
           </Tabs>
-          <TabPanel value={tab} index={0}>
-            <Container spacing={2}>
-              <DealCard
-                deal={DEALS[0]}
-                onPress={() => router.push(DEALS_ROUTES.one)}
-              />
-              <DealCard
-                deal={DEALS[0]}
-                onPress={() => router.push(DEALS_ROUTES.one)}
-              />
-              <DealCard
-                deal={DEALS[0]}
-                onPress={() => router.push(DEALS_ROUTES.one)}
-              />
-            </Container>
-          </TabPanel>
-          <TabPanel value={tab} index={1}>
-            <Text>Noting to show</Text>
-          </TabPanel>
         </Container>
+        <TabPanel value={tab} index={0}>
+          <Container spacing={2} p={2}>
+            <FlatList
+              data={DEALS}
+              decelerationRate="fast"
+              snapToStart
+              snapToEnd
+              keyExtractor={(_, index) => index.toString()}
+              scrollEventThrottle={16}
+              renderItem={({ item }) => <DealCard deal={item} />}
+            />
+          </Container>
+        </TabPanel>
+        <TabPanel value={tab} index={1}>
+          <Text>Noting to show</Text>
+        </TabPanel>
       </ScrollLayout>
-      <FloatButton onPress={() => router.push(DEALS_ROUTES.new)}>
-        <PlusIcon width={20} height={20} color={theme.pallete.common.white} />
-      </FloatButton>
       <Modal open={modal.isOpen} onClose={modal.close} title="Filtros">
         <Container p={2}>
           <InputText

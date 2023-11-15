@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.TouchableOpacity(({ theme }) => ({
+export const IconContainer = styled.TouchableOpacity(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: theme.pallete.grey[100],
@@ -11,3 +11,9 @@ export const Container = styled.TouchableOpacity(({ theme }) => ({
   borderColor: theme.pallete.grey[100],
   borderRadius: theme.spacing(1),
 }));
+
+export const Container = styled.TouchableOpacity({
+  flex: 1,
+  flexDirection: 'row',
+  gap: 10,
+});
