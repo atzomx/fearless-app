@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from 'react';
-import { StyleProp, View, ViewProps, ViewStyle } from 'react-native';
+import React from 'react';
+import { View, ViewProps } from 'react-native';
 
 import {
   FlexAlignType,
@@ -16,7 +16,6 @@ type ContainerProps<D> = React.PropsWithChildren &
     fullWidth?: boolean;
     spacing?: number;
     direction?: FlexStyle['flexDirection'];
-    spacingArround?: boolean;
     position?: 'absolute' | 'relative';
     alignSelf?: FlexAlignType;
     style?: ViewProps['style'];
@@ -24,13 +23,6 @@ type ContainerProps<D> = React.PropsWithChildren &
   } & Omit<FlexStyle, 'direction'> &
   //@ts-ignore
   React.ComponentProps<D>;
-
-const PARSER_MARGIN = Object.freeze({
-  row: 'marginRight',
-  ['row-reverse']: 'marginRight',
-  column: 'marginBottom',
-  ['column-reverse']: 'marginBottom',
-});
 
 function Container<D>({
   children,
@@ -53,42 +45,11 @@ function Container<D>({
   fullHeight = false,
   fullWidth = false,
   direction = 'column',
-  spacingArround = false,
   //@ts-ignore
   component: Component = View,
   ...props
 }: ContainerProps<D>) {
   const theme = useTheme();
-  const ArrayChildren = useMemo(
-    () => React.Children.toArray(children),
-    [children],
-  );
-
-  const styleSpacing = useCallback(
-    (index: number): StyleProp<ViewStyle> => {
-      if (spacingArround)
-        return {
-          margin: theme.spacingSingle(spacing),
-        };
-      if (index === ArrayChildren.length - 1) return undefined;
-
-      return {
-        [PARSER_MARGIN[direction]]: theme.spacingSingle(spacing),
-      };
-    },
-    [ArrayChildren.length, direction, spacing, theme, spacingArround],
-  );
-
-  const CHILDREN = useMemo(() => {
-    if (!spacing) return ArrayChildren;
-    return ArrayChildren.map((child, index) => (
-      <View
-        key={`spacing-layout-fragment-${index}`}
-        style={styleSpacing(index)}>
-        {child}
-      </View>
-    ));
-  }, [ArrayChildren, spacing, styleSpacing]);
 
   return (
     //@ts-ignore
@@ -114,9 +75,10 @@ function Container<D>({
         { ...(fullHeight && { flex: 1 }) },
         { ...(fullWidth && { width: '100%' }) },
         { ...(direction && { flexDirection: direction }) },
+        { ...(spacing && { gap: theme.spacingSingle(spacing) }) },
         style,
       ]}>
-      {CHILDREN}
+      {children}
     </Component>
   );
 }

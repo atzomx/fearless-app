@@ -12,7 +12,8 @@ type SafeLayoutProps = React.PropsWithChildren & {
 const SafeLayout: FC<SafeLayoutProps> = ({ children }) => {
   const theme = useTheme();
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <GestureHandlerRootView
+      style={[styles.container, { backgroundColor: theme.pallete.background }]}>
       <StatusBar
         translucent
         backgroundColor={theme.pallete.common.white}
