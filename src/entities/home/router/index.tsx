@@ -5,20 +5,29 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { makeStyles } from '@core/hooks';
 import { HomeTabBarIcon } from '@e/home/components';
-
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { HomeRoutes, type THomeRoutes } from './routes';
+import { useTheme } from 'styled-components/native';
 
 const Tab = createBottomTabNavigator();
 
 const HomeRouter = () => {
   const styles = useStyles();
+  const insets = useSafeAreaInsets();
+  const theme = useTheme();
+
+  console.log(insets);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
-        tabBarStyle: styles.tabBarStyle,
+        tabBarStyle: [
+          styles.tabBarStyle,
+          { height: theme.spacingSingle(7) + insets.bottom },
+        ],
         tabBarIcon: ({ focused }) => (
           <HomeTabBarIcon
             focused={focused}
@@ -35,7 +44,6 @@ const HomeRouter = () => {
 
 const useStyles = makeStyles(theme => ({
   tabBarStyle: {
-    height: theme.spacingSingle(7),
     elevation: 0,
     borderTopWidth: 0,
     backgroundColor: theme.pallete.colors.white,
