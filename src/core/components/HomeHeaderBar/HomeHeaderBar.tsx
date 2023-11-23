@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 
 import { useTheme } from 'styled-components/native';
 
-import { BellIcon } from '@core/icons';
 import { Text } from '@core/ui';
 
 import * as S from './HomeHeaderBar.style';
@@ -18,27 +17,22 @@ const HomeHeaderBar: FC<HomeHeaderBarProps> = ({ name }) => {
   return (
     <S.ContainerView edges={['top']}>
       <S.Container>
-        <S.ContainerButton>
-          <ProfileButton />
-        </S.ContainerButton>
         <S.ContainerTitle>
           <Text
-            fontSize={10}
+            fontSize={12}
             fontWeight="Regular"
             color={theme.pallete.grey[500]}>
             Bienvenido
           </Text>
           <Text
-            fontSize={12}
+            fontSize={14}
             fontWeight="Medium"
             color={theme.pallete.text.black}>
             Erick Andrade
           </Text>
         </S.ContainerTitle>
         <S.ContainerButton>
-          <S.IconButton activeOpacity={0.8}>
-            <BellIcon color={theme.pallete.grey[600]} height={24} width={24} />
-          </S.IconButton>
+          <ProfileButton />
         </S.ContainerButton>
       </S.Container>
     </S.ContainerView>

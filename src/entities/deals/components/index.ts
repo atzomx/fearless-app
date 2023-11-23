@@ -27,3 +27,6 @@ export * from './NewDealStepFour';
 
 export { default as DealSummary } from './DealSummary';
 export * from './DealSummary';
+
+export { default as DealList } from './DealList';
+export * from './DealList';

@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View(({ theme }) => ({
   flexDirection: 'row',
-  height: theme.spacing(3.75),
+  height: theme.spacing(5),
+  borderRadius: theme.spacing(5 / 3),
   backgroundColor: theme.pallete.grey[50],
-  borderRadius: theme.spacing(1),
   alignItems: 'center',
   paddingHorizontal: theme.spacing(1),
   flex: 1,

@@ -3,9 +3,9 @@ import { StackNavigationOptions } from '@react-navigation/stack';
 import { IRoute } from '@core/interfaces/IRoutes';
 
 import ROUTES from '../constants/routes';
-import { DealScreen, DealsScreen, NewDealScreen } from '../screens';
+import { DealScreen, NewDealScreen } from '../screens';
 
-const options: StackNavigationOptions = {
+export const DealsStackOptions: StackNavigationOptions = {
   headerShown: false,
   presentation: 'card',
   cardStyleInterpolator: ({ current, layouts }) => {
@@ -24,22 +24,17 @@ const options: StackNavigationOptions = {
   },
 };
 
-const DealsRoutes: IRoute[] = [
-  {
-    key: ROUTES.home,
-    component: DealsScreen,
-    options,
-  },
-  {
+const DealsRoutes: Record<string, IRoute> = {
+  [ROUTES.new]: {
     key: ROUTES.new,
     component: NewDealScreen,
-    options,
+    options: DealsStackOptions,
   },
-  {
+  [ROUTES.one]: {
     key: ROUTES.one,
     component: DealScreen,
-    options,
+    options: DealsStackOptions,
   },
-];
+};
 
 export default DealsRoutes;
