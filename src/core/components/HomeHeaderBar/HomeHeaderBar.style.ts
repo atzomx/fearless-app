@@ -16,7 +16,7 @@ export const ContainerTitle = styled.View({
   flexShrink: 4,
   flexGrow: 4,
   justifyContent: 'center',
-  gap: -4,
+  gap: 0,
 });
 
 export const ContainerView = styled(SafeAreaView)(({ theme }) => ({

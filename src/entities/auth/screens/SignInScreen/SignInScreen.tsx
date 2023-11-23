@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import { InputControl } from '@core/components';
 import { useNavigate } from '@core/hooks';
-import { Button, Spacer, Stack, Text } from '@core/ui';
+import { Button, InputText, Spacer, Stack, Text } from '@core/ui';
 import AUTH_ROUTES from '@e/auth/constants/routes';
 import loginSchema from '@e/auth/schemas/login.schema';
 
@@ -48,6 +48,7 @@ const SignInScreen = () => {
           {t('auth.signin.text.signin')}
         </Text>
         <InputControl
+          component={InputText}
           control={control}
           name="userName"
           label={t('auth.signin.input.username')}
@@ -55,6 +56,7 @@ const SignInScreen = () => {
           required
         />
         <InputControl
+          component={InputText}
           control={control}
           name="password"
           label={t('auth.signin.input.password')}
