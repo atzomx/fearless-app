@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FlatList } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components/native';
@@ -17,12 +16,19 @@ import {
   Tab,
   TabPanel,
   Tabs,
-  Text,
 } from '@core/ui';
-import { DealCard, DealFilters, DealHeader } from '@e/deals/components';
+import {
+  DealFilters,
+  DealHeader,
+  DealList,
+  type Deal,
+} from '@e/deals/components';
 import DEALS_ROUTES from '@e/deals/constants/routes';
+import { BaseDeal } from '@e/deals/types';
 
-const deal = {
+// import DEALS_ROUTES from '@e/deals/constants/routes';
+
+const deal: BaseDeal = {
   status: 'Espeando Confirmacion',
   itemStatus: 'Usado',
   id: '7736672888290',
@@ -43,6 +49,13 @@ const DealsScreen = () => {
   const [tab, setTab] = useState(0);
   const { t } = useTranslation();
 
+  const onPressItem = (current: Deal) => {
+    router.navigate('deals', {
+      screen: DEALS_ROUTES.one,
+      params: { deal: current },
+    });
+  };
+
   return (
     <SafeLayout>
       <HomeHeaderBar />
@@ -56,20 +69,10 @@ const DealsScreen = () => {
           </Tabs>
         </Container>
         <TabPanel value={tab} index={0}>
-          <Container spacing={2} p={2}>
-            <FlatList
-              data={DEALS}
-              decelerationRate="fast"
-              snapToStart
-              snapToEnd
-              keyExtractor={(_, index) => index.toString()}
-              scrollEventThrottle={16}
-              renderItem={({ item }) => <DealCard deal={item} />}
-            />
-          </Container>
+          <DealList deals={DEALS} onPressItem={onPressItem} />
         </TabPanel>
         <TabPanel value={tab} index={1}>
-          <Text>Noting to show</Text>
+          <DealList deals={DEALS} />
         </TabPanel>
       </ScrollLayout>
       <Modal open={modal.isOpen} onClose={modal.close} title="Filtros">
