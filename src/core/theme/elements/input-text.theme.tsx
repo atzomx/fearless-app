@@ -2,30 +2,34 @@ import type { InputTextBase } from '../types';
 
 const InputText: InputTextBase = {
   container: {
-    minHeight: '56px',
-    borderRadius: '12px',
-    backgroundColor: 'rgba(0,0,0,0.03)',
+    minHeight: 64,
+    borderRadius: 12,
     display: 'flex',
     flexDirection: 'row',
     overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: '#DFDFDF',
   },
   label: {
-    padding: '0px 10px',
+    padding: '0px 20px',
     marginTop: 5,
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
+    position: 'absolute',
+    zIndex: 10,
   },
   adorment: {
-    width: '6px',
+    width: 6,
   },
   input: {
-    padding: '0px 10px',
+    marginTop: 8,
+    padding: '0px 20px',
     fontSize: 14,
     fontWeight: 400,
     fontFamily: 'Inter-Regular',
   },
   helper: {
-    paddingLeft: '16px',
+    paddingLeft: '20px',
     fontSize: 10,
     fontWeight: 400,
     fontFamily: 'Inter-Regular',

@@ -16,7 +16,7 @@ export const TabContent = styled.TouchableOpacity<{ active: boolean }>(
     borderRadius: theme.spacing(1),
     padding: theme.spacing(0.7, 1.5),
     ...(active && {
-      backgroundColor: theme.pallete.grey[100],
+      backgroundColor: theme.pallete.common.black,
     }),
   }),
 );

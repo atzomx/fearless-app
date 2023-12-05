@@ -1,30 +1,20 @@
 import { DefaultTheme } from 'styled-components/native';
 
-import { ColorVariant } from '@core/theme';
-
 import { InputStatus } from './InputText.types';
 
-export const getInputAdormentStatus = (
-  theme: DefaultTheme,
-  color: ColorVariant,
-  status: InputStatus,
-) => {
+export const getInputStatus = (theme: DefaultTheme, status: InputStatus) => {
   const STATUS = {
     error: theme.pallete.error.main,
-    focus: theme.pallete[color].main,
-    default: 'rgba(0,0,0,0)',
+    focus: theme.pallete.common.black,
+    default: theme.pallete.grey[300],
   };
   return STATUS[status];
 };
 
-export const getLabelStatus = (
-  theme: DefaultTheme,
-  color: ColorVariant,
-  status: InputStatus,
-) => {
+export const getLabelStatus = (theme: DefaultTheme, status: InputStatus) => {
   const STATUS = {
     error: theme.pallete.error.main,
-    focus: theme.pallete[color].main,
+    focus: theme.pallete.common.black,
     default: theme.pallete.grey[500],
   };
   return STATUS[status];

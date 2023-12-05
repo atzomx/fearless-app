@@ -17,3 +17,7 @@ export { default as SearchIcon } from './SearchIcon';
 export { default as SettingsIcon } from './SettingsIcon';
 export { default as SignOutIcon } from './SignOutIcon';
 export { default as VerifyIcon } from './VerifyIcon';
+export { default as MenuIcon } from './MenuIcon';
+export { default as MessageIcon } from './MessageIcon';
+export { default as GoogleIcon } from './GoogleIcon';
+export { default as FacebookIcon } from './FacebookIcon';

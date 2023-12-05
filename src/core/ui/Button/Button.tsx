@@ -20,9 +20,11 @@ export type ButtonProps = ButtonPropsRN & {
   style?: StyleProp<ViewStyle>;
   disable?: boolean;
   sx?: {
-    button: StyleProp<TextStyle>;
-    text: StyleProp<TextStyle>;
+    button?: StyleProp<TextStyle>;
+    text?: StyleProp<TextStyle>;
   };
+  startAdorment?: JSX.Element;
+  endAdorment?: JSX.Element;
 };
 
 const Button: FC<ButtonProps> = ({
@@ -33,6 +35,9 @@ const Button: FC<ButtonProps> = ({
   disable = false,
   onPress,
   style,
+  startAdorment,
+  endAdorment,
+  sx,
   ...props
 }) => {
   return (
@@ -45,10 +50,17 @@ const Button: FC<ButtonProps> = ({
           color={color}
           disable={disable}
           onPress={disable ? undefined : onPress}
+          style={sx?.button}
           {...props}>
-          <S.Text color={color} variant={variant} disable={disable}>
+          {startAdorment}
+          <S.Text
+            style={sx?.text}
+            color={color}
+            variant={variant}
+            disable={disable}>
             {title}
           </S.Text>
+          {endAdorment}
         </S.Button>
       )}
     </ButtonBase>

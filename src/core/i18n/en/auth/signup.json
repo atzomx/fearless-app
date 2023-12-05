@@ -6,6 +6,11 @@
     "email": "Email"
   },
   "text": {
-    "signup": "Sign Up"
+    "gretting": "Create new account!",
+    "action": "Sign up",
+    "description": "Please fill the form to continue",
+    "signin": "Sign Up",
+    "new_user": "Do you have an account?",
+    "create_account": "Sign in"
   }
 }
