@@ -9,16 +9,15 @@ const BackButton: FC<IconButtonProps> = props => {
   const theme = useTheme();
   return (
     <IconButton
+      {...props}
       variant="contained"
-      color="secondary"
+      color={theme.pallete.grey['100']}
       sx={{
         button: {
           height: 36,
           width: 36,
-          backgroundColor: theme.pallete.grey['100'],
         },
-      }}
-      {...props}>
+      }}>
       <BackIcon color={theme.pallete.grey[600]} height={18} width={18} />
     </IconButton>
   );

@@ -2,12 +2,13 @@
 import * as React from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from 'styled-components/native';
 
 import { makeStyles } from '@core/hooks';
 import { HomeTabBarIcon } from '@e/home/components';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { HomeRoutes, type THomeRoutes } from './routes';
-import { useTheme } from 'styled-components/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,8 +16,6 @@ const HomeRouter = () => {
   const styles = useStyles();
   const insets = useSafeAreaInsets();
   const theme = useTheme();
-
-  console.log(insets);
 
   return (
     <Tab.Navigator

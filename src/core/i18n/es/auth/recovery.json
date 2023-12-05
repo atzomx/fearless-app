@@ -3,6 +3,8 @@
     "username": "Nombre de usuario"
   },
   "text": {
-    "recovery": "Recuperar contraseña"
+    "gretting": "Recuperar contraseña",
+    "recovery": "Enviaremos un codigo a tu correo registrado para que puedas acceder a tu cuenta",
+    "action": "Enviar"
   }
 }

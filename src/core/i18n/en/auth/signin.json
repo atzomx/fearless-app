@@ -4,8 +4,12 @@
     "password": "Password"
   },
   "text": {
-    "signin": "Sign In",
+    "gretting": "Welcome Back!",
+    "action": "Sign In",
+    "signin": "Please sign in to your account",
     "recover": "Recovery password",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "new_user": "Don't have an account?",
+    "create_account": "Sign up"
   }
 }

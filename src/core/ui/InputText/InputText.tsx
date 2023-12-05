@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState, useMemo } from 'react';
 import {
   NativeSyntheticEvent,
   StyleProp,
@@ -6,8 +6,16 @@ import {
   TextInputFocusEventData,
   TextInputProps,
   TextStyle,
+  View,
 } from 'react-native';
 
+import Animated, {
+  Easing,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { useTheme } from 'styled-components/native';
 
 import { ColorVariant } from '@core/theme';
@@ -30,6 +38,8 @@ export type InputTextProps = TextInputProps & {
   };
 };
 
+const AnimatedLabel = Animated.createAnimatedComponent(S.Label);
+
 const InputText: FC<InputTextProps> = ({
   label,
   onFocus,
@@ -46,6 +56,7 @@ const InputText: FC<InputTextProps> = ({
 }) => {
   const theme = useTheme();
   const ref = useRef<TextInput>();
+  const touched = useSharedValue(0);
   const [focus, setFocus] = useState(
     Boolean(props.focusable && props.autoFocus),
   );
@@ -64,20 +75,47 @@ const InputText: FC<InputTextProps> = ({
     ref.current?.focus();
   };
 
+  const HAS_CONTENT = useMemo(
+    () => props.value && props.value.length > 0,
+    [props.value],
+  );
+
+  useEffect(() => {
+    touched.value = withTiming(focus || HAS_CONTENT ? 1 : 0, {
+      duration: 200,
+      easing: Easing.inOut(Easing.ease),
+    });
+  }, [focus, touched, HAS_CONTENT]);
+
   const status = error ? 'error' : focus ? 'focus' : 'default';
 
+  const rLabelStyled = useAnimatedStyle(() => {
+    const fontSize = interpolate(touched.value, [0, 1], [14, 11]);
+    const translate = interpolate(touched.value, [0, 1], [0, -16]);
+    return {
+      fontSize: fontSize,
+      transform: [{ translateY: translate }],
+    };
+  });
+
   return (
-    <>
-      <S.Container activeOpacity={1} onPress={handleOnPress} style={style}>
-        <S.InputAdorment color={color} status={status} style={sx?.adorment} />
+    <View>
+      <S.Container
+        status={status}
+        activeOpacity={1}
+        onPress={handleOnPress}
+        style={style}>
         <S.InputContainer>
-          <S.Label color={color} status={status} style={sx?.label}>
+          <AnimatedLabel
+            color={color}
+            status={status}
+            style={[sx?.label, rLabelStyled]}>
             {label}
             {required ? '*' : ''}
-          </S.Label>
+          </AnimatedLabel>
           <S.Input
             ref={ref as React.Ref<TextInput>}
-            style={sx?.input}
+            style={[sx?.input]}
             placeholderTextColor={theme.pallete.grey[400]}
             onFocus={handleOnFocus}
             onBlur={handleOnBlur}
@@ -92,7 +130,7 @@ const InputText: FC<InputTextProps> = ({
         )}
       </S.Container>
       {helperText && <S.HelperText status={status}>{helperText}</S.HelperText>}
-    </>
+    </View>
   );
 };
 
