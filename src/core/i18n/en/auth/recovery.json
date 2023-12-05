@@ -1,8 +1,10 @@
 {
   "input": {
-    "username": "Username"
+    "username": "Nombre de usuario"
   },
   "text": {
-    "recover": "Recovery password"
+    "gretting": "Recovery Password",
+    "recovery": "Enter the email address with you account and we'll send an email with confirmation to reset your password",
+    "action": "Send"
   }
 }

@@ -1,20 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
+
+import { useRoute } from '@react-navigation/native';
 
 import { HeaderBar, SlideCarrousel } from '@core/components';
 import { useNavigate } from '@core/hooks';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import { Container } from '@core/ui';
+import { BaseDeal } from '@e/deals/types';
 
 const DealScreen = () => {
   const navigator = useNavigate();
+  const route = useRoute();
+
+  const { deal } = route.params as { deal: BaseDeal };
 
   return (
     <SafeLayout>
-      <HeaderBar
-        onBack={() => navigator.pop(1)}
-        title="Identificador de trato"
-        subtitle="#7736672888290"
-      />
+      <HeaderBar onBack={() => navigator.pop(1)} />
       <ScrollLayout>
         <Container p={2} spacing={1} />
         <SlideCarrousel
