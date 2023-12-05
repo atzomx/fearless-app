@@ -12,7 +12,7 @@ export type HomeHeaderBarProps = {
   name?: string;
 };
 
-const HomeHeaderBar: FC<HomeHeaderBarProps> = ({ name }) => {
+const HomeHeaderBar: FC<HomeHeaderBarProps> = () => {
   const theme = useTheme();
   return (
     <S.ContainerView edges={['top']}>
