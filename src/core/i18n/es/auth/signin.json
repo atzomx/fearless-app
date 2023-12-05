@@ -4,8 +4,12 @@
     "password": "Contraseña"
   },
   "text": {
-    "signin": "Inicia Sesión",
+    "gretting": "Welcome Back!",
+    "action": "Sign In",
+    "signin": "Inicia sesion ahora!",
     "recover": "Recuperar contraseña",
-    "signup": "Registrate"
+    "signup": "Registrate",
+    "new_user": "Si eres nuevo.",
+    "create_account": "Crear una cuenta"
   }
 }

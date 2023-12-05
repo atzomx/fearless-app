@@ -6,6 +6,11 @@
     "email": "Correo"
   },
   "text": {
-    "signup": "Registrarse"
+    "gretting": "Crear una nueva cuenta!",
+    "action": "Registrate",
+    "description": "Porfavor llena el formulario para continuar",
+    "signin": "Registrate",
+    "new_user": "Tienes una cuenta?",
+    "create_account": "Iniciar sesion"
   }
 }

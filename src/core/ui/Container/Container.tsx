@@ -41,7 +41,7 @@ function Container<D>({
   ml = 0,
   mv = 0,
   mh = 0,
-  spacing = 1,
+  spacing = 0,
   fullHeight = false,
   fullWidth = false,
   direction = 'column',

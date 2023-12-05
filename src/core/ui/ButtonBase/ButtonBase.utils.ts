@@ -1,6 +1,6 @@
 import { CSSObject } from 'styled-components';
 
-import { ButtonVariant, ColorVariant, Theme } from '@core/theme';
+import DefaultTheme, { ButtonVariant, ColorVariant, Theme } from '@core/theme';
 
 export type TButtonVariantStyle = {
   variant: ButtonVariant;
@@ -15,6 +15,8 @@ export type ButtonMakerProps = {
   disable: boolean;
 };
 
+type Color = keyof typeof DefaultTheme.pallete;
+
 export const getButtonVariantStyle = ({
   variant,
   theme,
@@ -23,7 +25,8 @@ export const getButtonVariantStyle = ({
 }: TButtonVariantStyle): CSSObject => {
   const currentColor = disable
     ? theme.pallete.action.disabledBackground
-    : theme.pallete[color].main;
+    : // @ts-ignore
+      theme.pallete[color as Color]?.main ?? color;
 
   const variants = {
     contained: {
@@ -43,6 +46,9 @@ export const getContentVariantStyle = ({
   disable,
 }: TButtonVariantStyle) => {
   if (disable) return theme.pallete.action.disabled;
-  if (variant === 'contained') return theme.pallete[color].contrastText;
-  return theme.pallete[color].main;
+  if (variant === 'contained')
+    // @ts-ignore
+    return theme.pallete[color as Color]?.contrastText ?? color;
+  // @ts-ignore
+  return theme.pallete[color as Color].main;
 };

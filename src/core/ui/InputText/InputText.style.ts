@@ -5,30 +5,27 @@ import { ColorVariant } from '@core/theme';
 import { InputStatus } from './InputText.types';
 import {
   getHelperLabelStatus,
-  getInputAdormentStatus,
+  getInputStatus,
   getLabelStatus,
 } from './InputText.utils';
 
-export const Container = styled.TouchableOpacity(({ theme }) => ({
-  ...theme.components.InputText.container,
-}));
-
-export const InputAdorment = styled.View<{
-  color: ColorVariant;
-  status: InputStatus;
-}>(({ status, color, theme }) => ({
-  ...theme.components.InputText.adorment,
-  backgroundColor: getInputAdormentStatus(theme, color, status),
-}));
+export const Container = styled.TouchableOpacity<{ status: InputStatus }>(
+  ({ theme, status }) => ({
+    ...theme.components.InputText.container,
+    borderColor: getInputStatus(theme, status),
+  }),
+);
 
 export const InputContainer = styled.View({
   flex: 1,
+  justifyContent: 'center',
+  position: 'relative',
 });
 
 export const Label = styled.Text<{ color: ColorVariant; status: InputStatus }>(
-  ({ theme, color, status }) => ({
+  ({ theme, status }) => ({
     ...theme.components.InputText.label,
-    color: getLabelStatus(theme, color, status),
+    color: getLabelStatus(theme, status),
   }),
 );
 
