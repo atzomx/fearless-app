@@ -109,12 +109,7 @@ const SignUpScreen = () => {
           </SafeAreaView>
         </KeyboardAvoidLayout>
         <SafeAreaView edges={['bottom']}>
-          <Container
-            // style={{ display: keyboardOpen ? 'none' : 'flex' }}
-            spacing={2}
-            fullWidth
-            p={2}
-            flexDirection="row">
+          <Container spacing={2} fullWidth p={2} flexDirection="row">
             <Button
               onPress={handleSubmit(onSubmit)}
               title={t('auth.signup.text.action')}
