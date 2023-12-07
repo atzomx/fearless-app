@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
+import { View } from 'react-native';
 
 import { useTheme } from 'styled-components/native';
 
@@ -11,16 +12,16 @@ export type DealFiltersProps = {
   onPress: () => void;
 };
 
-const DealFilters: FC<DealFiltersProps> = ({ onPress }) => {
+const DealFilters = forwardRef<View, DealFiltersProps>(({ onPress }, ref) => {
   const theme = useTheme();
   return (
-    <S.Container>
+    <S.Container ref={ref}>
       <SearchBar />
       <S.IconContainer onPress={onPress}>
         <FilterIcon width={20} height={20} color={theme.pallete.common.black} />
       </S.IconContainer>
     </S.Container>
   );
-};
+});
 
 export default DealFilters;

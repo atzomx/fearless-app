@@ -1,4 +1,5 @@
 {
   "required": "Required field",
-  "password-match": "Password must match"
+  "password-match": "Password must match",
+  "placeholder": "Type here..."
 }

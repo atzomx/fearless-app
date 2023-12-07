@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { View } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
+import Animated, {
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
 
 import { HomeHeaderBar } from '@core/components';
 import { useModal, useNavigate } from '@core/hooks';
-import { SearchIcon } from '@core/icons';
+import { PlusIcon, SearchIcon } from '@core/icons';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import {
   Button,
   Container,
+  FloatButton,
   InputText,
   Modal,
   Spacer,
@@ -39,15 +48,22 @@ const deal: BaseDeal = {
   dealer: 'Jose Arevalos Martinex',
 };
 
-const DEALS = [deal, deal, deal, deal, deal];
+const DEALS = Array.from({ length: 20 }).map(() => deal);
+
+const HIDDEN_POSITION = 80;
+const INTERPOLATE = [HIDDEN_POSITION / 2, HIDDEN_POSITION, HIDDEN_POSITION * 2];
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const DealsScreen = () => {
   const theme = useTheme();
   const modal = useModal();
   const router = useNavigate();
+  const translateY = useSharedValue(0);
 
   const [tab, setTab] = useState(0);
   const { t } = useTranslation();
+  const ref = useRef<View>(null);
 
   const onPressItem = (current: Deal) => {
     router.navigate('deals', {
@@ -56,25 +72,90 @@ const DealsScreen = () => {
     });
   };
 
+  const onPressNew = () => {
+    router.navigate('deals', {
+      screen: DEALS_ROUTES.new,
+    });
+  };
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll(event) {
+      translateY.value = event.contentOffset.y;
+    },
+  });
+
+  const rStyleHeaderInScroll = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      translateY.value,
+      INTERPOLATE,
+      [1, 0.3, 0],
+      'clamp',
+    );
+    return {
+      opacity,
+    };
+  });
+
+  const rStyleHeaderTop = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      translateY.value,
+      INTERPOLATE,
+      [0, 0, 1],
+      'clamp',
+    );
+    const height = Math.min(
+      interpolate(
+        translateY.value,
+        INTERPOLATE,
+        [0, 0, HIDDEN_POSITION],
+        'clamp',
+      ),
+      HIDDEN_POSITION,
+    );
+    return {
+      opacity,
+      height,
+    };
+  });
+
   return (
     <SafeLayout>
       <HomeHeaderBar />
-      <ScrollLayout showsVerticalScrollIndicator={false}>
-        <Container ph={2} spacing={1} flex={1}>
-          <DealHeader />
-          <DealFilters onPress={modal.open} />
-          <Tabs value={tab} onChange={current => setTab(current)}>
-            <Tab>{t('deals.screen.tabs.active')}</Tab>
-            <Tab>{t('deals.screen.tabs.finished')}</Tab>
-          </Tabs>
-        </Container>
-        <TabPanel value={tab} index={0}>
-          <DealList deals={DEALS} onPressItem={onPressItem} />
-        </TabPanel>
-        <TabPanel value={tab} index={1}>
-          <DealList deals={DEALS} />
-        </TabPanel>
+      <AnimatedContainer ph={2} spacing={1} style={rStyleHeaderTop}>
+        <DealFilters ref={ref} onPress={modal.open} />
+        <Tabs value={tab} onChange={current => setTab(current)}>
+          <Tab>{t('deals.screen.tabs.active')}</Tab>
+          <Tab>{t('deals.screen.tabs.finished')}</Tab>
+        </Tabs>
+      </AnimatedContainer>
+      <ScrollLayout
+        onScroll={scrollHandler}
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}>
+        <SafeAreaView>
+          <AnimatedContainer
+            ph={2}
+            spacing={1}
+            flex={1}
+            style={rStyleHeaderInScroll}>
+            <DealHeader />
+            <DealFilters ref={ref} onPress={modal.open} />
+            <Tabs value={tab} onChange={current => setTab(current)}>
+              <Tab>{t('deals.screen.tabs.active')}</Tab>
+              <Tab>{t('deals.screen.tabs.finished')}</Tab>
+            </Tabs>
+          </AnimatedContainer>
+          <TabPanel value={tab} index={0}>
+            <DealList deals={DEALS} onPressItem={onPressItem} />
+          </TabPanel>
+          <TabPanel value={tab} index={1}>
+            <DealList deals={DEALS} />
+          </TabPanel>
+        </SafeAreaView>
       </ScrollLayout>
+      <FloatButton onPress={onPressNew}>
+        <PlusIcon color="white" />
+      </FloatButton>
       <Modal open={modal.isOpen} onClose={modal.close} title="Filtros">
         <Container p={2}>
           <InputText

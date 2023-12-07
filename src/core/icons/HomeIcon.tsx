@@ -17,4 +17,5 @@ const HomeIcon = ({ width = 24, height = 24, ...props }: SvgProps) => (
     />
   </Svg>
 );
+
 export default HomeIcon;
