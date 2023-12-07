@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { View, ViewProps } from 'react-native';
 
 import {
@@ -24,36 +24,40 @@ type ContainerProps<D> = React.PropsWithChildren &
   //@ts-ignore
   React.ComponentProps<D>;
 
-function Container<D>({
-  children,
-  style,
-  p = 0,
-  pt = 0,
-  pb = 0,
-  pr = 0,
-  pl = 0,
-  pv = 0,
-  ph = 0,
-  m = 0,
-  mt = 0,
-  mb = 0,
-  mr = 0,
-  ml = 0,
-  mv = 0,
-  mh = 0,
-  spacing = 0,
-  fullHeight = false,
-  fullWidth = false,
-  direction = 'column',
-  //@ts-ignore
-  component: Component = View,
-  ...props
-}: ContainerProps<D>) {
+function Container<D>(
+  {
+    children,
+    style,
+    p = 0,
+    pt = 0,
+    pb = 0,
+    pr = 0,
+    pl = 0,
+    pv = 0,
+    ph = 0,
+    m = 0,
+    mt = 0,
+    mb = 0,
+    mr = 0,
+    ml = 0,
+    mv = 0,
+    mh = 0,
+    spacing = 0,
+    fullHeight = false,
+    fullWidth = false,
+    direction = 'column',
+    //@ts-ignore
+    component: Component = View,
+    ...props
+  }: ContainerProps<D>,
+  ref: D,
+) {
   const theme = useTheme();
 
   return (
     //@ts-ignore
     <Component
+      ref={ref}
       style={[
         createSpacingStyle(theme, {
           p,
@@ -83,4 +87,6 @@ function Container<D>({
   );
 }
 
-export default Container;
+const ForwardedContainer = forwardRef(Container);
+
+export default ForwardedContainer;

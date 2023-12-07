@@ -22,6 +22,7 @@ export const ContainerTitle = styled.View({
 export const ContainerView = styled(SafeAreaView)(({ theme }) => ({
   backgroundColor: theme.pallete.common.white,
   padding: theme.spacing(1, 2),
+  gap: 10,
 }));
 
 export const IconButton = styled.TouchableOpacity(({ theme }) => ({
