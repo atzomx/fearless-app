@@ -12,7 +12,7 @@ export const IconContainer = styled.TouchableOpacity(({ theme }) => ({
   borderRadius: theme.spacing(1),
 }));
 
-export const Container = styled.TouchableOpacity({
+export const Container = styled.View({
   flex: 1,
   flexDirection: 'row',
   gap: 10,

@@ -13,7 +13,7 @@ const RootRouter = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="auth"
+        initialRouteName="home"
         screenOptions={{ headerShown: false }}>
         <Stack.Screen name="auth" component={LoginRoute} />
         <Stack.Screen name="home" component={HomeRouter} />

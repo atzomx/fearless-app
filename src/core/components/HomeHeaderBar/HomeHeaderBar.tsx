@@ -8,14 +8,14 @@ import * as S from './HomeHeaderBar.style';
 
 import ProfileButton from '../ProfileButton';
 
-export type HomeHeaderBarProps = {
+export type HomeHeaderBarProps = React.PropsWithChildren & {
   name?: string;
 };
 
 const HomeHeaderBar: FC<HomeHeaderBarProps> = () => {
   const theme = useTheme();
   return (
-    <S.ContainerView edges={['top']}>
+    <S.ContainerView>
       <S.Container>
         <S.ContainerTitle>
           <Text

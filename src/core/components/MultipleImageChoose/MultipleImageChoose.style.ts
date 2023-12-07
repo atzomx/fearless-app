@@ -6,4 +6,5 @@ export const Container = styled(CoreContainer)({
   flexDirection: 'row',
   flexWrap: 'wrap',
   justifyContent: 'center',
+  maxWidth: 300,
 });
