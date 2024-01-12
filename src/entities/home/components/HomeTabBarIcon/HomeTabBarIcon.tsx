@@ -16,7 +16,7 @@ const HomeTabBarIcon: FC<HomeTabBarIconProps> = ({ focused, icon: Icon }) => {
 
   return (
     <React.Fragment>
-      <Icon width={24} height={24} color={color} />
+      <Icon width={22} height={22} color={color} />
       {focused && <S.Dot focused={focused} />}
     </React.Fragment>
   );

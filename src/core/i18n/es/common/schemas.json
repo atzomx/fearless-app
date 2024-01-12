@@ -1,5 +1,6 @@
 {
   "required": "Campo requerido",
   "password-match": "Contraseña debe coincidir",
-  "placeholder": "Escribe aqui..."
+  "placeholder": "Escribe aqui...",
+  "email": "Email debe se valido"
 }

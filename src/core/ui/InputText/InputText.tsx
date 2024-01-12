@@ -6,7 +6,6 @@ import {
   TextInputFocusEventData,
   TextInputProps,
   TextStyle,
-  View,
 } from 'react-native';
 
 import Animated, {
@@ -57,6 +56,7 @@ const InputText: FC<InputTextProps> = ({
   const theme = useTheme();
   const ref = useRef<TextInput>();
   const touched = useSharedValue(0);
+  const shake = useSharedValue(0);
   const [focus, setFocus] = useState(
     Boolean(props.focusable && props.autoFocus),
   );
@@ -82,10 +82,19 @@ const InputText: FC<InputTextProps> = ({
 
   useEffect(() => {
     touched.value = withTiming(focus || HAS_CONTENT ? 1 : 0, {
-      duration: 200,
+      duration: 100,
       easing: Easing.inOut(Easing.ease),
     });
   }, [focus, touched, HAS_CONTENT]);
+
+  useEffect(() => {
+    shake.value =
+      error && helperText
+        ? withTiming(3, { duration: 400, easing: Easing.bounce }, () => {
+            shake.value = 0;
+          })
+        : 0;
+  }, [shake, error, helperText]);
 
   const status = error ? 'error' : focus ? 'focus' : 'default';
 
@@ -98,8 +107,23 @@ const InputText: FC<InputTextProps> = ({
     };
   });
 
+  const rErroStyled = useAnimatedStyle(() => {
+    const translateX = interpolate(
+      shake.value,
+      [0, 0.5, 1, 1.5, 2, 2.5, 3],
+      [0, -10, 0, 10, 0, -10, 0],
+    );
+    return {
+      transform: [
+        {
+          translateX,
+        },
+      ],
+    };
+  });
+
   return (
-    <View>
+    <Animated.View style={[rErroStyled]}>
       <S.Container
         status={status}
         activeOpacity={1}
@@ -130,7 +154,7 @@ const InputText: FC<InputTextProps> = ({
         )}
       </S.Container>
       {helperText && <S.HelperText status={status}>{helperText}</S.HelperText>}
-    </View>
+    </Animated.View>
   );
 };
 

@@ -1,22 +1,24 @@
 import { gql, useMutation } from '@apollo/client';
 
+import { UserResponse } from '@core/types';
+
 const USER_SIGNUP_MUTATION = gql`
-  mutation UserCreate($data: UserCreateInput!) {
-    userCreate(data: $data) {
-      createdAt
-      updatedAt
-      _id
-      name
-      email
-      status
+  mutation SignUp($data: CreateUserInput!) {
+    signUp(createUserInput: $data) {
+      token
+      user {
+        email
+        name
+        status
+        birthday
+        _id
+      }
     }
   }
 `;
 
 export type UseUserSingUpResult = {
-  userLogin: {
-    token: string;
-  };
+  signUp: { token: string; user: UserResponse };
 };
 
 export type UseUserSingUpParams = {

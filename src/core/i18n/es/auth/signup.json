@@ -1,6 +1,6 @@
 {
   "input": {
-    "username": "Nombre de usuario",
+    "name": "Nombre de usuario",
     "password": "Contraseña",
     "password-confirm": "Confirmar contraseña",
     "email": "Correo"

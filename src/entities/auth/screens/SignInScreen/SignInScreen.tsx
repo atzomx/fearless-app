@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-// import { useUserLogin } from '@core/graphql/mutations';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
 
 import { InputControl } from '@core/components';
+import { useUserLogin } from '@core/graphql/mutations';
 import { useNavigate } from '@core/hooks';
 import { FacebookIcon, GoogleIcon } from '@core/icons';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
@@ -18,18 +18,21 @@ import loginSchema from '@e/auth/schemas/login.schema';
 type TFormLogin = { userName: string; password: string };
 
 const SignInScreen = () => {
-  // const [userLogin] = useUserLogin();
+  const [userLogin] = useUserLogin();
   const theme = useTheme();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
   const onSubmit = async (values: TFormLogin) => {
-    // TODO: uncomment this section after create login
-    // const result = await userLogin({
-    //   variables: values,
-    // });
-    console.log(values);
-    // navigator.replace(HOME_ROUTES.home);
+    const result = await userLogin({
+      variables: {
+        user: {
+          name: values.userName,
+          password: values.password,
+        },
+      },
+    });
+    console.log(result);
   };
 
   const { control, handleSubmit } = useForm<TFormLogin>({
@@ -70,7 +73,7 @@ const SignInScreen = () => {
                 component={InputText}
                 control={control}
                 name="userName"
-                label={t('auth.signin.input.username')}
+                label={t('auth.signin.input.name')}
                 color="secondary"
                 required
               />

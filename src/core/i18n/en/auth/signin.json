@@ -1,6 +1,6 @@
 {
   "input": {
-    "username": "Username",
+    "name": "Full name",
     "password": "Password"
   },
   "text": {

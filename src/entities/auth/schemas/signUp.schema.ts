@@ -2,12 +2,15 @@ import * as yup from 'yup';
 
 const signUpSchema = yup.object().shape({
   name: yup.string().required('common.schemas.required'),
-  email: yup.string().email().required('common.schemas.required'),
+  email: yup
+    .string()
+    .email('common.schemas.email')
+    .required('common.schemas.required'),
   password: yup.string().required('common.schemas.required'),
   passwordConfirmation: yup
     .string()
-    .oneOf([yup.ref('password')], 'common.schemas.password-match')
-    .required('common.schemas.required'),
+    .required('common.schemas.required')
+    .oneOf([yup.ref('password')], 'common.schemas.password-match'),
 });
 
 export default signUpSchema;

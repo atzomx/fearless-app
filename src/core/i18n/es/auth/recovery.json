@@ -1,6 +1,6 @@
 {
   "input": {
-    "username": "Nombre de usuario"
+    "name": "Nombre de usuario"
   },
   "text": {
     "gretting": "Recuperar contraseña",
