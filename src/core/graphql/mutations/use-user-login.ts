@@ -1,23 +1,30 @@
 import { gql, useMutation } from '@apollo/client';
 
+import { UserResponse } from '@core/types';
+
+import { userInfoFragment } from '../fragments';
+
 const USER_LOGIN_MUTATION = gql`
-  mutation UserLogin($password: String!, $userName: String!) {
-    userLogin(password: $password, userName: $userName) {
+  mutation LoginUser($user: LoginUserInput!) {
+    loginUser(User: $user) {
       token
+      user {
+        ...${userInfoFragment}
+      }
     }
   }
 `;
 
-export type UseUserLoginResult = {
-  userLogin: {
+export type UseUserLoginOutput = {
+  loginUser: {
     token: string;
+    user: UserResponse;
   };
 };
 
-export type UseUserLoginParams = {
-  password: string;
-  userName: string;
+export type UseUserLoginInput = {
+  user: { password: string; name: string };
 };
 
 export const useUserLogin = () =>
-  useMutation<UseUserLoginResult, UseUserLoginParams>(USER_LOGIN_MUTATION);
+  useMutation<UseUserLoginOutput, UseUserLoginInput>(USER_LOGIN_MUTATION);

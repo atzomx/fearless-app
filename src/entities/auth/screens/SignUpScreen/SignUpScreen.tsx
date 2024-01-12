@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,11 +6,13 @@ import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { HeaderBar, InputControl } from '@core/components';
+// import { useUserSingUp } from '@core/graphql/mutations';
 import { useUserSingUp } from '@core/graphql/mutations';
 import { useNavigate } from '@core/hooks';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import theme from '@core/theme';
 import { Button, Container, InputText, Text } from '@core/ui';
+import { pick } from '@core/utils/Object';
 import signUpSchema, { TFormSignUp } from '@e/auth/schemas/signUp.schema';
 
 const SignUpScreen = () => {
@@ -20,16 +21,15 @@ const SignUpScreen = () => {
   const { t } = useTranslation();
 
   const onSubmit = async (values: TFormSignUp) => {
-    // TODO: uncomment this section after create login
-    const { passwordConfirmation, ...dataValues } = values;
+    const data = pick(values, ['name', 'email', 'password']);
     const result = await userSingUp({
-      variables: { data: { ...dataValues } },
+      variables: { data },
     });
     console.log(result);
     // navigator.replace(INTERACTION_ROUTES.interaction);
   };
 
-  const { control, handleSubmit, formState } = useForm<TFormSignUp>({
+  const { control, handleSubmit } = useForm<TFormSignUp>({
     resolver: yupResolver(signUpSchema),
     defaultValues: {
       name: '',
@@ -75,7 +75,7 @@ const SignUpScreen = () => {
                 control={control}
                 component={InputText}
                 name="name"
-                label={t('auth.signup.input.username')}
+                label={t('auth.signup.input.name')}
                 color="secondary"
                 required
               />
