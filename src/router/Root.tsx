@@ -3,9 +3,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import LoginRoute from '@e/auth/router';
-import DealRouter, { DealsStackOptions } from '@e/deals/router';
+import LoginRouter from '@e/auth/router';
+import DealRouter from '@e/deals/router';
 import HomeRouter from '@e/home/router';
+import ProfileRouter from '@e/profile/router';
 
 const Stack = createStackNavigator();
 
@@ -15,13 +16,10 @@ const RootRouter = () => {
       <Stack.Navigator
         initialRouteName="home"
         screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="auth" component={LoginRoute} />
+        <Stack.Screen name="auth" component={LoginRouter} />
+        <Stack.Screen name="profile" component={ProfileRouter} />
         <Stack.Screen name="home" component={HomeRouter} />
-        <Stack.Screen
-          name="deals"
-          component={DealRouter}
-          options={DealsStackOptions}
-        />
+        <Stack.Screen name="deals" component={DealRouter} />
       </Stack.Navigator>
     </NavigationContainer>
   );

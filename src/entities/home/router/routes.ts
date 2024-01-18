@@ -1,5 +1,6 @@
 import { BellIcon, HomeIcon, MenuIcon, MessageIcon } from '@core/icons';
 import { DealsScreen } from '@e/deals/screens';
+import ProfileRouter from '@e/profile/router';
 
 import HOME_ROUTES from '../constants/routes';
 
@@ -22,7 +23,7 @@ export const HomeRoutes = {
   [HOME_ROUTES.more]: {
     key: HOME_ROUTES.more,
     icon: MenuIcon,
-    component: DealsScreen,
+    component: ProfileRouter,
   },
 };
 
