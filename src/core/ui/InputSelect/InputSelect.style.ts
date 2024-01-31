@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
-export const Input = styled.TextInput(({ theme }) => ({
+import Text from '../Text';
+
+export const SelectText = styled(Text)(({ theme }) => ({
   ...theme.components.InputText.input,
-  color: theme.pallete.text.primary,
 }));
