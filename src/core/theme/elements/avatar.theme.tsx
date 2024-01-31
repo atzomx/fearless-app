@@ -2,9 +2,9 @@ import type { AvatarBase } from '../types';
 
 const Avatar: AvatarBase = {
   small: {
-    height: 36,
-    width: 36,
-    borderRadius: 36 / 2,
+    height: 32,
+    width: 32,
+    borderRadius: 32 / 2,
   },
   medium: {
     height: 40,
@@ -12,14 +12,14 @@ const Avatar: AvatarBase = {
     borderRadius: 40 / 2,
   },
   large: {
-    height: 42,
-    width: 42,
-    borderRadius: 42 / 2,
-  },
-  xlarge: {
     height: 48,
     width: 48,
     borderRadius: 48 / 2,
+  },
+  xlarge: {
+    height: 86,
+    width: 86,
+    borderRadius: 86 / 2,
   },
 };
 
