@@ -25,5 +25,6 @@ const Text: FC<RNTextProps & TextProps> = ({
     </S.Text>
   );
 };
+export type { TextProps };
 
 export default Text;
