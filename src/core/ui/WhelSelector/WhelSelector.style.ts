@@ -10,4 +10,5 @@ export const Selector = styled.View(({ theme }) => ({
   width: '100%',
   gap: SELECT_OPTION_HEIGHT,
   backgroundColor: theme.fade(theme.pallete.grey[100]),
+  borderRadius: theme.spacingSingle(1),
 }));

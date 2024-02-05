@@ -4,6 +4,9 @@ export * from './InputText';
 export { default as InputSelect } from './InputSelect';
 export * from './InputSelect';
 
+export { default as InputDate } from './InputDate';
+export * from './InputDate';
+
 export { default as Text } from './Text';
 export * from './Text';
 

@@ -6,7 +6,6 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { NativeSyntheticEvent } from 'react-native';
 
 import { useModal } from '@core/hooks';
 
@@ -15,41 +14,11 @@ import { OptionProps } from './Option';
 
 import Button from '../Button';
 import Container from '../Container';
-import { InputBaseProps } from '../InputBase';
+import { InputBaseProps, defaultInputEvent } from '../InputBase';
 import Modal from '../Modal';
 import WhelSelector from '../WhelSelector';
 
 type RefElement = { focus: () => void };
-
-const defaultEvent: NativeSyntheticEvent<{ target: number }> = {
-  nativeEvent: {
-    target: 0,
-  },
-  currentTarget: 0,
-  target: 0,
-  bubbles: false,
-  cancelable: false,
-  defaultPrevented: false,
-  eventPhase: 0,
-  isTrusted: false,
-  preventDefault: function (): void {
-    throw new Error('Function not implemented.');
-  },
-  isDefaultPrevented: function (): boolean {
-    throw new Error('Function not implemented.');
-  },
-  stopPropagation: function (): void {
-    throw new Error('Function not implemented.');
-  },
-  isPropagationStopped: function (): boolean {
-    throw new Error('Function not implemented.');
-  },
-  persist: function (): void {
-    throw new Error('Function not implemented.');
-  },
-  timeStamp: 0,
-  type: '',
-};
 
 const Select = forwardRef<
   RefElement,
@@ -89,12 +58,12 @@ const Select = forwardRef<
 
     const handleOnClose = () => {
       close();
-      onBlur?.(defaultEvent);
+      onBlur?.(defaultInputEvent);
     };
 
     const handleOnOpen = () => {
       open();
-      onFocus?.(defaultEvent);
+      onFocus?.(defaultInputEvent);
     };
 
     useImperativeHandle(ref, () => ({

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, memo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import Animated, {
@@ -7,24 +7,28 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
 } from 'react-native-reanimated';
+import { useTheme } from 'styled-components/native';
 
 import Text from '../Text';
 
 type SelectItemProps = PropsWithChildren & {
   scrollOffset: SharedValue<number>;
   index: number;
+  disabled: boolean;
 };
 
 export const SELECT_OPTION_HEIGHT = 40;
 
-const SelectItem: FC<SelectItemProps> = ({ children, scrollOffset, index }) => {
-  const animatedStyle = useAnimatedStyle(() => {
-    const inputRange = [
-      (index - 1) * SELECT_OPTION_HEIGHT,
-      index * SELECT_OPTION_HEIGHT,
-      (index + 1) * SELECT_OPTION_HEIGHT,
-    ];
+const SelectItem: FC<SelectItemProps> = ({
+  children,
+  scrollOffset,
+  index,
+  disabled,
+}) => {
+  const theme = useTheme();
 
+  const animatedStyle = useAnimatedStyle(() => {
+    const inputRange = [index - 1, index, index + 1];
     const scale = interpolate(
       scrollOffset.value,
       inputRange,
@@ -46,7 +50,10 @@ const SelectItem: FC<SelectItemProps> = ({ children, scrollOffset, index }) => {
 
   return (
     <Animated.View key={index} style={[styles.container, animatedStyle]}>
-      <Text align="center" color="black" fontWeight="Regular">
+      <Text
+        align="center"
+        color={disabled ? theme.pallete.grey[500] : theme.pallete.common.black}
+        fontWeight="Regular">
         {children}
       </Text>
     </Animated.View>
@@ -60,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectItem;
+export default memo(SelectItem);

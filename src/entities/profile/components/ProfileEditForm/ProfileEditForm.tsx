@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Container, InputSelect, InputText, Option } from '@core/ui';
+import { Container, InputDate, InputSelect, InputText, Option } from '@core/ui';
 
 const ProfileEditForm = () => {
   const [value, setValue] = useState<string>();
@@ -24,7 +24,7 @@ const ProfileEditForm = () => {
         <Option value="3">Number 3</Option>
         <Option value="4">Number 4</Option>
       </InputSelect>
-      <InputText label="Nombre completo" />
+      <InputDate label="Nombre completo" />
     </Container>
   );
 };

@@ -1,12 +1,14 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import Select from './Select';
 
 import InputBase, { InputBaseProps } from '../InputBase';
 
-type InputSelectProps = PropsWithChildren<Omit<InputBaseProps, 'children'>>;
+type InputSelectProps<T> = PropsWithChildren<
+  Omit<InputBaseProps<T>, 'children'>
+>;
 
-const InputSelect: FC<InputSelectProps> = ({ children, ...props }) => {
+function InputSelect<T>({ children, ...props }: InputSelectProps<T>) {
   return (
     <InputBase {...props}>
       {({
@@ -33,6 +35,6 @@ const InputSelect: FC<InputSelectProps> = ({ children, ...props }) => {
       )}
     </InputBase>
   );
-};
+}
 
 export default InputSelect;

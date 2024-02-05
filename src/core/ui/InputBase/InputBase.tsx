@@ -1,5 +1,10 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
-import { StyleProp, TextStyle, ViewProps } from 'react-native';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  NativeSyntheticEvent,
+  StyleProp,
+  TextStyle,
+  ViewProps,
+} from 'react-native';
 
 import Animated, {
   Easing,
@@ -11,13 +16,44 @@ import Animated, {
 import { useTheme } from 'styled-components/native';
 
 import { ColorVariant } from '@core/theme';
+import DateUtils from '@core/utils/DateUtils';
 
 import * as S from './InputBase.style';
 import { InputBaseChildrenProps, RefElement } from './InputBase.types';
 
 import Container from '../Container';
 
-export type InputBaseProps = InputBaseChildrenProps & {
+export const defaultInputEvent: NativeSyntheticEvent<{ target: number }> = {
+  nativeEvent: {
+    target: 0,
+  },
+  currentTarget: 0,
+  target: 0,
+  bubbles: false,
+  cancelable: false,
+  defaultPrevented: false,
+  eventPhase: 0,
+  isTrusted: false,
+  preventDefault: function (): void {
+    throw new Error('Function not implemented.');
+  },
+  isDefaultPrevented: function (): boolean {
+    throw new Error('Function not implemented.');
+  },
+  stopPropagation: function (): void {
+    throw new Error('Function not implemented.');
+  },
+  isPropagationStopped: function (): boolean {
+    throw new Error('Function not implemented.');
+  },
+  persist: function (): void {
+    throw new Error('Function not implemented.');
+  },
+  timeStamp: 0,
+  type: '',
+};
+
+export type InputBaseProps<T> = InputBaseChildrenProps<T> & {
   label?: string;
   helperText?: string;
   color?: ColorVariant;
@@ -32,12 +68,12 @@ export type InputBaseProps = InputBaseChildrenProps & {
     input: StyleProp<TextStyle>;
     adorment: StyleProp<TextStyle>;
   };
-  children: (input: InputBaseChildrenProps) => JSX.Element;
+  children: (input: InputBaseChildrenProps<T>) => JSX.Element;
 };
 
 const AnimatedLabel = Animated.createAnimatedComponent(S.Label);
 
-const InputText: FC<InputBaseProps> = ({
+function InputText<T>({
   label,
   onFocus,
   onBlur,
@@ -55,19 +91,19 @@ const InputText: FC<InputBaseProps> = ({
   autoFocus,
   value,
   ...props
-}) => {
+}: InputBaseProps<T>) {
   const theme = useTheme();
   const ref = useRef<RefElement>();
   const touched = useSharedValue(0);
   const shake = useSharedValue(0);
   const [focus, setFocus] = useState(Boolean(focusable && autoFocus));
 
-  const handleOnFocus: InputBaseChildrenProps['onFocus'] = e => {
+  const handleOnFocus: InputBaseChildrenProps<T>['onFocus'] = e => {
     setFocus(true);
     onFocus?.(e);
   };
 
-  const handleOnBlur: InputBaseChildrenProps['onBlur'] = e => {
+  const handleOnBlur: InputBaseChildrenProps<T>['onBlur'] = e => {
     setFocus(false);
     onBlur?.(e);
   };
@@ -76,7 +112,12 @@ const InputText: FC<InputBaseProps> = ({
     ref.current?.focus();
   };
 
-  const HAS_CONTENT = useMemo(() => value && value.length > 0, [value]);
+  const HAS_CONTENT = useMemo(() => {
+    if (value === undefined || value === null) return false;
+    if (typeof value === 'number') return !isNaN(value);
+    if (typeof value === 'string') return value && value.length > 0;
+    return DateUtils.fromDate(value as unknown as Date).isValid;
+  }, [value]);
 
   useEffect(() => {
     touched.value = withTiming(focus || HAS_CONTENT ? 1 : 0, {
@@ -156,6 +197,6 @@ const InputText: FC<InputBaseProps> = ({
       {helperText && <S.HelperText status={status}>{helperText}</S.HelperText>}
     </Animated.View>
   );
-};
+}
 
 export default InputText;
