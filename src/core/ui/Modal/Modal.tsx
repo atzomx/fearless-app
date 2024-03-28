@@ -1,5 +1,5 @@
-import React, { FC, PropsWithChildren, useEffect } from 'react';
-import { Dimensions, Modal as RNModal, Keyboard } from 'react-native';
+import React, { FC, PropsWithChildren, useLayoutEffect } from 'react';
+import { Dimensions, Keyboard, Modal as RNModal } from 'react-native';
 
 import {
   GestureHandlerRootView,
@@ -38,6 +38,7 @@ const AnimatedLine = Animated.createAnimatedComponent(S.Line);
 const AnimatedDrag = Animated.createAnimatedComponent(S.GestureContainer);
 
 const INITIAL_POSITION = Dimensions.get('screen').height;
+
 const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
   const theme = useTheme();
   const translateY = useSharedValue(0);
@@ -95,11 +96,11 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
     );
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open) translateY.value = withTiming(0, { duration: 300 });
   }, [open, translateY]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     Keyboard.addListener('keyboardDidShow', () => {
       const metrics = Keyboard.metrics();
       translateY.value = -(metrics?.height ?? 0);
@@ -139,13 +140,12 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
       statusBarTranslucent
       presentationStyle="overFullScreen"
       onRequestClose={handleOnClose}>
-      <AnimatedBackdrop style={rBackdropStyle} />
-      <S.Container onPress={handleOnClose} activeOpacity={1}>
+      <S.Container>
+        <S.BackdropPressable onPress={handleOnClose}>
+          <AnimatedBackdrop style={rBackdropStyle} />
+        </S.BackdropPressable>
         <GestureHandlerRootView>
-          <AnimatedModal
-            ref={aref}
-            style={rBottomSheetStyle}
-            onStartShouldSetResponder={() => true}>
+          <AnimatedModal ref={aref} style={rBottomSheetStyle}>
             <PanGestureHandler onGestureEvent={panGestureEvent}>
               <AnimatedDrag>
                 <AnimatedLine style={rHoldStyle} />
