@@ -2,7 +2,9 @@ import { DateTime } from 'luxon';
 
 type DateInput = { day: string; month: string; year: string };
 
-const toIndexable = (current: Date = new Date()) => {
+const toIndexable = (current?: Date) => {
+  if (!current) return { day: 0, month: 0, year: 0 };
+
   const date = DateTime.fromISO(current.toISOString()).setZone(
     'America/Mexico_City',
   );

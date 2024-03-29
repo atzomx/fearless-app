@@ -25,13 +25,11 @@ function Selector(
     onFocus,
     value,
     onChangeText,
+    placeholder,
   }: PropsWithChildren<Omit<InputBaseProps<Date>, 'children'>>,
   ref: React.Ref<RefElement>,
 ) {
-  const currentDate = useMemo(
-    () => DateUtils.toIndexable(value as Date),
-    [value],
-  );
+  const currentDate = useMemo(() => DateUtils.toIndexable(value), [value]);
 
   const [dayIndex, setDayIndex] = useState<number>(currentDate.day);
   const [monthIndex, setMonthIndex] = useState<number>(currentDate.month);
@@ -44,11 +42,6 @@ function Selector(
   const handleOnClose = () => {
     close();
     onBlur?.(defaultInputEvent);
-  };
-
-  const onHandleSelect = () => {
-    onChangeText?.(undefined);
-    handleOnClose();
   };
 
   const handleOnOpen = () => {
@@ -67,51 +60,67 @@ function Selector(
     return { year, month, day };
   }, [dayIndex, monthIndex, yearIndex, YEARS]);
 
-  const FORMATED = useMemo(
-    () =>
-      [
-        CURRENT_INDEX_DATE.day,
-        CURRENT_INDEX_DATE.month,
-        CURRENT_INDEX_DATE.year,
-      ].join('/'),
-    [CURRENT_INDEX_DATE],
-  );
+  const FORMATED = useMemo(() => {
+    const day = DAYS[currentDate.day].value;
+    const month = MONTHS[currentDate.month].value;
+    const year = YEARS[currentDate.year].value;
+    return [day, month, year].join('/');
+  }, [currentDate, YEARS]);
 
   const IS_VALID = useMemo(
     () => DateUtils.isValid(CURRENT_INDEX_DATE),
     [CURRENT_INDEX_DATE],
   );
 
+  const onHandleSelect = (onClose: () => void) => {
+    const { day, month, year } = CURRENT_INDEX_DATE;
+    const date = DateUtils.toDate({ day, month, year });
+    onChangeText?.(IS_VALID ? date : undefined);
+    onClose();
+  };
+
   return (
     <>
-      <S.SelectText>{FORMATED}</S.SelectText>
-      <Modal open={isOpen} onClose={close} title="Selecciona">
-        <Container justifyContent="center" direction="row" spacing={2} ph={6}>
-          <WhelSelector
-            data={DAYS}
-            onChangeIndex={index => setDayIndex(index)}
-            index={dayIndex}
-            style={styles.whell}
-            inverted
-          />
-          <WhelSelector
-            data={MONTHS}
-            onChangeIndex={index => setMonthIndex(index)}
-            index={monthIndex}
-            style={styles.whell}
-            inverted
-          />
-          <WhelSelector
-            data={YEARS}
-            onChangeIndex={index => setYearIndex(index)}
-            index={yearIndex}
-            style={styles.year}
-            inverted
-          />
-        </Container>
-        <Container ph={2} pv={1} spacing={2}>
-          <Button disable={!IS_VALID} onPress={onHandleSelect} title="Done" />
-        </Container>
+      <S.SelectText>{value ? FORMATED : ''}</S.SelectText>
+      <Modal open={isOpen} onClose={handleOnClose} title={placeholder}>
+        {({ animatedClose }) => (
+          <>
+            <Container
+              justifyContent="center"
+              direction="row"
+              spacing={2}
+              ph={6}>
+              <WhelSelector
+                data={DAYS}
+                onChangeIndex={index => setDayIndex(index)}
+                index={dayIndex}
+                style={styles.whell}
+                inverted
+              />
+              <WhelSelector
+                data={MONTHS}
+                onChangeIndex={index => setMonthIndex(index)}
+                index={monthIndex}
+                style={styles.whell}
+                inverted
+              />
+              <WhelSelector
+                data={YEARS}
+                onChangeIndex={index => setYearIndex(index)}
+                index={yearIndex}
+                style={styles.year}
+                inverted
+              />
+            </Container>
+            <Container ph={2} pv={1} spacing={2}>
+              <Button
+                disable={!IS_VALID}
+                onPress={() => onHandleSelect(animatedClose)}
+                title="Done"
+              />
+            </Container>
+          </>
+        )}
       </Modal>
     </>
   );

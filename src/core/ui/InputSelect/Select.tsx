@@ -22,7 +22,7 @@ type RefElement = { focus: () => void };
 
 const Select = forwardRef<
   RefElement,
-  PropsWithChildren<Omit<InputBaseProps, 'children'>>
+  PropsWithChildren<Omit<InputBaseProps<string>, 'children'>>
 >(
   (
     {
@@ -70,9 +70,9 @@ const Select = forwardRef<
       focus: handleOnOpen,
     }));
 
-    const onHandleSelect = () => {
+    const onHandleSelect = (onClose: () => void) => {
       onChangeText?.(DATA[index].value);
-      handleOnClose();
+      onClose();
     };
 
     const handleOnChangeValue = useCallback((newIndex: number) => {
@@ -95,14 +95,21 @@ const Select = forwardRef<
           {VALUE?.value ? VALUE.label ?? placeholder : undefined}
         </S.SelectText>
         <Modal open={isOpen} onClose={handleOnClose} title="Selecciona">
-          <WhelSelector
-            data={DATA}
-            onChangeIndex={handleOnChangeValue}
-            index={index}
-          />
-          <Container ph={2} pv={1}>
-            <Button onPress={onHandleSelect} title="Done" />
-          </Container>
+          {({ animatedClose }) => (
+            <>
+              <WhelSelector
+                data={DATA}
+                onChangeIndex={handleOnChangeValue}
+                index={index}
+              />
+              <Container ph={2} pv={1}>
+                <Button
+                  onPress={() => onHandleSelect(animatedClose)}
+                  title="Done"
+                />
+              </Container>
+            </>
+          )}
         </Modal>
       </>
     );

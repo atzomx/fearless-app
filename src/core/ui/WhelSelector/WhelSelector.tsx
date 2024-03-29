@@ -38,7 +38,7 @@ const WhelSelector: FC<WhelSelector> = ({
 
   const handleOnChangeValue = useDebouncedCallback((newIndex: number) => {
     onChangeIndex(newIndex);
-  }, 200);
+  }, 100);
 
   const scrollHandler = useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -51,7 +51,9 @@ const WhelSelector: FC<WhelSelector> = ({
   );
 
   useLayoutEffect(() => {
-    scrollRef.current?.scrollToItem({ item: data[index], animated: false });
+    setTimeout(() => {
+      scrollRef.current?.scrollToItem({ item: data[index], animated: false });
+    }, 0);
   }, [scrollRef, index, data]);
 
   const renderItam = useCallback(
@@ -80,6 +82,7 @@ const WhelSelector: FC<WhelSelector> = ({
         })}
         snapToStart
         scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         onScroll={scrollHandler}
         ref={scrollRef as React.RefObject<FlatList<ItemSelector>>}

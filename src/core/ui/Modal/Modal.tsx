@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useLayoutEffect } from 'react';
+import React, { FC, useLayoutEffect } from 'react';
 import { Dimensions, Keyboard, Modal as RNModal } from 'react-native';
 
 import {
@@ -24,10 +24,13 @@ import * as S from './Modal.style';
 import Container from '../Container';
 import Text from '../Text';
 
-type ModalProps = PropsWithChildren & {
+type ModalProps = {
   open: boolean;
   onClose: () => void;
   title?: string;
+  children:
+    | React.ReactNode
+    | ((props: { animatedClose: () => void }) => JSX.Element);
 };
 
 type TContext = { translateX: number; translateY: number };
@@ -71,7 +74,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
         return;
       }
 
-      translateY.value = withTiming(INITIAL_POSITION, { duration: 300 }, () => {
+      translateY.value = withTiming(INITIAL_POSITION, { duration: 200 }, () => {
         runOnJS(onClose)();
       });
     },
@@ -88,7 +91,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
     translateY.value = withTiming(
       INITIAL_POSITION,
       {
-        duration: 300,
+        duration: 200,
       },
       () => {
         runOnJS(onClose)();
@@ -149,15 +152,19 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
             <PanGestureHandler onGestureEvent={panGestureEvent}>
               <AnimatedDrag>
                 <AnimatedLine style={rHoldStyle} />
+                {title && (
+                  <Container pt={2}>
+                    <Text align="center" fontWeight="Medium" fontSize={14}>
+                      {title}
+                    </Text>
+                  </Container>
+                )}
               </AnimatedDrag>
             </PanGestureHandler>
             <Container pb={2}>
-              {title && (
-                <Text align="center" fontWeight="Medium" fontSize={14}>
-                  {title}
-                </Text>
-              )}
-              {children}
+              {typeof children === 'function'
+                ? children({ animatedClose: handleOnClose })
+                : children}
             </Container>
           </AnimatedModal>
         </GestureHandlerRootView>

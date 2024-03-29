@@ -1,8 +1,9 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 import styled from 'styled-components/native';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('screen');
+const platform = Platform.OS;
 
 export const Container = styled.View({
   flex: 1,
@@ -31,6 +32,7 @@ export const Modal = styled.View(({ theme }) => ({
   minHeight: 150,
   zIndex: 10,
   margin: 10,
+  marginBottom: platform === 'ios' ? 20 : 10,
 }));
 
 export const GestureContainer = styled.View(({ theme }) => ({

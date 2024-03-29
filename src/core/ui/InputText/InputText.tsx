@@ -5,9 +5,9 @@ import * as S from './InputText.style';
 
 import InputBase, { InputBaseProps } from '../InputBase';
 
-const InputText: FC<Omit<InputBaseProps, 'children'> & TextInputProps> = ({
-  ...props
-}) => {
+type InputTextProps<T> = Omit<InputBaseProps<T>, 'children'> & TextInputProps;
+
+const InputText = ({ ...props }: InputTextProps<string>) => {
   return (
     <InputBase {...props}>
       {({

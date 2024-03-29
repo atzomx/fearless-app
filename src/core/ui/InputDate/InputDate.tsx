@@ -1,12 +1,12 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import DateSelector from './DateSelector';
 
 import InputBase, { InputBaseProps } from '../InputBase';
 
-type InputDateProps = PropsWithChildren<Omit<InputBaseProps, 'children'>>;
+type InputDateProps<T> = PropsWithChildren<Omit<InputBaseProps<T>, 'children'>>;
 
-const InputDate: FC<InputDateProps> = ({ ...props }) => {
+const InputDate = ({ ...props }: InputDateProps<Date>) => {
   return (
     <InputBase {...props}>
       {({ ...inputProps }) => <DateSelector {...inputProps} />}
