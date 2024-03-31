@@ -3,12 +3,13 @@ import { DealsScreen } from '@e/deals/screens';
 import ProfileRouter from '@e/profile/router';
 
 import HOME_ROUTES from '../constants/routes';
+import { WelcomeScreen } from '../screens';
 
 export const HomeRoutes = {
   [HOME_ROUTES.home]: {
     key: HOME_ROUTES.home,
     icon: HomeIcon,
-    component: DealsScreen,
+    component: WelcomeScreen,
   },
   [HOME_ROUTES.messages]: {
     key: HOME_ROUTES.messages,

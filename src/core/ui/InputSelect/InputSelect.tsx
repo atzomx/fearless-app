@@ -3,13 +3,12 @@ import React, { PropsWithChildren } from 'react';
 import Select from './Select';
 
 import InputBase, { InputBaseProps } from '../InputBase';
-import Option from './Option';
 
 type InputSelectProps<T> = PropsWithChildren<
   Omit<InputBaseProps<T>, 'children'>
 >;
 
-function InputSelect<T>({ children, ...props }: InputSelectProps<T>) {
+function InputSelect({ children, ...props }: InputSelectProps<string>) {
   return (
     <InputBase {...props}>
       {({

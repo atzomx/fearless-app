@@ -1,5 +1,5 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
+import { SafeAreaView } from 'react-native';
 
 export const Container = styled.View({
   flexDirection: 'row',
@@ -20,8 +20,11 @@ export const ContainerTitle = styled.View({
 });
 
 export const ContainerView = styled(SafeAreaView)(({ theme }) => ({
-  backgroundColor: theme.pallete.common.white,
-  padding: theme.spacing(1, 2),
+  backgroundColor: theme.fade(theme.pallete.common.white, 0.1),
+  marginTop: theme.spacingSingle(1),
+  marginBottom: theme.spacingSingle(1),
+  marginLeft: theme.spacingSingle(2),
+  marginRight: theme.spacingSingle(2),
   gap: 10,
 }));
 

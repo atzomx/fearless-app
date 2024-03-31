@@ -11,13 +11,15 @@ import {
   ProfileList,
   ProfileRankingText,
 } from '@e/profile/components';
+import { useNavigate } from '@core/hooks';
 
 const URL = 'https://avatars.githubusercontent.com/u/43711671?v=4';
 
 const MoreScreen = () => {
+  const navigation = useNavigate();
   return (
     <SafeLayout>
-      <HeaderBar onBack={console.log} title="Mi Perfil" />
+      <HeaderBar onBack={() => navigation.goBack()} title="Mi Perfil" />
       <ScrollLayout>
         <KeyboardAwareScrollView
           enableOnAndroid

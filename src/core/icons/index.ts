@@ -21,3 +21,6 @@ export { default as MenuIcon } from './MenuIcon';
 export { default as MessageIcon } from './MessageIcon';
 export { default as GoogleIcon } from './GoogleIcon';
 export { default as FacebookIcon } from './FacebookIcon';
+export { default as WalletIcon } from './WalletIcon';
+export { default as ArrowTrendingDownIcon } from './ArrowTrendingDownIcon';
+export { default as QRCodeIcon } from './QRCodeIcon';

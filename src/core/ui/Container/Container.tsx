@@ -4,6 +4,7 @@ import { View, ViewProps } from 'react-native';
 import {
   FlexAlignType,
   FlexStyle,
+  ViewStyle,
 } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 import { useTheme } from 'styled-components/native';
 
@@ -21,6 +22,7 @@ type ContainerProps<D> = React.PropsWithChildren &
     style?: ViewProps['style'];
     component?: D;
   } & Omit<FlexStyle, 'direction'> &
+  Omit<ViewStyle, 'direction'> &
   //@ts-ignore
   React.ComponentProps<D>;
 
@@ -48,6 +50,7 @@ function Container<D>(
     direction = 'column',
     //@ts-ignore
     component: Component = View,
+    //@ts-ignore
     ...props
   }: ContainerProps<D>,
   ref: D,

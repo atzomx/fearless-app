@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 import Animated, {
@@ -8,24 +8,12 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from 'styled-components/native';
 
 import { HomeHeaderBar } from '@core/components';
 import { useModal, useNavigate } from '@core/hooks';
-import { PlusIcon, SearchIcon } from '@core/icons';
+import { PlusIcon } from '@core/icons';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
-import {
-  Button,
-  Container,
-  FloatButton,
-  InputText,
-  Modal,
-  Spacer,
-  Tab,
-  TabPanel,
-  Tabs,
-} from '@core/ui';
+import { Container, FloatButton, Tab, TabPanel, Tabs } from '@core/ui';
 import {
   DealFilters,
   DealHeader,
@@ -34,8 +22,6 @@ import {
 } from '@e/deals/components';
 import DEALS_ROUTES from '@e/deals/constants/routes';
 import { BaseDeal } from '@e/deals/types';
-
-// import DEALS_ROUTES from '@e/deals/constants/routes';
 
 const deal: BaseDeal = {
   status: 'Espeando Confirmacion',
@@ -56,7 +42,6 @@ const INTERPOLATE = [HIDDEN_POSITION / 2, HIDDEN_POSITION, HIDDEN_POSITION * 2];
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const DealsScreen = () => {
-  const theme = useTheme();
   const modal = useModal();
   const router = useNavigate();
   const translateY = useSharedValue(0);
@@ -156,17 +141,6 @@ const DealsScreen = () => {
       <FloatButton onPress={onPressNew}>
         <PlusIcon color="white" />
       </FloatButton>
-      <Modal open={modal.isOpen} onClose={modal.close} title="Filtros">
-        <Container p={2}>
-          <InputText
-            label={t('deals.screen.modal.input.label')}
-            placeholder={t('deals.screen.modal.input.placeholder')}
-            icon={<SearchIcon color={theme.pallete.grey[400]} />}
-          />
-          <Spacer spacing={2} />
-          <Button title="Hecho" />
-        </Container>
-      </Modal>
     </SafeLayout>
   );
 };
