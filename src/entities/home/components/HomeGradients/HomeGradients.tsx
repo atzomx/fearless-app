@@ -4,6 +4,8 @@ import { Container, Text } from '@core/ui';
 import React from 'react';
 import GradientCard from '../GradientCard';
 
+// #6157ff', '#ee49fd'
+
 const HomeGradients = () => {
   return (
     <>
@@ -35,7 +37,7 @@ const HomeGradients = () => {
         </GradientCard.Row>
       </GradientCard>
       <Container direction="row" spacing={1}>
-        <GradientCard colors={['#6157ff', '#ee49fd']}>
+        <GradientCard colors={['#868f96', '#596164']}>
           <GradientCard.Row>
             <Container
               justifyContent="center"
@@ -56,7 +58,7 @@ const HomeGradients = () => {
             </Text>
           </GradientCard.Row>
         </GradientCard>
-        <GradientCard colors={['#6157ff', '#ee49fd']}>
+        <GradientCard colors={['#868f96', '#596164']}>
           <GradientCard.Row>
             <Container
               justifyContent="center"

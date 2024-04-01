@@ -3,9 +3,12 @@ import React from 'react';
 import { Pressable, TouchableOpacity } from 'react-native';
 import { useTheme } from 'styled-components/native';
 
-type Props = {};
+type MoreTitleProps = {
+  title: React.ReactNode;
+  more: React.ReactNode;
+};
 
-const MoreTitle = (props: Props) => {
+const MoreTitle = ({ more, title }: MoreTitleProps) => {
   const theme = useTheme();
   return (
     <Container
@@ -17,11 +20,11 @@ const MoreTitle = (props: Props) => {
         fontWeight="Medium"
         fontSize={18}
         color={theme.pallete.colors.black}>
-        My Deals
+        {title}
       </Text>
       <TouchableOpacity activeOpacity={0.8}>
         <Text fontWeight="Light" color={theme.pallete.grey[700]}>
-          See more
+          {more}
         </Text>
       </TouchableOpacity>
     </Container>

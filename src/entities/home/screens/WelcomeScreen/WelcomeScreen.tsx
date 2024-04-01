@@ -11,7 +11,7 @@ const WelcomeScreen = () => {
       <ScrollLayout showsVerticalScrollIndicator={false}>
         <Container p={2} spacing={1}>
           <HomeGradients />
-          <MoreTitle />
+          <MoreTitle title="Pending Deals" more="See more" />
         </Container>
       </ScrollLayout>
     </SafeLayout>
