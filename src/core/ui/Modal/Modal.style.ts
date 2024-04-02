@@ -1,13 +1,22 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 import styled from 'styled-components/native';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('screen');
+const platform = Platform.OS;
 
-export const Container = styled.TouchableOpacity({
+export const Container = styled.View({
   flex: 1,
   justifyContent: 'flex-end',
-  backgroundColor: 'transparent',
+  height: SCREEN_HEIGHT,
+  display: 'flex',
+  position: 'relative',
+});
+
+export const BackdropPressable = styled.TouchableWithoutFeedback({
+  height: SCREEN_HEIGHT,
+  width: SCREEN_WIDTH,
+  position: 'absolute',
 });
 
 export const Backdrop = styled.View(({ theme }) => ({
@@ -19,9 +28,11 @@ export const Backdrop = styled.View(({ theme }) => ({
 
 export const Modal = styled.View(({ theme }) => ({
   backgroundColor: theme.pallete.common.white,
-  borderTopLeftRadius: theme.spacingSingle(3),
-  borderTopRightRadius: theme.spacingSingle(3),
+  borderRadius: theme.spacingSingle(3),
   minHeight: 150,
+  zIndex: 10,
+  margin: 10,
+  marginBottom: platform === 'ios' ? 20 : 10,
 }));
 
 export const GestureContainer = styled.View(({ theme }) => ({

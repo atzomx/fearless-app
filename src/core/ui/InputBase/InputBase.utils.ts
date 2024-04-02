@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components/native';
 
-import { InputStatus } from './InputText.types';
+import { InputStatus } from './InputBase.types';
 
 export const getInputStatus = (theme: DefaultTheme, status: InputStatus) => {
   const STATUS = {

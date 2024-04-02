@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -30,11 +30,13 @@ const SlideCarrousel: React.FC<SlideCarrouselProps> = ({ images }) => {
     scrollOffset.value = event.nativeEvent.contentOffset.x;
   };
 
-  useEffect(() => {
-    ref?.current?.scrollToOffset({
-      offset: SLIDE_IMAGE_WIDTH,
-      animated: true,
-    });
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      ref?.current?.scrollToOffset({
+        offset: SLIDE_IMAGE_WIDTH,
+        animated: true,
+      });
+    }, 0);
   }, [ref]);
 
   return (

@@ -1,9 +1,11 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 
-export const Container = styled.View({
+export const Container = styled.View(({ theme }) => ({
   flexDirection: 'row',
-});
+  marginTop: theme.spacingSingle(2),
+  marginLeft: theme.spacingSingle(2),
+  marginRight: theme.spacingSingle(2),
+}));
 
 export const ContainerButton = styled.View({
   flexBasis: 'auto',
@@ -18,12 +20,6 @@ export const ContainerTitle = styled.View({
   justifyContent: 'center',
   gap: 0,
 });
-
-export const ContainerView = styled(SafeAreaView)(({ theme }) => ({
-  backgroundColor: theme.pallete.common.white,
-  padding: theme.spacing(1, 2),
-  gap: 10,
-}));
 
 export const IconButton = styled.TouchableOpacity(({ theme }) => ({
   width: 42,

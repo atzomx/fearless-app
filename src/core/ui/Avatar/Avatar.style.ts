@@ -2,7 +2,9 @@ import styled from 'styled-components/native';
 
 import { VariantSize } from '@core/theme';
 
-export const Image = styled.Image<{ size: VariantSize }>(({ size, theme }) => ({
+export const Image = styled.Image<{
+  size: VariantSize;
+}>(({ size, theme }) => ({
   ...theme.components.Avatar[size],
   width: Number(theme.components.Avatar[size].width) - 4,
   height: Number(theme.components.Avatar[size].height) - 4,

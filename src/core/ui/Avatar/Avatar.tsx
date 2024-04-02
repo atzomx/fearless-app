@@ -6,6 +6,8 @@ import * as S from './Avatar.style';
 type AvatarProps = ImageProps & {
   size?: 'small' | 'medium' | 'large' | 'xlarge';
   onPress?: () => void;
+  height?: number;
+  width?: number;
 };
 
 const Avatar: FC<AvatarProps> = ({ size = 'medium', onPress, ...props }) => {

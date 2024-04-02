@@ -1,5 +1,5 @@
-import React, { FC, PropsWithChildren, useEffect } from 'react';
-import { Dimensions, Modal as RNModal, Keyboard } from 'react-native';
+import React, { FC, useLayoutEffect } from 'react';
+import { Dimensions, Keyboard, Modal as RNModal } from 'react-native';
 
 import {
   GestureHandlerRootView,
@@ -24,10 +24,13 @@ import * as S from './Modal.style';
 import Container from '../Container';
 import Text from '../Text';
 
-type ModalProps = PropsWithChildren & {
+type ModalProps = {
   open: boolean;
   onClose: () => void;
   title?: string;
+  children:
+    | React.ReactNode
+    | ((props: { animatedClose: () => void }) => JSX.Element);
 };
 
 type TContext = { translateX: number; translateY: number };
@@ -38,6 +41,7 @@ const AnimatedLine = Animated.createAnimatedComponent(S.Line);
 const AnimatedDrag = Animated.createAnimatedComponent(S.GestureContainer);
 
 const INITIAL_POSITION = Dimensions.get('screen').height;
+
 const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
   const theme = useTheme();
   const translateY = useSharedValue(0);
@@ -70,7 +74,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
         return;
       }
 
-      translateY.value = withTiming(INITIAL_POSITION, { duration: 300 }, () => {
+      translateY.value = withTiming(INITIAL_POSITION, { duration: 200 }, () => {
         runOnJS(onClose)();
       });
     },
@@ -87,7 +91,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
     translateY.value = withTiming(
       INITIAL_POSITION,
       {
-        duration: 300,
+        duration: 200,
       },
       () => {
         runOnJS(onClose)();
@@ -95,11 +99,11 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
     );
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open) translateY.value = withTiming(0, { duration: 300 });
   }, [open, translateY]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     Keyboard.addListener('keyboardDidShow', () => {
       const metrics = Keyboard.metrics();
       translateY.value = -(metrics?.height ?? 0);
@@ -139,25 +143,28 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
       statusBarTranslucent
       presentationStyle="overFullScreen"
       onRequestClose={handleOnClose}>
-      <AnimatedBackdrop style={rBackdropStyle} />
-      <S.Container onPress={handleOnClose} activeOpacity={1}>
+      <S.Container>
+        <S.BackdropPressable onPress={handleOnClose}>
+          <AnimatedBackdrop style={rBackdropStyle} />
+        </S.BackdropPressable>
         <GestureHandlerRootView>
-          <AnimatedModal
-            ref={aref}
-            style={rBottomSheetStyle}
-            onStartShouldSetResponder={() => true}>
+          <AnimatedModal ref={aref} style={rBottomSheetStyle}>
             <PanGestureHandler onGestureEvent={panGestureEvent}>
               <AnimatedDrag>
                 <AnimatedLine style={rHoldStyle} />
+                {title && (
+                  <Container pt={2}>
+                    <Text align="center" fontWeight="Medium" fontSize={14}>
+                      {title}
+                    </Text>
+                  </Container>
+                )}
               </AnimatedDrag>
             </PanGestureHandler>
             <Container pb={2}>
-              {title && (
-                <Text align="center" fontWeight="Medium" fontSize={14}>
-                  {title}
-                </Text>
-              )}
-              {children}
+              {typeof children === 'function'
+                ? children({ animatedClose: handleOnClose })
+                : children}
             </Container>
           </AnimatedModal>
         </GestureHandlerRootView>

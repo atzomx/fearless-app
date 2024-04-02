@@ -3,10 +3,10 @@ import React from 'react';
 import { Control, useController } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { InputText, InputTextProps } from '@core/ui';
+import { InputText, InputBaseProps } from '@core/ui';
 
 type InputControlCommonProps<D> = Pick<
-  InputTextProps,
+  InputBaseProps<D>,
   'helperText' | 'error' | 'value' | 'onChangeText' | 'onBlur'
 > & {
   control: Control<any, any>;

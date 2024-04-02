@@ -1,11 +1,13 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { FC, useLayoutEffect } from 'react';
-import { StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 
 import ImageView from 'react-native-image-viewing';
 import { useTheme } from 'styled-components/native';
 
 import { Text } from '@core/ui';
+
+const platform = Platform.OS;
 
 export type ImageCarrouselViewerProps = React.ComponentProps<typeof ImageView>;
 
@@ -18,10 +20,11 @@ const ImageCarrouselViewer: FC<ImageCarrouselViewerProps> = ({
   useLayoutEffect(() => {
     const background = theme.pallete.colors[visible ? 'black' : 'white'];
     const content = visible ? 'light-content' : 'dark-content';
-
-    StatusBar.setBackgroundColor(background);
-    StatusBar.setBarStyle(content);
-    StatusBar.setTranslucent(true);
+    if (platform === 'android') {
+      StatusBar.setBackgroundColor(background);
+      StatusBar.setBarStyle(content);
+      StatusBar.setTranslucent(true);
+    }
   }, [theme, visible]);
 
   return (
