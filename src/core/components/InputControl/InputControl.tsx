@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { InputText, InputBaseProps } from '@core/ui';
 
 type InputControlCommonProps<D> = Pick<
-  InputBaseProps,
+  InputBaseProps<D>,
   'helperText' | 'error' | 'value' | 'onChangeText' | 'onBlur'
 > & {
   control: Control<any, any>;

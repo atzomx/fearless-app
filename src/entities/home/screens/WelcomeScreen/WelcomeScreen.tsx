@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { HomeHeaderBar } from '@core/components';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import { Container } from '@core/ui';
@@ -8,14 +10,15 @@ import { HomeGradients, MoreTitle } from '@e/home/components';
 const WelcomeScreen = () => {
   return (
     <SafeLayout>
-      <HomeHeaderBar>
+      <SafeAreaView>
+        <HomeHeaderBar />
         <ScrollLayout showsVerticalScrollIndicator={false}>
           <Container p={2} spacing={1}>
             <HomeGradients />
-            <MoreTitle title="Pending Deals" more="See more" />
+            <MoreTitle title="Recent Deals" more="See more" />
           </Container>
         </ScrollLayout>
-      </HomeHeaderBar>
+      </SafeAreaView>
     </SafeLayout>
   );
 };

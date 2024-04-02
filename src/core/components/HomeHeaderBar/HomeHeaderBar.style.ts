@@ -1,4 +1,3 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 
 export const Container = styled.View(({ theme }) => ({
@@ -21,10 +20,6 @@ export const ContainerTitle = styled.View({
   justifyContent: 'center',
   gap: 0,
 });
-
-export const ContainerView = styled(SafeAreaView)(({ theme }) => ({
-  backgroundColor: theme.fade(theme.pallete.common.white, 0.1),
-}));
 
 export const IconButton = styled.TouchableOpacity(({ theme }) => ({
   width: 42,

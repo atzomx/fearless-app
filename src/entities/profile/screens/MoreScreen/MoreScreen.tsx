@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { HeaderBar } from '@core/components';
+import { useNavigate } from '@core/hooks';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import { Avatar, Button, Container, Text } from '@core/ui';
 import {
@@ -11,7 +12,6 @@ import {
   ProfileList,
   ProfileRankingText,
 } from '@e/profile/components';
-import { useNavigate } from '@core/hooks';
 
 const URL = 'https://avatars.githubusercontent.com/u/43711671?v=4';
 

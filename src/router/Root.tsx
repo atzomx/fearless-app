@@ -14,7 +14,7 @@ const RootRouter = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="home"
+        initialRouteName="auth"
         screenOptions={{ headerShown: false }}>
         <Stack.Screen name="auth" component={LoginRouter} />
         <Stack.Screen name="profile" component={ProfileRouter} />

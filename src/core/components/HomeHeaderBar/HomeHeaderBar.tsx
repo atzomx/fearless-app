@@ -12,32 +12,29 @@ export type HomeHeaderBarProps = React.PropsWithChildren & {
   name?: string;
 };
 
-const HomeHeaderBar: FC<HomeHeaderBarProps> = ({ children }) => {
+const HomeHeaderBar: FC<HomeHeaderBarProps> = () => {
   const theme = useTheme();
 
   return (
-    <S.ContainerView>
-      <S.Container>
-        <S.ContainerTitle>
-          <Text
-            fontSize={12}
-            fontWeight="Regular"
-            color={theme.pallete.grey[500]}>
-            Bienvenido
-          </Text>
-          <Text
-            fontSize={14}
-            fontWeight="Medium"
-            color={theme.pallete.text.black}>
-            Erick Andrade
-          </Text>
-        </S.ContainerTitle>
-        <S.ContainerButton>
-          <ProfileButton />
-        </S.ContainerButton>
-      </S.Container>
-      {children}
-    </S.ContainerView>
+    <S.Container>
+      <S.ContainerTitle>
+        <Text
+          fontSize={12}
+          fontWeight="Regular"
+          color={theme.pallete.grey[500]}>
+          Bienvenido
+        </Text>
+        <Text
+          fontSize={14}
+          fontWeight="Medium"
+          color={theme.pallete.text.black}>
+          Erick Andrade
+        </Text>
+      </S.ContainerTitle>
+      <S.ContainerButton>
+        <ProfileButton />
+      </S.ContainerButton>
+    </S.Container>
   );
 };
 

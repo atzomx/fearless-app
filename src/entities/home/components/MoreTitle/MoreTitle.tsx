@@ -1,7 +1,9 @@
-import { Container, Text } from '@core/ui';
 import React from 'react';
-import { Pressable, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+
 import { useTheme } from 'styled-components/native';
+
+import { Container, Text } from '@core/ui';
 
 type MoreTitleProps = {
   title: React.ReactNode;

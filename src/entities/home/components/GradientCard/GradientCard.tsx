@@ -1,17 +1,13 @@
-import { Container, Text } from '@core/ui';
-import React, { PropsWithChildren, ReactNode } from 'react';
-import { GestureResponderEvent, Pressable } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgProps } from 'react-native-svg';
-import { useTheme } from 'styled-components/native';
+import React, { PropsWithChildren } from 'react';
+import {
+  GestureResponderEvent,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
-type GradientCardProps = {
-  header: ReactNode;
-  icon: (props: SvgProps) => JSX.Element;
-  amount: ReactNode;
-  currency: string;
-  colors: string[];
-};
+import LinearGradient from 'react-native-linear-gradient';
+
+import { Container } from '@core/ui';
 
 const GradientCardRow = ({ children }: PropsWithChildren) => (
   <Container direction="row" alignItems="center" justifyContent="space-between">
@@ -28,20 +24,32 @@ const GradientCard = ({
   onPress?: (event: GestureResponderEvent) => void;
 }>) => {
   return (
-    <Pressable onPress={onPress} style={{ flex: 1 }}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={onPress}
+      style={styles.touchable}>
       <LinearGradient
         useAngle
         angle={90}
-        style={{ borderRadius: 20 }}
+        style={styles.gradient}
         colors={colors}>
         <Container minHeight={120} p={2} justifyContent="space-between">
           {children}
         </Container>
       </LinearGradient>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
 GradientCard.Row = GradientCardRow;
+
+const styles = StyleSheet.create({
+  touchable: {
+    flex: 1,
+  },
+  gradient: {
+    borderRadius: 20,
+  },
+});
 
 export default GradientCard;
