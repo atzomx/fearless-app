@@ -1,0 +1,29 @@
+mutation SignIn($user: LoginUserInput!) {
+  signIn(User: $user) {
+    token
+    user {
+      _id
+      birthday
+      email
+      name
+      role
+      status
+      timestamp
+    }
+  }
+}
+
+mutation SignUp($createUserInput: CreateUserInput!) {
+  signUp(createUserInput: $createUserInput) {
+    token
+    user {
+      _id
+      birthday
+      email
+      name
+      role
+      status
+      timestamp
+    }
+  }
+}

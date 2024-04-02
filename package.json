@@ -12,7 +12,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.yml",
     "lint:fix": "eslint . --fix --ext .js,.jsx,.ts,.tsx,.yml",
     "format": "prettier --ignore-path .gitignore --write \"**/*.{js,ts,json,jsx,tsx,yml}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "codegen": "graphql-codegen --config src/core/graphql/codegen.config.ts && prettier --write src/core/graphql/generated"
   },
   "dependencies": {
     "@apollo/client": "^3.8.1",
@@ -49,6 +50,9 @@
     "@babel/runtime": "^7.20.0",
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript-operations": "^4.2.0",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.11",
