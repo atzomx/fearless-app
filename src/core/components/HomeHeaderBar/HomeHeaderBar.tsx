@@ -12,8 +12,9 @@ export type HomeHeaderBarProps = React.PropsWithChildren & {
   name?: string;
 };
 
-const HomeHeaderBar: FC<HomeHeaderBarProps> = () => {
+const HomeHeaderBar: FC<HomeHeaderBarProps> = ({ children }) => {
   const theme = useTheme();
+
   return (
     <S.ContainerView>
       <S.Container>
@@ -35,6 +36,7 @@ const HomeHeaderBar: FC<HomeHeaderBarProps> = () => {
           <ProfileButton />
         </S.ContainerButton>
       </S.Container>
+      {children}
     </S.ContainerView>
   );
 };
