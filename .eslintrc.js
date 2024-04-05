@@ -30,8 +30,8 @@ module.exports = {
               },
               { pattern: '@core', group: 'internal' },
               { pattern: '@core/**', group: 'internal' },
-              { pattern: '@e', group: 'internal' },
-              { pattern: '@e/**', group: 'internal' },
+              { pattern: '@e', group: 'sibling' },
+              { pattern: '@e/**', group: 'sibling' },
             ],
             pathGroupsExcludedImportTypes: ['react'],
             alphabetize: {

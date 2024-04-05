@@ -5,14 +5,16 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
+import yup from 'yup';
 
 import { HeaderBar, InputControl } from '@core/components';
 import { useNavigate } from '@core/hooks';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import { Button, Container, InputText, Text } from '@core/ui';
+
 import loginSchema from '@e/auth/schemas/login.schema';
 
-type TFormLogin = { userName: string; password: string };
+type TForm = yup.InferType<typeof loginSchema>;
 
 const RecoveryScreen = () => {
   const navigator = useNavigate();
@@ -23,7 +25,7 @@ const RecoveryScreen = () => {
     // navigator.replace(INTERACTION_ROUTES.interaction);
   };
 
-  const { control, handleSubmit } = useForm<TFormLogin>({
+  const { control, handleSubmit } = useForm<TForm>({
     resolver: yupResolver(loginSchema),
     defaultValues: { userName: '', password: '' },
     mode: 'onBlur',

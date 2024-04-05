@@ -4,41 +4,46 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import yup from 'yup';
 
 import { HeaderBar, InputControl } from '@core/components';
-// import { useUserSingUp } from '@core/graphql/mutations';
-import { useUserSingUp } from '@core/graphql/mutations';
+import { useSignUpMutation } from '@core/graphql';
 import { useNavigate } from '@core/hooks';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import theme from '@core/theme';
 import { Button, Container, InputText, Text } from '@core/ui';
 import { pick } from '@core/utils/Object';
-import signUpSchema, { TFormSignUp } from '@e/auth/schemas/signUp.schema';
+
+import signUpSchema from '@e/auth/schemas/signUp.schema';
+import HOME_ROUTES from '@e/home/constants/routes';
+
+type TForm = yup.InferType<typeof signUpSchema>;
 
 const SignUpScreen = () => {
-  const [userSingUp] = useUserSingUp();
+  const [userSingUp] = useSignUpMutation();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
-  const onSubmit = async (values: TFormSignUp) => {
-    const data = pick(values, ['name', 'email', 'password']);
-    const result = await userSingUp({
-      variables: { data },
-    });
-    console.log(result);
-    // navigator.replace(INTERACTION_ROUTES.interaction);
-  };
-
-  const { control, handleSubmit } = useForm<TFormSignUp>({
+  const { control, handleSubmit } = useForm<TForm>({
     resolver: yupResolver(signUpSchema),
     defaultValues: {
       name: '',
       email: '',
       password: '',
-      passwordConfirmation: '',
+      confirmation: '',
     },
     mode: 'onBlur',
   });
+
+  const onSubmit = async (values: TForm) => {
+    const createUserInput = pick(values, ['name', 'email', 'password']);
+    await userSingUp({
+      variables: { createUserInput },
+      onCompleted() {
+        navigator.replace(HOME_ROUTES.home);
+      },
+    });
+  };
 
   const goSignIn = async () => {
     navigator.goBack();
@@ -99,7 +104,7 @@ const SignUpScreen = () => {
               <InputControl
                 control={control}
                 component={InputText}
-                name="passwordConfirmation"
+                name="confirmation"
                 label={t('auth.signup.input.password-confirm')}
                 secureTextEntry
                 color="secondary"

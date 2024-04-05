@@ -5,41 +5,42 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
+import * as yup from 'yup';
 
 import { InputControl } from '@core/components';
-import { useUserLogin } from '@core/graphql/mutations';
+import { useSignInMutation } from '@core/graphql';
 import { useNavigate } from '@core/hooks';
 import { FacebookIcon, GoogleIcon } from '@core/icons';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import { Button, Container, IconButton, InputText, Text } from '@core/ui';
+
 import AUTH_ROUTES from '@e/auth/constants/routes';
 import loginSchema from '@e/auth/schemas/login.schema';
+import HOME_ROUTES from '@e/home/constants/routes';
 
-type TFormLogin = { userName: string; password: string };
+type TForm = yup.InferType<typeof loginSchema>;
 
 const SignInScreen = () => {
-  const [userLogin] = useUserLogin();
+  const [userLogin] = useSignInMutation();
   const theme = useTheme();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
-  const onSubmit = async (values: TFormLogin) => {
-    const result = await userLogin({
-      variables: {
-        user: {
-          name: values.userName,
-          password: values.password,
-        },
-      },
-    });
-    console.log(result);
-  };
-
-  const { control, handleSubmit } = useForm<TFormLogin>({
+  const { control, handleSubmit } = useForm<TForm>({
     resolver: yupResolver(loginSchema),
     defaultValues: { userName: '', password: '' },
     mode: 'onBlur',
   });
+
+  const onSubmit = (values: TForm) => {
+    const user = { email: values.userName, password: values.password };
+    userLogin({
+      variables: { user },
+      onCompleted() {
+        navigator.push(HOME_ROUTES.home);
+      },
+    });
+  };
 
   const goSignUp = async () => {
     navigator.push(AUTH_ROUTES.signup);
