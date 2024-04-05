@@ -11,9 +11,7 @@ type InputControlCommonProps<D extends ElementType<any>, F extends {}> = Pick<
 > & {
   control: Control<F, any>;
   name: Path<F>;
-  //@ts-ignore
   component?: D;
-  //@ts-ignore
 } & React.ComponentProps<D>;
 
 function InputControl<D extends ElementType<any>, F extends {}>({
@@ -21,7 +19,6 @@ function InputControl<D extends ElementType<any>, F extends {}>({
   name,
   helperText,
   error,
-  //@ts-ignore
   component: Component = InputText,
   ...props
 }: InputControlCommonProps<D, F>) {
