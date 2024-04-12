@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { TextInput, TextInputProps } from 'react-native';
 
 import * as S from './InputText.style';
 
-import InputBase, { InputBaseProps } from '../InputBase';
+import InputBase, { InputBaseProps, RefElement } from '../InputBase';
 
-type InputTextProps<T> = Omit<InputBaseProps<T>, 'children'> & TextInputProps;
+type InputTextProps<T> = Omit<InputBaseProps<T>, 'children' | 'ref'> &
+  Omit<TextInputProps, 'onChangeText' | 'ref'>;
 
-const InputText = ({ ...props }: InputTextProps<string>) => {
+function InputText(
+  { ...props }: InputTextProps<string>,
+  parentRef: React.ForwardedRef<RefElement>,
+) {
   return (
-    <InputBase {...props}>
+    <InputBase {...props} ref={parentRef}>
       {({
         ref,
         style,
@@ -19,6 +23,7 @@ const InputText = ({ ...props }: InputTextProps<string>) => {
         placeholder,
         placeholderTextColor,
         value,
+        ...nextProps
       }) => (
         <S.Input
           ref={ref as React.Ref<TextInput>}
@@ -29,10 +34,11 @@ const InputText = ({ ...props }: InputTextProps<string>) => {
           placeholder={placeholder}
           onChangeText={onChangeText}
           value={value}
+          {...nextProps}
         />
       )}
     </InputBase>
   );
-};
+}
 
-export default InputText;
+export default forwardRef(InputText);

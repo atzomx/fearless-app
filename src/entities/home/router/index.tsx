@@ -6,9 +6,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
 
 import { makeStyles } from '@core/hooks';
-import { HomeTabBarIcon } from '@e/home/components';
 
 import { HomeRoutes, type THomeRoutes } from './routes';
+import { HomeTabBarIcon } from '@e/home/components';
 
 const Tab = createBottomTabNavigator();
 

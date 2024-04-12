@@ -252,6 +252,7 @@ export type LoginUserInput = {
 
 export type LoginUserResult = {
   __typename?: 'LoginUserResult';
+  refreshToken: Scalars['String']['output'];
   token: Scalars['String']['output'];
   user: UserResponse;
 };
@@ -271,6 +272,8 @@ export type Mutation = {
   decideDeal: Deal;
   recoveryPass: Scalars['Boolean']['output'];
   recoveryPassConfirm: Scalars['Boolean']['output'];
+  recoveryPassVerifyOtp: RecoveryVerifyOtTokenResult;
+  refreshTokens: RefreshTokenResult;
   removeAddress: Address;
   removeClaim: Claim;
   removeCostumer: UserResponse;
@@ -345,6 +348,14 @@ export type MutationRecoveryPassArgs = {
 
 export type MutationRecoveryPassConfirmArgs = {
   UserRecoveryInput: UserRecoveryConfirmInput;
+};
+
+export type MutationRecoveryPassVerifyOtpArgs = {
+  UserRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput;
+};
+
+export type MutationRefreshTokensArgs = {
+  refreshToken: Scalars['String']['input'];
 };
 
 export type MutationRemoveAddressArgs = {
@@ -557,12 +568,32 @@ export type QueryValidationArgs = {
   id: Scalars['String']['input'];
 };
 
+export type RecoveryVerifyOtTokenResult = {
+  __typename?: 'RecoveryVerifyOtTokenResult';
+  token?: Maybe<Scalars['String']['output']>;
+};
+
+export type RefreshTokenResult = {
+  __typename?: 'RefreshTokenResult';
+  refreshToken: Scalars['String']['output'];
+  token: Scalars['String']['output'];
+};
+
 export type Shipment = {
   __typename?: 'Shipment';
   _id: Scalars['ID']['output'];
   address_id: Scalars['ID']['output'];
   provider?: Maybe<Scalars['String']['output']>;
   tracking_number?: Maybe<Scalars['String']['output']>;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  userMeSubscriptor: UserResponse;
+};
+
+export type SubscriptionUserMeSubscriptorArgs = {
+  name: Scalars['String']['input'];
 };
 
 export type Transaction = {
@@ -683,6 +714,11 @@ export type UserRecoveryInput = {
   email: Scalars['String']['input'];
 };
 
+export type UserRecoveryVerifyOtpInput = {
+  email: Scalars['String']['input'];
+  tokenOTP: Scalars['String']['input'];
+};
+
 export type UserResponse = {
   __typename?: 'UserResponse';
   _id: Scalars['String']['output'];
@@ -731,6 +767,7 @@ export type SignInMutation = {
   __typename?: 'Mutation';
   signIn: {
     __typename?: 'LoginUserResult';
+    refreshToken: string;
     token: string;
     user: {
       __typename?: 'UserResponse';
@@ -740,7 +777,6 @@ export type SignInMutation = {
       name: string;
       role?: string | null;
       status?: string | null;
-      timestamp: Date;
     };
   };
 };
@@ -753,6 +789,7 @@ export type SignUpMutation = {
   __typename?: 'Mutation';
   signUp: {
     __typename?: 'LoginUserResult';
+    refreshToken: string;
     token: string;
     user: {
       __typename?: 'UserResponse';
@@ -762,14 +799,57 @@ export type SignUpMutation = {
       name: string;
       role?: string | null;
       status?: string | null;
-      timestamp: Date;
     };
   };
+};
+
+export type RecoveryPassMutationVariables = Exact<{
+  userRecoveryInput: UserRecoveryInput;
+}>;
+
+export type RecoveryPassMutation = {
+  __typename?: 'Mutation';
+  recoveryPass: boolean;
+};
+
+export type RefreshTokensMutationVariables = Exact<{
+  refreshToken: Scalars['String']['input'];
+}>;
+
+export type RefreshTokensMutation = {
+  __typename?: 'Mutation';
+  refreshTokens: {
+    __typename?: 'RefreshTokenResult';
+    refreshToken: string;
+    token: string;
+  };
+};
+
+export type RecoveryPassVerifyOtpMutationVariables = Exact<{
+  userRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput;
+}>;
+
+export type RecoveryPassVerifyOtpMutation = {
+  __typename?: 'Mutation';
+  recoveryPassVerifyOtp: {
+    __typename?: 'RecoveryVerifyOtTokenResult';
+    token?: string | null;
+  };
+};
+
+export type RecoveryPassConfirmMutationVariables = Exact<{
+  userRecoveryInput: UserRecoveryConfirmInput;
+}>;
+
+export type RecoveryPassConfirmMutation = {
+  __typename?: 'Mutation';
+  recoveryPassConfirm: boolean;
 };
 
 export const SignInDocument = gql`
   mutation SignIn($user: LoginUserInput!) {
     signIn(User: $user) {
+      refreshToken
       token
       user {
         _id
@@ -778,7 +858,6 @@ export const SignInDocument = gql`
         name
         role
         status
-        timestamp
       }
     }
   }
@@ -826,6 +905,7 @@ export type SignInMutationOptions = Apollo.BaseMutationOptions<
 export const SignUpDocument = gql`
   mutation SignUp($createUserInput: CreateUserInput!) {
     signUp(createUserInput: $createUserInput) {
+      refreshToken
       token
       user {
         _id
@@ -834,7 +914,6 @@ export const SignUpDocument = gql`
         name
         role
         status
-        timestamp
       }
     }
   }
@@ -878,4 +957,205 @@ export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
 export type SignUpMutationOptions = Apollo.BaseMutationOptions<
   SignUpMutation,
   SignUpMutationVariables
+>;
+export const RecoveryPassDocument = gql`
+  mutation RecoveryPass($userRecoveryInput: UserRecoveryInput!) {
+    recoveryPass(UserRecoveryInput: $userRecoveryInput)
+  }
+`;
+export type RecoveryPassMutationFn = Apollo.MutationFunction<
+  RecoveryPassMutation,
+  RecoveryPassMutationVariables
+>;
+
+/**
+ * __useRecoveryPassMutation__
+ *
+ * To run a mutation, you first call `useRecoveryPassMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRecoveryPassMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [recoveryPassMutation, { data, loading, error }] = useRecoveryPassMutation({
+ *   variables: {
+ *      userRecoveryInput: // value for 'userRecoveryInput'
+ *   },
+ * });
+ */
+export function useRecoveryPassMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RecoveryPassMutation,
+    RecoveryPassMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    RecoveryPassMutation,
+    RecoveryPassMutationVariables
+  >(RecoveryPassDocument, options);
+}
+export type RecoveryPassMutationHookResult = ReturnType<
+  typeof useRecoveryPassMutation
+>;
+export type RecoveryPassMutationResult =
+  Apollo.MutationResult<RecoveryPassMutation>;
+export type RecoveryPassMutationOptions = Apollo.BaseMutationOptions<
+  RecoveryPassMutation,
+  RecoveryPassMutationVariables
+>;
+export const RefreshTokensDocument = gql`
+  mutation RefreshTokens($refreshToken: String!) {
+    refreshTokens(refreshToken: $refreshToken) {
+      refreshToken
+      token
+    }
+  }
+`;
+export type RefreshTokensMutationFn = Apollo.MutationFunction<
+  RefreshTokensMutation,
+  RefreshTokensMutationVariables
+>;
+
+/**
+ * __useRefreshTokensMutation__
+ *
+ * To run a mutation, you first call `useRefreshTokensMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRefreshTokensMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [refreshTokensMutation, { data, loading, error }] = useRefreshTokensMutation({
+ *   variables: {
+ *      refreshToken: // value for 'refreshToken'
+ *   },
+ * });
+ */
+export function useRefreshTokensMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RefreshTokensMutation,
+    RefreshTokensMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    RefreshTokensMutation,
+    RefreshTokensMutationVariables
+  >(RefreshTokensDocument, options);
+}
+export type RefreshTokensMutationHookResult = ReturnType<
+  typeof useRefreshTokensMutation
+>;
+export type RefreshTokensMutationResult =
+  Apollo.MutationResult<RefreshTokensMutation>;
+export type RefreshTokensMutationOptions = Apollo.BaseMutationOptions<
+  RefreshTokensMutation,
+  RefreshTokensMutationVariables
+>;
+export const RecoveryPassVerifyOtpDocument = gql`
+  mutation RecoveryPassVerifyOtp(
+    $userRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput!
+  ) {
+    recoveryPassVerifyOtp(
+      UserRecoveryVerifyOtpInput: $userRecoveryVerifyOtpInput
+    ) {
+      token
+    }
+  }
+`;
+export type RecoveryPassVerifyOtpMutationFn = Apollo.MutationFunction<
+  RecoveryPassVerifyOtpMutation,
+  RecoveryPassVerifyOtpMutationVariables
+>;
+
+/**
+ * __useRecoveryPassVerifyOtpMutation__
+ *
+ * To run a mutation, you first call `useRecoveryPassVerifyOtpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRecoveryPassVerifyOtpMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [recoveryPassVerifyOtpMutation, { data, loading, error }] = useRecoveryPassVerifyOtpMutation({
+ *   variables: {
+ *      userRecoveryVerifyOtpInput: // value for 'userRecoveryVerifyOtpInput'
+ *   },
+ * });
+ */
+export function useRecoveryPassVerifyOtpMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RecoveryPassVerifyOtpMutation,
+    RecoveryPassVerifyOtpMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    RecoveryPassVerifyOtpMutation,
+    RecoveryPassVerifyOtpMutationVariables
+  >(RecoveryPassVerifyOtpDocument, options);
+}
+export type RecoveryPassVerifyOtpMutationHookResult = ReturnType<
+  typeof useRecoveryPassVerifyOtpMutation
+>;
+export type RecoveryPassVerifyOtpMutationResult =
+  Apollo.MutationResult<RecoveryPassVerifyOtpMutation>;
+export type RecoveryPassVerifyOtpMutationOptions = Apollo.BaseMutationOptions<
+  RecoveryPassVerifyOtpMutation,
+  RecoveryPassVerifyOtpMutationVariables
+>;
+export const RecoveryPassConfirmDocument = gql`
+  mutation RecoveryPassConfirm($userRecoveryInput: UserRecoveryConfirmInput!) {
+    recoveryPassConfirm(UserRecoveryInput: $userRecoveryInput)
+  }
+`;
+export type RecoveryPassConfirmMutationFn = Apollo.MutationFunction<
+  RecoveryPassConfirmMutation,
+  RecoveryPassConfirmMutationVariables
+>;
+
+/**
+ * __useRecoveryPassConfirmMutation__
+ *
+ * To run a mutation, you first call `useRecoveryPassConfirmMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRecoveryPassConfirmMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [recoveryPassConfirmMutation, { data, loading, error }] = useRecoveryPassConfirmMutation({
+ *   variables: {
+ *      userRecoveryInput: // value for 'userRecoveryInput'
+ *   },
+ * });
+ */
+export function useRecoveryPassConfirmMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RecoveryPassConfirmMutation,
+    RecoveryPassConfirmMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    RecoveryPassConfirmMutation,
+    RecoveryPassConfirmMutationVariables
+  >(RecoveryPassConfirmDocument, options);
+}
+export type RecoveryPassConfirmMutationHookResult = ReturnType<
+  typeof useRecoveryPassConfirmMutation
+>;
+export type RecoveryPassConfirmMutationResult =
+  Apollo.MutationResult<RecoveryPassConfirmMutation>;
+export type RecoveryPassConfirmMutationOptions = Apollo.BaseMutationOptions<
+  RecoveryPassConfirmMutation,
+  RecoveryPassConfirmMutationVariables
 >;

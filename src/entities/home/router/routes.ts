@@ -1,4 +1,5 @@
 import { BellIcon, HomeIcon, MenuIcon, MessageIcon } from '@core/icons';
+
 import { DealsScreen } from '@e/deals/screens';
 import ProfileRouter from '@e/profile/router';
 
@@ -26,6 +27,6 @@ export const HomeRoutes = {
     icon: MenuIcon,
     component: ProfileRouter,
   },
-};
+} as const;
 
 export type THomeRoutes = keyof typeof HomeRoutes;

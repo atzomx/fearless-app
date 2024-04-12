@@ -1,5 +1,6 @@
 mutation SignIn($user: LoginUserInput!) {
   signIn(User: $user) {
+    refreshToken
     token
     user {
       _id
@@ -8,13 +9,13 @@ mutation SignIn($user: LoginUserInput!) {
       name
       role
       status
-      timestamp
     }
   }
 }
 
 mutation SignUp($createUserInput: CreateUserInput!) {
   signUp(createUserInput: $createUserInput) {
+    refreshToken
     token
     user {
       _id
@@ -23,7 +24,31 @@ mutation SignUp($createUserInput: CreateUserInput!) {
       name
       role
       status
-      timestamp
     }
   }
+}
+
+mutation RecoveryPass($userRecoveryInput: UserRecoveryInput!) {
+  recoveryPass(UserRecoveryInput: $userRecoveryInput)
+}
+
+mutation RefreshTokens($refreshToken: String!) {
+  refreshTokens(refreshToken: $refreshToken) {
+    refreshToken
+    token
+  }
+}
+
+mutation RecoveryPassVerifyOtp(
+  $userRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput!
+) {
+  recoveryPassVerifyOtp(
+    UserRecoveryVerifyOtpInput: $userRecoveryVerifyOtpInput
+  ) {
+    token
+  }
+}
+
+mutation RecoveryPassConfirm($userRecoveryInput: UserRecoveryConfirmInput!) {
+  recoveryPassConfirm(UserRecoveryInput: $userRecoveryInput)
 }

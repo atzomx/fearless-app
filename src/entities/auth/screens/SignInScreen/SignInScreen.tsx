@@ -34,10 +34,14 @@ const SignInScreen = () => {
 
   const onSubmit = (values: TForm) => {
     const user = { email: values.userName, password: values.password };
+
     userLogin({
       variables: { user },
       onCompleted() {
         navigator.push(HOME_ROUTES.home);
+      },
+      onError(error, clientOptions) {
+        console.log({ error, clientOptions });
       },
     });
   };
@@ -46,7 +50,7 @@ const SignInScreen = () => {
     navigator.push(AUTH_ROUTES.signup);
   };
   const goRecovery = async () => {
-    navigator.push(AUTH_ROUTES.recovery);
+    navigator.push(AUTH_ROUTES.forgot);
   };
 
   return (

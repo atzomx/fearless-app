@@ -20,7 +20,7 @@ import HOME_ROUTES from '@e/home/constants/routes';
 type TForm = yup.InferType<typeof signUpSchema>;
 
 const SignUpScreen = () => {
-  const [userSingUp] = useSignUpMutation();
+  const [userSingUp, { error: full }] = useSignUpMutation();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
@@ -35,15 +35,22 @@ const SignUpScreen = () => {
     mode: 'onBlur',
   });
 
-  const onSubmit = async (values: TForm) => {
+  const onSubmit = (values: TForm) => {
     const createUserInput = pick(values, ['name', 'email', 'password']);
-    await userSingUp({
+    console.log('submited');
+    userSingUp({
       variables: { createUserInput },
-      onCompleted() {
-        navigator.replace(HOME_ROUTES.home);
+      onCompleted(data) {
+        console.log(data);
+        // navigator.replace(HOME_ROUTES.home);
+      },
+      onError(error, clientOptions) {
+        console.log({ error, clientOptions });
       },
     });
   };
+
+  console.log({ full });
 
   const goSignIn = async () => {
     navigator.goBack();
