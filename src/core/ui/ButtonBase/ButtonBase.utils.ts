@@ -6,27 +6,27 @@ export type TButtonVariantStyle = {
   variant: ButtonVariant;
   theme: Theme;
   color: ColorVariant;
-  disable: boolean;
+  disabled: boolean;
 };
 
 export type ButtonMakerProps = {
   color: ColorVariant;
   variant: ButtonVariant;
-  disable: boolean;
+  disabled: boolean;
 };
 
-type Color = keyof typeof DefaultTheme.pallete;
+type Color = keyof typeof DefaultTheme.palette;
 
 export const getButtonVariantStyle = ({
   variant,
   theme,
   color,
-  disable,
+  disabled,
 }: TButtonVariantStyle): CSSObject => {
-  const currentColor = disable
-    ? theme.pallete.action.disabledBackground
+  const currentColor = disabled
+    ? theme.palette.action.disabledBackground
     : // @ts-ignore
-      theme.pallete[color as Color]?.main ?? color;
+      theme.palette[color as Color]?.main ?? color;
 
   const variants = {
     contained: {
@@ -43,12 +43,12 @@ export const getContentVariantStyle = ({
   variant,
   theme,
   color,
-  disable,
+  disabled,
 }: TButtonVariantStyle) => {
-  if (disable) return theme.pallete.action.disabled;
+  if (disabled) return theme.palette.action.disabled;
   if (variant === 'contained')
     // @ts-ignore
-    return theme.pallete[color as Color]?.contrastText ?? color;
+    return theme.palette[color as Color]?.contrastText ?? color;
   // @ts-ignore
-  return theme.pallete[color as Color].main;
+  return theme.palette[color as Color].main;
 };

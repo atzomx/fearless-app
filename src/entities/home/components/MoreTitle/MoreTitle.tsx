@@ -21,11 +21,11 @@ const MoreTitle = ({ more, title }: MoreTitleProps) => {
       <Text
         fontWeight="Medium"
         fontSize={18}
-        color={theme.pallete.colors.black}>
+        color={theme.palette.colors.black}>
         {title}
       </Text>
       <TouchableOpacity activeOpacity={0.8}>
-        <Text fontWeight="Light" color={theme.pallete.grey[700]}>
+        <Text fontWeight="Light" color={theme.palette.grey[700]}>
           {more}
         </Text>
       </TouchableOpacity>

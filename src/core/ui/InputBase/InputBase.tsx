@@ -192,7 +192,7 @@ const InputText = <T extends {}>(
           {children({
             ref: ref as React.Ref<RefElement>,
             style,
-            placeholderTextColor: theme.pallete.grey[400],
+            placeholderTextColor: theme.palette.grey[400],
             onFocus: handleOnFocus,
             onBlur: handleOnBlur,
             placeholder,

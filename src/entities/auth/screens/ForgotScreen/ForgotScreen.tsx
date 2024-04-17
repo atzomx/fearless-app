@@ -58,13 +58,13 @@ const ForgotScreen = () => {
             <Text
               fontSize={24}
               fontWeight="SemiBold"
-              color={theme.pallete.colors.black}>
+              color={theme.palette.colors.black}>
               {t('auth.forgot.text.gretting')}
             </Text>
             <Text
               fontSize={16}
               fontWeight="Regular"
-              color={theme.pallete.grey[500]}>
+              color={theme.palette.grey[500]}>
               {t('auth.forgot.text.recovery')}
             </Text>
           </Container>

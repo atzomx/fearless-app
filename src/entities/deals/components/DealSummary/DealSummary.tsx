@@ -22,30 +22,30 @@ const DealSummary: FC<DealSummaryProps> = ({ product, service }) => {
   return (
     <Container p={4} mv={2}>
       <Container direction="row" justifyContent="space-between">
-        <Text fontSize={16} color={theme.pallete.grey[500]}>
+        <Text fontSize={16} color={theme.palette.grey[500]}>
           {t('deals.wizard.four.product_amount')}
         </Text>
-        <Text fontSize={16} color={theme.pallete.grey[900]}>
+        <Text fontSize={16} color={theme.palette.grey[900]}>
           {Money.fromNumber(product).toFormat()}
         </Text>
       </Container>
       <Container direction="row" justifyContent="space-between">
-        <Text fontSize={16} color={theme.pallete.grey[500]}>
+        <Text fontSize={16} color={theme.palette.grey[500]}>
           {t('deals.wizard.four.product_service')}
         </Text>
-        <Text fontSize={16} color={theme.pallete.grey[900]}>
+        <Text fontSize={16} color={theme.palette.grey[900]}>
           {Money.fromNumber(service).toFormat()}
         </Text>
       </Container>
       <Divider />
       <Container direction="row" justifyContent="space-between">
-        <Text fontSize={16} color={theme.pallete.common.black}>
+        <Text fontSize={16} color={theme.palette.common.black}>
           {t('deals.wizard.four.income_amount')}
         </Text>
         <Text
           fontWeight="Bold"
           fontSize={16}
-          color={theme.pallete.common.black}>
+          color={theme.palette.common.black}>
           {Money.fromNumber(TOTAL).toFormat()}
         </Text>
       </Container>

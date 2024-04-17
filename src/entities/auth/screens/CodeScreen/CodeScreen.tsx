@@ -81,13 +81,13 @@ const CodeScreen = () => {
             <Text
               fontSize={24}
               fontWeight="SemiBold"
-              color={theme.pallete.colors.black}>
+              color={theme.palette.colors.black}>
               {t('auth.code.text.title')}
             </Text>
             <Text
               fontSize={16}
               fontWeight="Regular"
-              color={theme.pallete.grey[500]}>
+              color={theme.palette.grey[500]}>
               {t('auth.code.text.subtitle')}
             </Text>
           </Container>

@@ -3,12 +3,12 @@ import styled from 'styled-components/native';
 export const IconContainer = styled.TouchableOpacity(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: theme.pallete.grey[100],
+  backgroundColor: theme.palette.grey[100],
   height: theme.spacing(5),
   width: theme.spacing(5),
   borderWidth: 1,
   borderStyle: 'solid',
-  borderColor: theme.pallete.grey[100],
+  borderColor: theme.palette.grey[100],
   borderRadius: theme.spacing(1),
 }));
 

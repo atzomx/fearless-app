@@ -13,7 +13,7 @@ const StartScreen = () => {
   return (
     <SafeLayout>
       <S.Container>
-        <StatusBar translucent backgroundColor={theme.pallete.primary.main} />
+        <StatusBar translucent backgroundColor={theme.palette.primary.main} />
         <Text align="center" color="white" variant="h1">
           Selyz
         </Text>

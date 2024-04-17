@@ -11,14 +11,14 @@ const BackButton: FC<IconButtonProps> = props => {
     <IconButton
       {...props}
       variant="contained"
-      color={theme.pallete.grey['100']}
+      color={theme.palette.grey['100']}
       sx={{
         button: {
           height: 52,
           width: 52,
         },
       }}>
-      <BackIcon color={theme.pallete.grey[600]} height={24} width={24} />
+      <BackIcon color={theme.palette.grey[600]} height={24} width={24} />
     </IconButton>
   );
 };

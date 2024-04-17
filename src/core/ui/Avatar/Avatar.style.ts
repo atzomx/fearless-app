@@ -15,7 +15,7 @@ export const Container = styled.TouchableOpacity<{ size: VariantSize }>(
     borderStyle: 'solid',
     borderRadius: 100,
     borderWidth: 1,
-    borderColor: theme.pallete.grey[500],
+    borderColor: theme.palette.grey[500],
     padding: 2,
     width: Number(theme.components.Avatar[size].width),
     height: Number(theme.components.Avatar[size].height),

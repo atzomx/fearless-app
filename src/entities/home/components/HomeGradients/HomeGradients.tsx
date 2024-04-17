@@ -14,24 +14,24 @@ const HomeGradients = () => {
           <Container
             justifyContent="center"
             alignItems="center"
-            backgroundColor={theme.fade(theme.pallete.colors.white, 0.3)}
+            backgroundColor={theme.fade(theme.palette.colors.white, 0.3)}
             height={48}
             width={48}
             borderRadius={48 / 2}>
-            <ArrowTrendingDownIcon color={theme.pallete.colors.white} />
+            <ArrowTrendingDownIcon color={theme.palette.colors.white} />
           </Container>
           <Container direction="row" spacing={1} alignItems="center">
-            <Text variant="h3" color={theme.pallete.colors.white}>
+            <Text variant="h3" color={theme.palette.colors.white}>
               1,500.00
             </Text>
-            <Text color={theme.pallete.colors.white}>USD</Text>
+            <Text color={theme.palette.colors.white}>USD</Text>
           </Container>
         </GradientCard.Row>
         <GradientCard.Row>
           <Text
             fontWeight="SemiBold"
             fontSize={16}
-            color={theme.pallete.colors.white}>
+            color={theme.palette.colors.white}>
             Pending Income
           </Text>
         </GradientCard.Row>
@@ -42,18 +42,18 @@ const HomeGradients = () => {
             <Container
               justifyContent="center"
               alignItems="center"
-              backgroundColor={theme.fade(theme.pallete.colors.white, 0.3)}
+              backgroundColor={theme.fade(theme.palette.colors.white, 0.3)}
               height={48}
               width={48}
               borderRadius={48 / 2}>
-              <PlusIcon color={theme.pallete.colors.white} />
+              <PlusIcon color={theme.palette.colors.white} />
             </Container>
           </GradientCard.Row>
           <GradientCard.Row>
             <Text
               fontWeight="SemiBold"
               fontSize={16}
-              color={theme.pallete.colors.white}>
+              color={theme.palette.colors.white}>
               New Deal
             </Text>
           </GradientCard.Row>
@@ -63,18 +63,18 @@ const HomeGradients = () => {
             <Container
               justifyContent="center"
               alignItems="center"
-              backgroundColor={theme.fade(theme.pallete.colors.white, 0.3)}
+              backgroundColor={theme.fade(theme.palette.colors.white, 0.3)}
               height={48}
               width={48}
               borderRadius={48 / 2}>
-              <QRCodeIcon color={theme.pallete.colors.white} />
+              <QRCodeIcon color={theme.palette.colors.white} />
             </Container>
           </GradientCard.Row>
           <GradientCard.Row>
             <Text
               fontWeight="SemiBold"
               fontSize={16}
-              color={theme.pallete.colors.white}>
+              color={theme.palette.colors.white}>
               Join with Code
             </Text>
           </GradientCard.Row>

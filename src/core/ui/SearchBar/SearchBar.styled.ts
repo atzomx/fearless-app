@@ -4,7 +4,7 @@ export const Container = styled.View(({ theme }) => ({
   flexDirection: 'row',
   height: theme.spacing(5),
   borderRadius: theme.spacing(5 / 3),
-  backgroundColor: theme.pallete.grey[50],
+  backgroundColor: theme.palette.grey[50],
   alignItems: 'center',
   paddingHorizontal: theme.spacing(1),
   flex: 1,

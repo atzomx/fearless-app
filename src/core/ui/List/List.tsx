@@ -22,7 +22,7 @@ const Text: FC<PropsWithChildren> = ({ children }) => {
   const theme = useTheme();
   return (
     <TextUi
-      color={theme.pallete.colors.black}
+      color={theme.palette.colors.black}
       fontWeight="Medium"
       fontSize={14}>
       {children}
@@ -35,7 +35,7 @@ const Icon: FC<{ icon: FC<SvgProps> }> = ({ icon: CustomIcon }) => {
   return (
     <CustomIcon
       strokeWidth={1.5}
-      color={theme.pallete.colors.black}
+      color={theme.palette.colors.black}
       height={theme.spacingSingle(2.5)}
     />
   );
@@ -72,7 +72,7 @@ const Item: FC<TouchableOpacityProps & { icon?: boolean }> = ({
           flexShrink={4}>
           <ChevronIcon
             strokeWidth={2}
-            color={theme.pallete.colors.black}
+            color={theme.palette.colors.black}
             height={theme.spacingSingle(1.5)}
           />
         </Container>

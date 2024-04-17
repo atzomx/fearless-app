@@ -28,10 +28,10 @@ const IconButtonTitle: FC<IconButtonTitleProps> = ({
           button: {
             height: 64,
             width: 64,
-            backgroundColor: theme.pallete.grey['200'],
+            backgroundColor: theme.palette.grey['200'],
           },
         }}>
-        <Icon height={28} width={28} color={theme.pallete.common.black} />
+        <Icon height={28} width={28} color={theme.palette.common.black} />
       </IconButton>
       <Text align="center" variant="caption">
         {title}

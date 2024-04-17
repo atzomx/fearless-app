@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   tabBarStyle: {
     elevation: 0,
     borderTopWidth: 0,
-    backgroundColor: theme.pallete.colors.white,
+    backgroundColor: theme.palette.colors.white,
     paddingHorizontal: theme.spacingSingle(6),
   },
 }));

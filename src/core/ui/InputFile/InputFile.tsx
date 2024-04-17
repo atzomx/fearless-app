@@ -115,13 +115,13 @@ const InputFile: FC<InputFileProps> = ({
               button: {
                 height: 24,
                 width: 24,
-                backgroundColor: theme.pallete.grey['200'],
+                backgroundColor: theme.palette.grey['200'],
               },
             }}>
             <CloseIcon
               height={16}
               width={16}
-              color={theme.pallete.common.black}
+              color={theme.palette.common.black}
             />
           </S.CloseButton>
         )}
@@ -131,7 +131,7 @@ const InputFile: FC<InputFileProps> = ({
   return (
     <>
       <S.Container activeOpacity={0.8} onPress={() => setModal(true)}>
-        <PlusIcon color={theme.pallete.grey[400]} width={40} height={40} />
+        <PlusIcon color={theme.palette.grey[400]} width={40} height={40} />
       </S.Container>
       <Modal
         title="Selecciona una opcion"

@@ -48,7 +48,7 @@ const Button: FC<ButtonProps> = ({
           onPressOut={fadeOut}
           variant={variant}
           color={color}
-          disable={disable}
+          disabled={disable}
           onPress={disable ? undefined : onPress}
           style={sx?.button}
           {...props}>
@@ -57,7 +57,7 @@ const Button: FC<ButtonProps> = ({
             style={sx?.text}
             color={color}
             variant={variant}
-            disable={disable}>
+            disabled={disable}>
             {title}
           </S.Text>
           {endAdorment}

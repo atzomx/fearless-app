@@ -15,12 +15,11 @@ import { Button, Container, InputText, Text } from '@core/ui';
 import { pick } from '@core/utils/Object';
 
 import signUpSchema from '@e/auth/schemas/signUp.schema';
-import HOME_ROUTES from '@e/home/constants/routes';
 
 type TForm = yup.InferType<typeof signUpSchema>;
 
 const SignUpScreen = () => {
-  const [userSingUp, { error: full }] = useSignUpMutation();
+  const [userSingUp, { error }] = useSignUpMutation();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
@@ -37,20 +36,17 @@ const SignUpScreen = () => {
 
   const onSubmit = (values: TForm) => {
     const createUserInput = pick(values, ['name', 'email', 'password']);
-    console.log('submited');
     userSingUp({
       variables: { createUserInput },
       onCompleted(data) {
         console.log(data);
         // navigator.replace(HOME_ROUTES.home);
       },
-      onError(error, clientOptions) {
-        console.log({ error, clientOptions });
+      onError(_error, clientOptions) {
+        console.log({ _error, clientOptions });
       },
     });
   };
-
-  console.log({ full });
 
   const goSignIn = async () => {
     navigator.goBack();
@@ -66,13 +62,13 @@ const SignUpScreen = () => {
               <Text
                 fontSize={24}
                 fontWeight="SemiBold"
-                color={theme.pallete.colors.black}>
+                color={theme.palette.colors.black}>
                 {t('auth.signup.text.gretting')}
               </Text>
               <Text
                 fontSize={16}
                 fontWeight="Regular"
-                color={theme.pallete.grey[500]}>
+                color={theme.palette.grey[500]}>
                 {t('auth.signup.text.description')}
               </Text>
             </Container>
@@ -130,13 +126,13 @@ const SignUpScreen = () => {
               fontSize={12}
               fontWeight="Regular"
               align="center"
-              color={theme.pallete.grey[500]}>
+              color={theme.palette.grey[500]}>
               {t('auth.signup.text.new_user')}{' '}
               <Text
                 onPress={goSignIn}
                 fontSize={12}
                 fontWeight="SemiBold"
-                color={theme.pallete.common.black}>
+                color={theme.palette.common.black}>
                 {t('auth.signup.text.create_account')}
               </Text>
             </Text>

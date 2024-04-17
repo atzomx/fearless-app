@@ -6,7 +6,7 @@ export const IconContainer = styled.View(({ theme }) => ({
   borderRadius: 42 / 2,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: theme.pallete.colors.black,
+  backgroundColor: theme.palette.colors.black,
 }));
 
 export const Dot = styled.View<{ focused: boolean }>(({ focused, theme }) => ({
@@ -15,6 +15,6 @@ export const Dot = styled.View<{ focused: boolean }>(({ focused, theme }) => ({
   height: 3,
   borderRadius: 2,
   backgroundColor: focused
-    ? theme.pallete.grey[800]
-    : theme.pallete.common.white,
+    ? theme.palette.grey[800]
+    : theme.palette.common.white,
 }));

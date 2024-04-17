@@ -22,7 +22,7 @@ export const BadgeCircle = styled.View<BadgeMaker>(
   ({ color, theme, variant, alignment }) => ({
     ...getBadgeVariantStyle({ variant, alignment }),
     ...theme.components.Badge.circle,
-    backgroundColor: theme.pallete[color].main,
+    backgroundColor: theme.palette[color].main,
   }),
 );
 

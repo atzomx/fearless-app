@@ -12,7 +12,7 @@ export type HomeTabBarIconProps = {
 
 const HomeTabBarIcon: FC<HomeTabBarIconProps> = ({ focused, icon: Icon }) => {
   const theme = useTheme();
-  const color = theme.pallete.grey[focused ? 800 : 400];
+  const color = theme.palette.grey[focused ? 800 : 400];
 
   return (
     <React.Fragment>

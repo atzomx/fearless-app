@@ -64,7 +64,7 @@ const NewDealStepOne = () => {
               placeholder={t('common.schemas.placeholder')}
               fontSize={16}
               fontWeight="Regular"
-              color={theme.pallete.grey['500']}
+              color={theme.palette.grey['500']}
             />
           </Container>
         </KeyboardAwareScrollView>

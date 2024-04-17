@@ -21,13 +21,13 @@ const HomeHeaderBar: FC<HomeHeaderBarProps> = () => {
         <Text
           fontSize={12}
           fontWeight="Regular"
-          color={theme.pallete.grey[500]}>
+          color={theme.palette.grey[500]}>
           Bienvenido
         </Text>
         <Text
           fontSize={14}
           fontWeight="Medium"
-          color={theme.pallete.text.black}>
+          color={theme.palette.text.black}>
           Erick Andrade
         </Text>
       </S.ContainerTitle>

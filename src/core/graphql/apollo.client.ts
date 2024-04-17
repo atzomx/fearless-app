@@ -18,7 +18,7 @@ if (__DEV__) {
   loadErrorMessages();
 }
 
-const AUTH_CODE_ERROR = 'UNAUTHENTICATED';
+const SESSION_EXPIRED_ERROR = 'SESSION_EXPIRED';
 const TOKEN_HASH = 'Bearer';
 
 const TOKEN_KEY = 'token';
@@ -42,8 +42,7 @@ const refreshSession = async () => {
 
 const errorLink = onError(({ graphQLErrors, forward, operation }) => {
   graphQLErrors?.forEach(({ extensions }) => {
-    console.log(extensions);
-    if (extensions?.code === AUTH_CODE_ERROR) {
+    if (extensions?.code === SESSION_EXPIRED_ERROR) {
       refreshSession().then(() => {
         return forward(operation);
       });

@@ -16,7 +16,7 @@
     "codegen": "graphql-codegen --config src/core/graphql/codegen.config.ts && prettier --write src/core/graphql/generated"
   },
   "dependencies": {
-    "@apollo/client": "^3.8.1",
+    "@apollo/client": "^3.9.11",
     "@hookform/resolvers": "^3.2.0",
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-navigation/bottom-tabs": "^6.5.11",

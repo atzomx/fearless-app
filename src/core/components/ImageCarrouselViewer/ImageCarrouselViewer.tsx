@@ -18,7 +18,7 @@ const ImageCarrouselViewer: FC<ImageCarrouselViewerProps> = ({
   const theme = useTheme();
 
   useLayoutEffect(() => {
-    const background = theme.pallete.colors[visible ? 'black' : 'white'];
+    const background = theme.palette.colors[visible ? 'black' : 'white'];
     const content = visible ? 'light-content' : 'dark-content';
     if (platform === 'android') {
       StatusBar.setBackgroundColor(background);

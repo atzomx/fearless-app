@@ -9,11 +9,11 @@ export const Container = styled.TouchableOpacity(({ theme }) => ({
   flexDirection: 'column',
   width: theme.spacingSingle(15),
   height: theme.spacingSingle(15),
-  backgroundColor: theme.pallete.grey[50],
+  backgroundColor: theme.palette.grey[50],
   borderWidth: 1,
   borderRadius: theme.spacingSingle(1),
   borderStyle: 'dashed',
-  borderColor: theme.pallete.grey[400],
+  borderColor: theme.palette.grey[400],
 }));
 
 export const ImageContainer = styled.TouchableOpacity(({ theme }) => ({

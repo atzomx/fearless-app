@@ -18,7 +18,7 @@ const KeyButton: React.FC<KeyboardButton> = ({ text, children, onPress }) => {
   return (
     <S.Button onPress={onPress}>
       {text && (
-        <Text fontWeight="Medium" fontSize={36} color={theme.pallete.grey[500]}>
+        <Text fontWeight="Medium" fontSize={36} color={theme.palette.grey[500]}>
           {text}
         </Text>
       )}
@@ -75,7 +75,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({
             align="center"
             fontWeight="Regular"
             fontSize={16}
-            color={theme.pallete.grey[500]}>
+            color={theme.palette.grey[500]}>
             {title}
           </Text>
         </Container>
@@ -108,7 +108,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({
             <BackSpaceIcon
               width={36}
               height={36}
-              color={theme.pallete.grey[500]}
+              color={theme.palette.grey[500]}
             />
           </KeyButton>
         </Container>
