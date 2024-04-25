@@ -2,6 +2,7 @@ import React from 'react';
 
 import { SafeLayout } from '@core/layouts';
 import { Wizard } from '@core/ui';
+
 import {
   NewDealStepFour,
   NewDealStepOne,

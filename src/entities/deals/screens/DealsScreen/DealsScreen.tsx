@@ -14,6 +14,7 @@ import { useModal, useNavigate } from '@core/hooks';
 import { PlusIcon } from '@core/icons';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import { Container, FloatButton, Tab, TabPanel, Tabs } from '@core/ui';
+
 import {
   DealFilters,
   DealHeader,

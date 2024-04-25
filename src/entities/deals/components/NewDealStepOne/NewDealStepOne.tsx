@@ -9,6 +9,7 @@ import { useTheme } from 'styled-components/native';
 import { HeaderBar, InputControl } from '@core/components';
 import { useNavigate, useWizard } from '@core/hooks';
 import { Button, Container, InputInvisible, Wizard } from '@core/ui';
+
 import { useNewDeal } from '@e/deals/hooks';
 import { newDealStepOne } from '@e/deals/schemas/NewDeal';
 

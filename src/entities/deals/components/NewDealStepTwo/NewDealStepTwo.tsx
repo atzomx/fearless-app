@@ -7,6 +7,7 @@ import { useWizard } from '@core/hooks';
 import { File } from '@core/interfaces/IFile';
 import { ScrollLayout } from '@core/layouts';
 import { Button, Container, Text, Wizard } from '@core/ui';
+
 import { useNewDeal } from '@e/deals/hooks';
 
 import NewDealHeader from '../NewDealHeader';
