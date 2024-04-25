@@ -3,12 +3,7 @@ mutation SignIn($user: LoginUserInput!) {
     refreshToken
     token
     user {
-      _id
-      birthday
-      email
-      name
-      role
-      status
+      ...UserFragment
     }
   }
 }
@@ -18,12 +13,7 @@ mutation SignUp($createUserInput: CreateUserInput!) {
     refreshToken
     token
     user {
-      _id
-      birthday
-      email
-      name
-      role
-      status
+      ...UserFragment
     }
   }
 }

@@ -135,6 +135,11 @@ export type CreateEvidenceInput = {
   user_id: Scalars['String']['input'];
 };
 
+export type CreateFeatureflagInput = {
+  feature_name: Scalars['String']['input'];
+  user_id: Scalars['ID']['input'];
+};
+
 export type CreatePaymentInput = {
   amounts: Array<Scalars['ID']['input']>;
   status: PaymentStatusEnum;
@@ -236,6 +241,13 @@ export enum EvidenceStatusEnum {
   Text = 'text',
 }
 
+export type Featureflag = {
+  __typename?: 'Featureflag';
+  _id: Scalars['ID']['output'];
+  feature_name: Scalars['String']['output'];
+  user_id: Scalars['ID']['output'];
+};
+
 export type FindDealParams = {
   code?: InputMaybe<Scalars['String']['input']>;
   deal_status?: InputMaybe<DealStatusEnum>;
@@ -264,6 +276,7 @@ export type Mutation = {
   createClaim: Claim;
   createDeal: Deal;
   createEvidence: Evidence;
+  createFeatureflag: Featureflag;
   createPayment: Payment;
   createProduct: Product;
   createShipment: Shipment;
@@ -279,6 +292,7 @@ export type Mutation = {
   removeCostumer: UserResponse;
   removeDeal: Deal;
   removeEvidence: Evidence;
+  removeFeatureflag: Featureflag;
   removePayment: Payment;
   removeProduct: Product;
   removeShipment: Shipment;
@@ -315,6 +329,10 @@ export type MutationCreateDealArgs = {
 
 export type MutationCreateEvidenceArgs = {
   createEvidenceInput: CreateEvidenceInput;
+};
+
+export type MutationCreateFeatureflagArgs = {
+  createFeatureflagInput: CreateFeatureflagInput;
 };
 
 export type MutationCreatePaymentArgs = {
@@ -375,6 +393,10 @@ export type MutationRemoveDealArgs = {
 };
 
 export type MutationRemoveEvidenceArgs = {
+  id: Scalars['String']['input'];
+};
+
+export type MutationRemoveFeatureflagArgs = {
   id: Scalars['String']['input'];
 };
 
@@ -503,6 +525,7 @@ export type Query = {
   deal: Deal;
   evidence: Evidence;
   findAddressByUser: Array<Address>;
+  findAllFeaturesFlagsByid: Array<Scalars['String']['output']>;
   findDealsByUser: Array<Deal>;
   findOneCostumer: UserResponse;
   payment: Payment;
@@ -759,6 +782,16 @@ export enum ValidationStatusEnum {
   Rejected = 'rejected',
 }
 
+export type UserFragmentFragment = {
+  __typename?: 'UserResponse';
+  _id: string;
+  birthday?: string | null;
+  email: string;
+  name: string;
+  role?: string | null;
+  status?: string | null;
+};
+
 export type SignInMutationVariables = Exact<{
   user: LoginUserInput;
 }>;
@@ -846,21 +879,42 @@ export type RecoveryPassConfirmMutation = {
   recoveryPassConfirm: boolean;
 };
 
+export type UserMeQueryVariables = Exact<{ [key: string]: never }>;
+
+export type UserMeQuery = {
+  __typename?: 'Query';
+  userMe: {
+    __typename?: 'UserResponse';
+    _id: string;
+    birthday?: string | null;
+    email: string;
+    name: string;
+    role?: string | null;
+    status?: string | null;
+  };
+};
+
+export const UserFragmentFragmentDoc = gql`
+  fragment UserFragment on UserResponse {
+    _id
+    birthday
+    email
+    name
+    role
+    status
+  }
+`;
 export const SignInDocument = gql`
   mutation SignIn($user: LoginUserInput!) {
     signIn(User: $user) {
       refreshToken
       token
       user {
-        _id
-        birthday
-        email
-        name
-        role
-        status
+        ...UserFragment
       }
     }
   }
+  ${UserFragmentFragmentDoc}
 `;
 export type SignInMutationFn = Apollo.MutationFunction<
   SignInMutation,
@@ -908,15 +962,11 @@ export const SignUpDocument = gql`
       refreshToken
       token
       user {
-        _id
-        birthday
-        email
-        name
-        role
-        status
+        ...UserFragment
       }
     }
   }
+  ${UserFragmentFragmentDoc}
 `;
 export type SignUpMutationFn = Apollo.MutationFunction<
   SignUpMutation,
@@ -1158,4 +1208,67 @@ export type RecoveryPassConfirmMutationResult =
 export type RecoveryPassConfirmMutationOptions = Apollo.BaseMutationOptions<
   RecoveryPassConfirmMutation,
   RecoveryPassConfirmMutationVariables
+>;
+export const UserMeDocument = gql`
+  query UserMe {
+    userMe {
+      ...UserFragment
+    }
+  }
+  ${UserFragmentFragmentDoc}
+`;
+
+/**
+ * __useUserMeQuery__
+ *
+ * To run a query within a React component, call `useUserMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUserMeQuery(
+  baseOptions?: Apollo.QueryHookOptions<UserMeQuery, UserMeQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<UserMeQuery, UserMeQueryVariables>(
+    UserMeDocument,
+    options,
+  );
+}
+export function useUserMeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<UserMeQuery, UserMeQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<UserMeQuery, UserMeQueryVariables>(
+    UserMeDocument,
+    options,
+  );
+}
+export function useUserMeSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    UserMeQuery,
+    UserMeQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<UserMeQuery, UserMeQueryVariables>(
+    UserMeDocument,
+    options,
+  );
+}
+export type UserMeQueryHookResult = ReturnType<typeof useUserMeQuery>;
+export type UserMeLazyQueryHookResult = ReturnType<typeof useUserMeLazyQuery>;
+export type UserMeSuspenseQueryHookResult = ReturnType<
+  typeof useUserMeSuspenseQuery
+>;
+export type UserMeQueryResult = Apollo.QueryResult<
+  UserMeQuery,
+  UserMeQueryVariables
 >;

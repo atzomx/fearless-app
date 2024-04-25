@@ -1,0 +1,8 @@
+fragment UserFragment on UserResponse {
+  _id
+  birthday
+  email
+  name
+  role
+  status
+}

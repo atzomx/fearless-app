@@ -8,8 +8,9 @@ import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { BASE_URL } from '@env';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import fetch from 'cross-fetch';
+
+import Session from '@core/utils/Session';
 
 import { RefreshTokenResult, RefreshTokensDocument } from './generated';
 
@@ -21,9 +22,6 @@ if (__DEV__) {
 const SESSION_EXPIRED_ERROR = 'SESSION_EXPIRED';
 const TOKEN_HASH = 'Bearer';
 
-const TOKEN_KEY = 'token';
-const REFRESH_KEY = 'refreshToken';
-
 const refreshSession = async () => {
   const { data } = await client.mutate<RefreshTokenResult>({
     mutation: RefreshTokensDocument,
@@ -33,10 +31,7 @@ const refreshSession = async () => {
   const token = data?.token;
 
   if (refreshToken && token) {
-    Promise.all([
-      AsyncStorage.setItem(TOKEN_KEY, token),
-      AsyncStorage.setItem(REFRESH_KEY, refreshToken),
-    ]);
+    await Session.create({ token, refreshToken });
   }
 };
 
@@ -50,8 +45,8 @@ const errorLink = onError(({ graphQLErrors, forward, operation }) => {
   });
 });
 
-const authLink = setContext(async (_, { headers }) => {
-  const token = await AsyncStorage.getItem(TOKEN_KEY);
+const authLink = setContext(async (_, { headers = {} }) => {
+  const { token } = await Session.get();
   if (token) headers.authorization = `${TOKEN_HASH} ${token}`;
   return { headers };
 });
