@@ -18,6 +18,6 @@ export const ContainerBack = styled.View({
 });
 
 export const ContainerView = styled(SafeAreaView)(({ theme }) => ({
-  backgroundColor: theme.pallete.common.white,
+  backgroundColor: theme.palette.common.white,
   padding: theme.spacing(1, 2),
 }));

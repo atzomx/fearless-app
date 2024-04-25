@@ -52,7 +52,7 @@ const SelectItem: FC<SelectItemProps> = ({
     <Animated.View key={index} style={[styles.container, animatedStyle]}>
       <Text
         align="center"
-        color={disabled ? theme.pallete.grey[500] : theme.pallete.common.black}
+        color={disabled ? theme.palette.grey[500] : theme.palette.common.black}
         fontWeight="Regular">
         {children}
       </Text>

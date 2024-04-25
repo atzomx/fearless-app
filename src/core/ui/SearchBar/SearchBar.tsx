@@ -14,9 +14,9 @@ const SearchBar: FC<SearchBarProps> = props => {
   return (
     <S.Container>
       <S.IconContainer>
-        <SearchIcon width={18} height={18} color={theme.pallete.grey[400]} />
+        <SearchIcon width={18} height={18} color={theme.palette.grey[400]} />
       </S.IconContainer>
-      <S.Input {...props} placeholderTextColor={theme.pallete.grey[400]} />
+      <S.Input {...props} placeholderTextColor={theme.palette.grey[400]} />
     </S.Container>
   );
 };

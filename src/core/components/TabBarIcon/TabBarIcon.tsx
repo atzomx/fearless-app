@@ -24,7 +24,7 @@ const TabBarIcon: FC<TabBarIconProps> = ({
       <Icon
         height={height}
         width={width}
-        fill={focused ? theme.pallete.primary.main : theme.pallete.common.white}
+        fill={focused ? theme.palette.primary.main : theme.palette.common.white}
       />
     </S.Container>
   );

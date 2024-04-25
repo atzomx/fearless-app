@@ -58,7 +58,7 @@ const InputInvisible: FC<InputInvisibleProps> = ({
           fontWeight="Medium"
           fontSize={14}
           color={
-            error ? theme.pallete.error.light : theme.pallete.common.black
+            error ? theme.palette.error.light : theme.palette.common.black
           }>
           {label}
         </Text>
@@ -67,7 +67,7 @@ const InputInvisible: FC<InputInvisibleProps> = ({
         focus={focus}
         multiline
         ref={ref as React.Ref<TextInput>}
-        placeholderTextColor={theme.pallete.grey[300]}
+        placeholderTextColor={theme.palette.grey[300]}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         {...{ fontSize, fontWeight, placeholder, color, ...props }}
@@ -75,7 +75,7 @@ const InputInvisible: FC<InputInvisibleProps> = ({
       {helperText && (
         <Text
           variant="caption"
-          color={error ? theme.pallete.error.light : undefined}>
+          color={error ? theme.palette.error.light : undefined}>
           {helperText}
         </Text>
       )}

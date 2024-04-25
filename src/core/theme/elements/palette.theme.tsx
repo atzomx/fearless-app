@@ -1,4 +1,4 @@
-import { PalletBase } from '../types';
+import { PaletteBase } from '../types';
 
 export const ColorPrimary = {
   light: '#000',
@@ -32,7 +32,7 @@ export const ColorsTheme = {
   ...CommonColors,
 };
 
-export const pallete: PalletBase = {
+export const palette: PaletteBase = {
   background: '#fff',
   common: CommonColors,
   action: {
@@ -81,4 +81,4 @@ export const pallete: PalletBase = {
   },
 };
 
-export default pallete;
+export default palette;

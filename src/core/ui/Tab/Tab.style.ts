@@ -7,10 +7,10 @@ export const Tab = styled(Text)<{ active?: boolean }>(({ theme, active }) => ({
   ...(active
     ? {
         fontFamily: theme.font.SemiBold,
-        color: theme.pallete.common.white,
+        color: theme.palette.common.white,
       }
     : {
         fontFamily: theme.font.Regular,
-        color: theme.pallete.grey[400],
+        color: theme.palette.grey[400],
       }),
 }));

@@ -7,6 +7,7 @@ import { HeaderBar, SlideCarrousel } from '@core/components';
 import { useNavigate } from '@core/hooks';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import { Container } from '@core/ui';
+
 import { BaseDeal } from '@e/deals/types';
 
 const DealScreen = () => {

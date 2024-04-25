@@ -1,0 +1,44 @@
+mutation SignIn($user: LoginUserInput!) {
+  signIn(User: $user) {
+    refreshToken
+    token
+    user {
+      ...UserFragment
+    }
+  }
+}
+
+mutation SignUp($createUserInput: CreateUserInput!) {
+  signUp(createUserInput: $createUserInput) {
+    refreshToken
+    token
+    user {
+      ...UserFragment
+    }
+  }
+}
+
+mutation RecoveryPass($userRecoveryInput: UserRecoveryInput!) {
+  recoveryPass(UserRecoveryInput: $userRecoveryInput)
+}
+
+mutation RefreshTokens($refreshToken: String!) {
+  refreshTokens(refreshToken: $refreshToken) {
+    refreshToken
+    token
+  }
+}
+
+mutation RecoveryPassVerifyOtp(
+  $userRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput!
+) {
+  recoveryPassVerifyOtp(
+    UserRecoveryVerifyOtpInput: $userRecoveryVerifyOtpInput
+  ) {
+    token
+  }
+}
+
+mutation RecoveryPassConfirm($userRecoveryInput: UserRecoveryConfirmInput!) {
+  recoveryPassConfirm(UserRecoveryInput: $userRecoveryInput)
+}

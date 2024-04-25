@@ -121,7 +121,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
     const color = interpolateColor(
       holding.value,
       [0, 1],
-      [theme.pallete.grey[200], theme.pallete.grey[500]],
+      [theme.palette.grey[200], theme.palette.grey[500]],
     );
     return { backgroundColor: color };
   }, []);

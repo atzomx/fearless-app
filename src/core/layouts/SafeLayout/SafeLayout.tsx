@@ -13,11 +13,11 @@ const SafeLayout: FC<SafeLayoutProps> = ({ children }) => {
   const theme = useTheme();
   return (
     <GestureHandlerRootView
-      style={[styles.container, { backgroundColor: theme.pallete.background }]}>
+      style={[styles.container, { backgroundColor: theme.palette.background }]}>
       <StatusBar
         animated
         translucent
-        backgroundColor={theme.pallete.common.white}
+        backgroundColor={theme.palette.common.white}
         barStyle="dark-content"
       />
       {children}

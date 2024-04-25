@@ -1,0 +1,13 @@
+{
+  "address": {
+    "text": "Addresses",
+    "description": "Here you can modify your addresses stored"
+  },
+  "products": {
+    "text": "Products",
+    "description": "Here you can modify your products stored"
+  },
+  "logout": {
+    "text": "Log out"
+  }
+}

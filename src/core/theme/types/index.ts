@@ -47,7 +47,7 @@ export type AvatarBase = {
   xlarge: CSSObject;
 };
 
-export type PalleteColor = {
+export type PaletteColor = {
   primary: string;
   secondary: string;
   disabled: string;
@@ -61,9 +61,9 @@ export type PalleteColor = {
   white: string;
 };
 
-export type ThemeColor = keyof PalleteColor;
+export type ThemeColor = keyof PaletteColor;
 
-export type PalleteFullColor = {
+export type paletteFullColor = {
   50: string;
   100: string;
   200: string;
@@ -76,7 +76,7 @@ export type PalleteFullColor = {
   900: string;
 };
 
-export type PalleteMainColor = {
+export type paletteMainColor = {
   light: string;
   main: string;
   dark: string;
@@ -134,7 +134,7 @@ export type SubColor =
   | 'secondary.light'
   | 'secondary.dark';
 
-export type PalletBase = {
+export type PaletteBase = {
   background: string;
   common: {
     black: string;
@@ -144,17 +144,17 @@ export type PalletBase = {
     disabled: string;
     disabledBackground: string;
   };
-  primary: PalleteMainColor;
-  secondary: PalleteMainColor;
-  grey: PalleteFullColor;
-  colors: PalleteColor & {
+  primary: paletteMainColor;
+  secondary: paletteMainColor;
+  grey: paletteFullColor;
+  colors: PaletteColor & {
     [key in SubColor]: string;
   };
-  text: PalleteColor & {
+  text: PaletteColor & {
     [key in SubColor]: string;
   };
-  error: PalleteMainColor;
-  warning: PalleteMainColor;
-  info: PalleteMainColor;
-  success: PalleteMainColor;
+  error: paletteMainColor;
+  warning: paletteMainColor;
+  info: paletteMainColor;
+  success: paletteMainColor;
 };

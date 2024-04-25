@@ -5,47 +5,55 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
+import * as yup from 'yup';
 
 import { InputControl } from '@core/components';
-import { useUserLogin } from '@core/graphql/mutations';
+import { useSignInMutation } from '@core/graphql';
 import { useNavigate } from '@core/hooks';
 import { FacebookIcon, GoogleIcon } from '@core/icons';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import { Button, Container, IconButton, InputText, Text } from '@core/ui';
+import Session from '@core/utils/Session';
+
 import AUTH_ROUTES from '@e/auth/constants/routes';
 import loginSchema from '@e/auth/schemas/login.schema';
+import HOME_ROUTES from '@e/home/constants/routes';
 
-type TFormLogin = { userName: string; password: string };
+type TForm = yup.InferType<typeof loginSchema>;
 
 const SignInScreen = () => {
-  const [userLogin] = useUserLogin();
+  const [userLogin] = useSignInMutation();
   const theme = useTheme();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
-  const onSubmit = async (values: TFormLogin) => {
-    const result = await userLogin({
-      variables: {
-        user: {
-          name: values.userName,
-          password: values.password,
-        },
-      },
-    });
-    console.log(result);
-  };
-
-  const { control, handleSubmit } = useForm<TFormLogin>({
+  const { control, handleSubmit, formState } = useForm<TForm>({
     resolver: yupResolver(loginSchema),
     defaultValues: { userName: '', password: '' },
     mode: 'onBlur',
   });
 
+  const onSubmit = (values: TForm) => {
+    const user = { email: values.userName, password: values.password };
+
+    userLogin({
+      variables: { user },
+      async onCompleted({ signIn }) {
+        const { refreshToken, token } = signIn;
+        await Session.create({ token, refreshToken });
+        navigator.replace(HOME_ROUTES.base);
+      },
+      onError(error) {
+        console.log({ error });
+      },
+    });
+  };
+
   const goSignUp = async () => {
     navigator.push(AUTH_ROUTES.signup);
   };
   const goRecovery = async () => {
-    navigator.push(AUTH_ROUTES.recovery);
+    navigator.push(AUTH_ROUTES.forgot);
   };
 
   return (
@@ -68,7 +76,7 @@ const SignInScreen = () => {
                 {t('auth.signin.text.signin')}
               </Text>
             </Container>
-            <Container fullHeight spacing={2} p={2} direction="column">
+            <Container spacing={2} p={2} direction="column">
               <InputControl
                 component={InputText}
                 control={control}
@@ -95,38 +103,37 @@ const SignInScreen = () => {
                 {t('auth.signin.text.recover')}
               </Text>
             </Container>
+            <Container spacing={2} p={2} flexDirection="row">
+              <Button
+                disable={!formState.isValid}
+                onPress={handleSubmit(onSubmit)}
+                title={t('auth.signin.text.action')}
+              />
+              <Container spacing={4} direction="row" justifyContent="center">
+                <IconButton color="#0165E1">
+                  <FacebookIcon />
+                </IconButton>
+                <IconButton color={theme.palette.grey[100]}>
+                  <GoogleIcon />
+                </IconButton>
+              </Container>
+              <Text
+                fontSize={12}
+                fontWeight="Regular"
+                align="center"
+                color={theme.palette.grey[500]}>
+                {t('auth.signin.text.new_user')}{' '}
+                <Text
+                  onPress={goSignUp}
+                  fontSize={12}
+                  fontWeight="SemiBold"
+                  color={theme.palette.common.black}>
+                  {t('auth.signin.text.create_account')}
+                </Text>
+              </Text>
+            </Container>
           </SafeAreaView>
         </KeyboardAvoidLayout>
-        <SafeAreaView edges={['bottom']}>
-          <Container spacing={2} fullWidth p={2} flexDirection="row">
-            <Button
-              onPress={handleSubmit(onSubmit)}
-              title={t('auth.signin.text.action')}
-            />
-            <Container spacing={4} direction="row" justifyContent="center">
-              <IconButton color="#0165E1">
-                <FacebookIcon />
-              </IconButton>
-              <IconButton color={theme.pallete.grey[100]}>
-                <GoogleIcon />
-              </IconButton>
-            </Container>
-            <Text
-              fontSize={12}
-              fontWeight="Regular"
-              align="center"
-              color={theme.pallete.grey[500]}>
-              {t('auth.signin.text.new_user')}{' '}
-              <Text
-                onPress={goSignUp}
-                fontSize={12}
-                fontWeight="SemiBold"
-                color={theme.pallete.common.black}>
-                {t('auth.signin.text.create_account')}
-              </Text>
-            </Text>
-          </Container>
-        </SafeAreaView>
       </SafeLayout>
     </ContentLayout>
   );

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { useNavigate } from '@core/hooks';
+import { SessionProvider } from '@core/providers';
 
 import ProfileRoutes from './routes';
 
@@ -17,16 +18,18 @@ const ProfileRouter = () => {
   });
 
   return (
-    <Stack.Navigator>
-      {Object.values(ProfileRoutes).map(route => (
-        <Stack.Screen
-          name={route.key}
-          key={route.key}
-          component={route.component}
-          options={route.options}
-        />
-      ))}
-    </Stack.Navigator>
+    <SessionProvider>
+      <Stack.Navigator>
+        {Object.values(ProfileRoutes).map(route => (
+          <Stack.Screen
+            name={route.key}
+            key={route.key}
+            component={route.component}
+            options={route.options}
+          />
+        ))}
+      </Stack.Navigator>
+    </SessionProvider>
   );
 };
 

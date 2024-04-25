@@ -6,6 +6,8 @@ import { useNavigate } from '@core/hooks';
 
 import LoginRoutes from './routes';
 
+import AUTH_ROUTES from '../constants/routes';
+
 const Stack = createStackNavigator();
 
 const AuthRouter = () => {
@@ -17,7 +19,7 @@ const AuthRouter = () => {
   });
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName={AUTH_ROUTES.login}>
       {Object.values(LoginRoutes).map(route => (
         <Stack.Screen
           name={route.key}

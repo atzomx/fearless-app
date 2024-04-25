@@ -6,7 +6,7 @@ import {
   Button,
   IconButton,
   InputText,
-  pallete,
+  palette,
   Text,
 } from './elements';
 import type {
@@ -14,7 +14,7 @@ import type {
   BadgeBase,
   ButtonBase,
   InputTextBase,
-  PalletBase,
+  PaletteBase,
   TextBase,
 } from './types';
 import { fade, spacing, font, spacingSingle } from './utils';
@@ -24,7 +24,7 @@ declare module 'styled-components' {
 }
 
 export type Theme = {
-  pallete: PalletBase;
+  palette: PaletteBase;
   components: {
     InputText: InputTextBase;
     Text: TextBase;
@@ -45,7 +45,7 @@ export type ThemedStyled = ThemedStyledProps<
 >;
 
 export const theme: Theme = {
-  pallete,
+  palette,
   components: {
     InputText,
     Button,

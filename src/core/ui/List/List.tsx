@@ -22,9 +22,18 @@ const Text: FC<PropsWithChildren> = ({ children }) => {
   const theme = useTheme();
   return (
     <TextUi
-      color={theme.pallete.colors.black}
+      color={theme.palette.colors.black}
       fontWeight="Medium"
       fontSize={14}>
+      {children}
+    </TextUi>
+  );
+};
+
+const Description: FC<PropsWithChildren> = ({ children }) => {
+  const theme = useTheme();
+  return (
+    <TextUi color={theme.palette.grey[600]} fontWeight="Regular" fontSize={12}>
       {children}
     </TextUi>
   );
@@ -35,70 +44,75 @@ const Icon: FC<{ icon: FC<SvgProps> }> = ({ icon: CustomIcon }) => {
   return (
     <CustomIcon
       strokeWidth={1.5}
-      color={theme.pallete.colors.black}
+      color={theme.palette.colors.black}
       height={theme.spacingSingle(2.5)}
     />
   );
 };
 
-const Item: FC<TouchableOpacityProps & { icon?: boolean }> = ({
-  children,
-  icon = true,
-  ...props
-}) => {
+const Item: FC<
+  TouchableOpacityProps & { iconArrow?: boolean; icon: FC<SvgProps> }
+> = ({ children, iconArrow = true, icon, onPress, ...props }) => {
   const theme = useTheme();
   return (
-    <Container
-      height={theme.spacingSingle(6)}
-      component={TouchableOpacity}
-      direction="row"
-      alignItems="center"
-      fullWidth
-      {...props}>
+    <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
       <Container
+        height={theme.spacingSingle(8)}
         direction="row"
-        justifyContent="center"
-        flexBasis="auto"
-        flexShrink={0}
-        spacing={1}
-        flexGrow={0}>
-        {children}
-      </Container>
-      {icon && (
+        alignItems="center"
+        fullWidth
+        borderWidth={1}
+        borderRadius={10}
+        borderStyle="solid"
+        p={1}
+        borderColor={theme.palette.grey[300]}
+        {...props}>
         <Container
-          alignItems="flex-end"
+          direction="row"
+          alignItems="center"
           flexBasis="auto"
-          flexGrow={4}
-          flexShrink={4}>
-          <ChevronIcon
-            strokeWidth={2}
-            color={theme.pallete.colors.black}
-            height={theme.spacingSingle(1.5)}
-          />
+          flexShrink={0}
+          spacing={1}
+          flexGrow={0}>
+          {icon && <Icon icon={icon} />}
+          <Container direction="column">{children}</Container>
         </Container>
-      )}
-    </Container>
+        {iconArrow && (
+          <Container
+            alignItems="flex-end"
+            flexBasis="auto"
+            flexGrow={4}
+            flexShrink={4}>
+            <ChevronIcon
+              strokeWidth={2}
+              color={theme.palette.colors.black}
+              height={theme.spacingSingle(1.5)}
+            />
+          </Container>
+        )}
+      </Container>
+    </TouchableOpacity>
   );
 };
 
 type ListProps = FC<React.PropsWithChildren> & {
-  Icon: typeof Icon;
   Text: typeof Text;
   Item: typeof Item;
   Divider: typeof Divider;
+  Description: typeof Description;
 };
 
 const List: ListProps = ({ children }) => {
   return (
-    <Container p={2} spacing={0}>
+    <Container p={2} spacing={1}>
       {children}
     </Container>
   );
 };
 
-List.Icon = Icon;
 List.Text = Text;
 List.Item = Item;
 List.Divider = Divider;
+List.Description = Description;
 
 export default List;

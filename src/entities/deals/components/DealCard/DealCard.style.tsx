@@ -14,22 +14,22 @@ export const DealerContainer = styled.View({
 
 export const CardContainer = styled(Card)(({ theme }) => ({
   padding: theme.spacing(2),
-  backgroundColor: theme.pallete.common.white,
-  borderColor: theme.pallete.grey[200],
+  backgroundColor: theme.palette.common.white,
+  borderColor: theme.palette.grey[200],
   borderWidth: 1,
   borderStyle: 'solid',
 }));
 
 export const ItemStatus = styled.View(({ theme }) => ({
-  color: theme.pallete.background,
-  backgroundColor: theme.pallete.common.black,
+  color: theme.palette.background,
+  backgroundColor: theme.palette.common.black,
   padding: theme.spacing(0.5, 1),
   borderRadius: theme.spacing(1),
   justifyContent: 'center',
 }));
 
 export const Identifier = styled(Text)(({ theme }) => ({
-  color: theme.pallete.grey[400],
+  color: theme.palette.grey[400],
   fontFamily: theme.font.Bold,
   fontSize: 12,
 }));
@@ -42,7 +42,7 @@ export const SeparatorContainer = styled.View(({ theme }) => ({
 export const Separator = styled.View(({ theme }) => ({
   height: 1,
   width: '90%',
-  backgroundColor: theme.pallete.grey[100],
+  backgroundColor: theme.palette.grey[100],
 }));
 
 export const FooterContainer = styled.View({

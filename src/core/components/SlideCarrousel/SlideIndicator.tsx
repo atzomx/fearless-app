@@ -25,9 +25,9 @@ const SlideIndicator: FC<SlideIndicatorProps> = ({ scrollOffset, index }) => {
     const inputRange = [index - 1, index, index + 1];
 
     const backgroundColor = interpolateColor(input, inputRange, [
-      theme.pallete.grey[200],
-      theme.pallete.common.black,
-      theme.pallete.grey[200],
+      theme.palette.grey[200],
+      theme.palette.common.black,
+      theme.palette.grey[200],
     ]);
 
     const width = interpolate(

@@ -7,17 +7,10 @@ const signUpSchema = yup.object().shape({
     .email('common.schemas.email')
     .required('common.schemas.required'),
   password: yup.string().required('common.schemas.required'),
-  passwordConfirmation: yup
+  confirmation: yup
     .string()
     .required('common.schemas.required')
     .oneOf([yup.ref('password')], 'common.schemas.password-match'),
 });
 
 export default signUpSchema;
-
-export type TFormSignUp = {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-};

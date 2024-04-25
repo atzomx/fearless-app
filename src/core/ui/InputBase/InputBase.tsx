@@ -1,4 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  ForwardedRef,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   NativeSyntheticEvent,
   StyleProp,
@@ -73,25 +81,28 @@ export type InputBaseProps<T> = InputBaseChildrenProps<T> & {
 
 const AnimatedLabel = Animated.createAnimatedComponent(S.Label);
 
-function InputText<T>({
-  label,
-  onFocus,
-  onBlur,
-  placeholder,
-  color = 'primary',
-  helperText,
-  error = false,
-  required,
-  style,
-  sx,
-  icon,
-  onChangeText,
-  children,
-  focusable,
-  autoFocus,
-  value,
-  ...props
-}: InputBaseProps<T>) {
+const InputText = <T extends {}>(
+  {
+    label,
+    onFocus,
+    onBlur,
+    placeholder,
+    color = 'primary',
+    helperText,
+    error = false,
+    required,
+    style,
+    sx,
+    icon,
+    onChangeText,
+    children,
+    focusable,
+    autoFocus,
+    value,
+    ...props
+  }: InputBaseProps<T>,
+  parentRef: React.ForwardedRef<RefElement>,
+) => {
   const theme = useTheme();
   const ref = useRef<RefElement>();
   const touched = useSharedValue(0);
@@ -111,6 +122,10 @@ function InputText<T>({
   const handleOnPress = () => {
     ref.current?.focus();
   };
+
+  useImperativeHandle(parentRef, () => ({
+    focus: handleOnPress,
+  }));
 
   const HAS_CONTENT = useMemo(() => {
     if (value === undefined || value === null) return false;
@@ -162,24 +177,22 @@ function InputText<T>({
   });
 
   return (
-    <Animated.View style={[rErroStyled]}>
-      <S.Container
-        status={status}
-        activeOpacity={1}
-        onPress={handleOnPress}
-        style={style}>
+    <Animated.View style={[rErroStyled, style]}>
+      <S.Container status={status} activeOpacity={1} onPress={handleOnPress}>
         <S.InputContainer>
-          <AnimatedLabel
-            color={color}
-            status={status}
-            style={[sx?.label, rLabelStyled]}>
-            {label}
-            {required ? '*' : ''}
-          </AnimatedLabel>
+          {label && (
+            <AnimatedLabel
+              color={color}
+              status={status}
+              style={[sx?.label, rLabelStyled]}>
+              {label}
+              {required ? '*' : ''}
+            </AnimatedLabel>
+          )}
           {children({
             ref: ref as React.Ref<RefElement>,
             style,
-            placeholderTextColor: theme.pallete.grey[400],
+            placeholderTextColor: theme.palette.grey[400],
             onFocus: handleOnFocus,
             onBlur: handleOnBlur,
             placeholder,
@@ -197,6 +210,9 @@ function InputText<T>({
       {helperText && <S.HelperText status={status}>{helperText}</S.HelperText>}
     </Animated.View>
   );
-}
+};
 
-export default InputText;
+export default forwardRef(InputText) as <T>(
+  props: InputBaseProps<T>,
+  ref: ForwardedRef<RefElement>,
+) => ReturnType<typeof InputText>;

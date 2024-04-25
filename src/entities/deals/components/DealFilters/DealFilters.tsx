@@ -18,7 +18,7 @@ const DealFilters = forwardRef<View, DealFiltersProps>(({ onPress }, ref) => {
     <S.Container ref={ref}>
       <SearchBar />
       <S.IconContainer onPress={onPress}>
-        <FilterIcon width={20} height={20} color={theme.pallete.common.black} />
+        <FilterIcon width={20} height={20} color={theme.palette.common.black} />
       </S.IconContainer>
     </S.Container>
   );

@@ -1,6 +1,6 @@
 {
   "input": {
-    "name": "Nombre de usuario"
+    "name": "Email"
   },
   "text": {
     "gretting": "Recovery Password",

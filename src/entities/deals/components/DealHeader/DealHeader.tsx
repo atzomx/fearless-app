@@ -21,7 +21,7 @@ const DealHeader = forwardRef<View, DealHeaderProps>((props, ref) => {
       </Text>
       <S.TextSecondary
         align="center"
-        color={theme.pallete.grey[500]}
+        color={theme.palette.grey[500]}
         fontWeight="Regular"
         fontSize={16}>
         {t('deals.screen.subtitle')}

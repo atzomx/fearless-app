@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { HomeHeaderBar } from '@core/components';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import { Container } from '@core/ui';
+
 import { HomeGradients, MoreTitle } from '@e/home/components';
 
 const WelcomeScreen = () => {

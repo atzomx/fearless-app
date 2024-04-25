@@ -20,14 +20,14 @@ export const BackdropPressable = styled.TouchableWithoutFeedback({
 });
 
 export const Backdrop = styled.View(({ theme }) => ({
-  backgroundColor: theme.fade(theme.pallete.common.black, 0.2),
+  backgroundColor: theme.fade(theme.palette.common.black, 0.2),
   position: 'absolute',
   height: SCREEN_HEIGHT,
   width: SCREEN_WIDTH,
 }));
 
 export const Modal = styled.View(({ theme }) => ({
-  backgroundColor: theme.pallete.common.white,
+  backgroundColor: theme.palette.common.white,
   borderRadius: theme.spacingSingle(3),
   minHeight: 150,
   zIndex: 10,

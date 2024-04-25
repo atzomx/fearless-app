@@ -6,6 +6,7 @@ import { HeaderBar, ImagePreviewer } from '@core/components';
 import { useWizard } from '@core/hooks';
 import { Button, Checkbox, Container, Wizard } from '@core/ui';
 import Money from '@core/utils/Money';
+
 import { useNewDeal } from '@e/deals/hooks';
 
 import DealSummary from '../DealSummary';

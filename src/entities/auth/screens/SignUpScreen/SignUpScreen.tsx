@@ -4,41 +4,50 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import yup from 'yup';
 
 import { HeaderBar, InputControl } from '@core/components';
-// import { useUserSingUp } from '@core/graphql/mutations';
-import { useUserSingUp } from '@core/graphql/mutations';
+import { useSignUpMutation } from '@core/graphql';
 import { useNavigate } from '@core/hooks';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import theme from '@core/theme';
 import { Button, Container, InputText, Text } from '@core/ui';
 import { pick } from '@core/utils/Object';
-import signUpSchema, { TFormSignUp } from '@e/auth/schemas/signUp.schema';
+import Session from '@core/utils/Session';
+
+import signUpSchema from '@e/auth/schemas/signUp.schema';
+import HOME_ROUTES from '@e/home/constants/routes';
+
+type TForm = yup.InferType<typeof signUpSchema>;
 
 const SignUpScreen = () => {
-  const [userSingUp] = useUserSingUp();
+  const [userSingUp] = useSignUpMutation();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
-  const onSubmit = async (values: TFormSignUp) => {
-    const data = pick(values, ['name', 'email', 'password']);
-    const result = await userSingUp({
-      variables: { data },
-    });
-    console.log(result);
-    // navigator.replace(INTERACTION_ROUTES.interaction);
-  };
-
-  const { control, handleSubmit } = useForm<TFormSignUp>({
+  const { control, handleSubmit } = useForm<TForm>({
     resolver: yupResolver(signUpSchema),
     defaultValues: {
       name: '',
       email: '',
       password: '',
-      passwordConfirmation: '',
+      confirmation: '',
     },
     mode: 'onBlur',
   });
+
+  const onSubmit = (values: TForm) => {
+    const createUserInput = pick(values, ['name', 'email', 'password']);
+    userSingUp({
+      variables: { createUserInput },
+      async onCompleted({ signUp }) {
+        const { refreshToken, token } = signUp;
+        await Session.create({ token, refreshToken });
+        navigator.navigate(HOME_ROUTES.home);
+      },
+      onError() {},
+    });
+  };
 
   const goSignIn = async () => {
     navigator.goBack();
@@ -54,13 +63,13 @@ const SignUpScreen = () => {
               <Text
                 fontSize={24}
                 fontWeight="SemiBold"
-                color={theme.pallete.colors.black}>
+                color={theme.palette.colors.black}>
                 {t('auth.signup.text.gretting')}
               </Text>
               <Text
                 fontSize={16}
                 fontWeight="Regular"
-                color={theme.pallete.grey[500]}>
+                color={theme.palette.grey[500]}>
                 {t('auth.signup.text.description')}
               </Text>
             </Container>
@@ -99,7 +108,7 @@ const SignUpScreen = () => {
               <InputControl
                 control={control}
                 component={InputText}
-                name="passwordConfirmation"
+                name="confirmation"
                 label={t('auth.signup.input.password-confirm')}
                 secureTextEntry
                 color="secondary"
@@ -118,13 +127,13 @@ const SignUpScreen = () => {
               fontSize={12}
               fontWeight="Regular"
               align="center"
-              color={theme.pallete.grey[500]}>
+              color={theme.palette.grey[500]}>
               {t('auth.signup.text.new_user')}{' '}
               <Text
                 onPress={goSignIn}
                 fontSize={12}
                 fontWeight="SemiBold"
-                color={theme.pallete.common.black}>
+                color={theme.palette.common.black}>
                 {t('auth.signup.text.create_account')}
               </Text>
             </Text>

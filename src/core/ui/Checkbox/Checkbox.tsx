@@ -23,8 +23,8 @@ const Checkbox: FC<CheckboxProps> = ({ label, value, onChange }) => {
   };
 
   const getCheckboxSvg = () => {
-    if (value) return <CheckboxIcon color={theme.pallete.common.black} />;
-    return <CheckboxBlankIcon color={theme.pallete.common.black} />;
+    if (value) return <CheckboxIcon color={theme.palette.common.black} />;
+    return <CheckboxBlankIcon color={theme.palette.common.black} />;
   };
 
   return (

@@ -7,6 +7,8 @@ import {
   SignInScreen,
   StartScreen,
   SignUpScreen,
+  ForgotScreen,
+  CodeScreen,
   RecoveryScreen,
 } from '../screens';
 
@@ -29,6 +31,16 @@ export const LoginRoutes: Record<string, IRoute> = {
   [ROUTES.signup]: {
     key: ROUTES.signup,
     component: SignUpScreen,
+    options: LoginStackOptions,
+  },
+  [ROUTES.forgot]: {
+    key: ROUTES.forgot,
+    component: ForgotScreen,
+    options: LoginStackOptions,
+  },
+  [ROUTES.code]: {
+    key: ROUTES.code,
+    component: CodeScreen,
     options: LoginStackOptions,
   },
   [ROUTES.recovery]: {

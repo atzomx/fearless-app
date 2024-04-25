@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('screen');
 
 export const Backdrop = styled.TouchableOpacity(({ theme }) => ({
-  backgroundColor: theme.fade(theme.pallete.common.black, 0.2),
+  backgroundColor: theme.fade(theme.palette.common.black, 0.2),
   position: 'absolute',
   height: SCREEN_HEIGHT,
   width: SCREEN_WIDTH,
@@ -14,10 +14,10 @@ export const Backdrop = styled.TouchableOpacity(({ theme }) => ({
 
 export const DrawerSheet = styled(Animated.View)(({ theme }) => ({
   width: SCREEN_WIDTH * 0.75,
-  backgroundColor: theme.pallete.background,
+  backgroundColor: theme.palette.background,
   borderTopLeftRadius: theme.spacingSingle(3),
   borderBottomLeftRadius: theme.spacingSingle(3),
-  borderColor: theme.pallete.grey[200],
+  borderColor: theme.palette.grey[200],
   borderWidth: 1,
   borderStyle: 'solid',
   flex: 1,

@@ -27,7 +27,7 @@ export const IconButton = styled.TouchableOpacity(({ theme }) => ({
   borderRadius: 100,
   borderWidth: 1,
   borderStyle: 'solid',
-  borderColor: theme.pallete.grey[400],
+  borderColor: theme.palette.grey[400],
   justifyContent: 'center',
   alignItems: 'center',
 }));

@@ -16,10 +16,10 @@ const ProfileRankingText: FC<ProfileRankingTextProps> = ({
   const theme = useTheme();
   return (
     <Container alignItems="center" spacing={0}>
-      <Text fontWeight="Bold" fontSize={24} color={theme.pallete.common.black}>
+      <Text fontWeight="Bold" fontSize={24} color={theme.palette.common.black}>
         {title}
       </Text>
-      <Text fontSize={12} color={theme.pallete.grey[500]}>
+      <Text fontSize={12} color={theme.palette.grey[500]}>
         {subtitle}
       </Text>
     </Container>

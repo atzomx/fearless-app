@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { HeaderBar, ImagePreviewer, NumberKeyboard } from '@core/components';
 import { useWizard } from '@core/hooks';
 import { Button, Container, Wizard } from '@core/ui';
+
 import { useNewDeal } from '@e/deals/hooks';
 
 import NewDealHeader from '../NewDealHeader';
