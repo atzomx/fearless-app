@@ -59,13 +59,13 @@ const ForgotScreen = () => {
               fontSize={24}
               fontWeight="SemiBold"
               color={theme.palette.colors.black}>
-              {t('auth.forgot.text.gretting')}
+              {t('auth.forgot.text.title')}
             </Text>
             <Text
               fontSize={16}
               fontWeight="Regular"
               color={theme.palette.grey[500]}>
-              {t('auth.forgot.text.recovery')}
+              {t('auth.forgot.text.subtitle')}
             </Text>
           </Container>
           <Container fullHeight spacing={2} p={2} direction="column">
@@ -73,7 +73,7 @@ const ForgotScreen = () => {
               component={InputText}
               control={control}
               name="userName"
-              label={t('auth.forgot.input.name')}
+              label={t('auth.forgot.input.user-name')}
               color="secondary"
               required
             />

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { useTheme } from 'styled-components/native';
 
+import { useSession } from '@core/hooks';
 import { Text } from '@core/ui';
 
 import * as S from './HomeHeaderBar.style';
@@ -14,6 +15,7 @@ export type HomeHeaderBarProps = React.PropsWithChildren & {
 
 const HomeHeaderBar: FC<HomeHeaderBarProps> = () => {
   const theme = useTheme();
+  const { user } = useSession();
 
   return (
     <S.Container>
@@ -28,7 +30,7 @@ const HomeHeaderBar: FC<HomeHeaderBarProps> = () => {
           fontSize={14}
           fontWeight="Medium"
           color={theme.palette.text.black}>
-          Erick Andrade
+          {user?.name}
         </Text>
       </S.ContainerTitle>
       <S.ContainerButton>

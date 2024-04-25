@@ -13,6 +13,7 @@ import { useNavigate } from '@core/hooks';
 import { FacebookIcon, GoogleIcon } from '@core/icons';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import { Button, Container, IconButton, InputText, Text } from '@core/ui';
+import Session from '@core/utils/Session';
 
 import AUTH_ROUTES from '@e/auth/constants/routes';
 import loginSchema from '@e/auth/schemas/login.schema';
@@ -37,8 +38,10 @@ const SignInScreen = () => {
 
     userLogin({
       variables: { user },
-      onCompleted() {
-        navigator.replace(HOME_ROUTES.home);
+      async onCompleted({ signIn }) {
+        const { refreshToken, token } = signIn;
+        await Session.create({ token, refreshToken });
+        navigator.replace(HOME_ROUTES.base);
       },
       onError(error) {
         console.log({ error });

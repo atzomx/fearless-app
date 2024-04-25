@@ -13,13 +13,15 @@ import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import theme from '@core/theme';
 import { Button, Container, InputText, Text } from '@core/ui';
 import { pick } from '@core/utils/Object';
+import Session from '@core/utils/Session';
 
 import signUpSchema from '@e/auth/schemas/signUp.schema';
+import HOME_ROUTES from '@e/home/constants/routes';
 
 type TForm = yup.InferType<typeof signUpSchema>;
 
 const SignUpScreen = () => {
-  const [userSingUp, { error }] = useSignUpMutation();
+  const [userSingUp] = useSignUpMutation();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
@@ -38,13 +40,12 @@ const SignUpScreen = () => {
     const createUserInput = pick(values, ['name', 'email', 'password']);
     userSingUp({
       variables: { createUserInput },
-      onCompleted(data) {
-        console.log(data);
-        // navigator.replace(HOME_ROUTES.home);
+      async onCompleted({ signUp }) {
+        const { refreshToken, token } = signUp;
+        await Session.create({ token, refreshToken });
+        navigator.navigate(HOME_ROUTES.home);
       },
-      onError(_error, clientOptions) {
-        console.log({ _error, clientOptions });
-      },
+      onError() {},
     });
   };
 

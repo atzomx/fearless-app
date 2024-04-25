@@ -36,6 +36,7 @@ const RecoveryScreen = () => {
 
   const email = route.params.email;
   const token = route.params.token;
+  console.log(route.params);
 
   const onSubmit = ({ password }: TForm) => {
     recoveryPasswordConfirm({
@@ -72,13 +73,13 @@ const RecoveryScreen = () => {
               fontSize={24}
               fontWeight="SemiBold"
               color={theme.palette.colors.black}>
-              {t('auth.forgot.text.gretting')}
+              {t('auth.recovery.text.title')}
             </Text>
             <Text
               fontSize={16}
               fontWeight="Regular"
               color={theme.palette.grey[500]}>
-              {t('auth.forgot.text.recovery')}
+              {t('auth.forgot.text.subtitle')}
             </Text>
           </Container>
           <Container fullHeight spacing={2} p={2} direction="column">
@@ -86,7 +87,7 @@ const RecoveryScreen = () => {
               component={InputText}
               control={control}
               name="password"
-              label={t('auth.forgot.input.name')}
+              label={t('auth.recovery.input.password')}
               color="secondary"
               required
             />
@@ -94,7 +95,7 @@ const RecoveryScreen = () => {
               component={InputText}
               control={control}
               name="confirmation"
-              label={t('auth.forgot.input.name')}
+              label={t('auth.recovery.input.confirm-password')}
               color="secondary"
               required
             />
@@ -106,7 +107,7 @@ const RecoveryScreen = () => {
           <Button
             disabled={loading}
             onPress={handleSubmit(onSubmit)}
-            title={t('auth.forgot.text.action')}
+            title={t('auth.password.text.action')}
           />
         </Container>
       </SafeAreaView>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { ArrowTrendingDownIcon, PlusIcon, QRCodeIcon } from '@core/icons';
 import theme from '@core/theme';
 import { Container, Text } from '@core/ui';
@@ -7,6 +9,8 @@ import { Container, Text } from '@core/ui';
 import GradientCard from '../GradientCard';
 
 const HomeGradients = () => {
+  const { t } = useTranslation('', { keyPrefix: 'home.home' });
+
   return (
     <>
       <GradientCard colors={['#232526', '#414345']}>
@@ -32,7 +36,7 @@ const HomeGradients = () => {
             fontWeight="SemiBold"
             fontSize={16}
             color={theme.palette.colors.white}>
-            Pending Income
+            {t('cards.income')}
           </Text>
         </GradientCard.Row>
       </GradientCard>
@@ -54,7 +58,7 @@ const HomeGradients = () => {
               fontWeight="SemiBold"
               fontSize={16}
               color={theme.palette.colors.white}>
-              New Deal
+              {t('cards.new')}
             </Text>
           </GradientCard.Row>
         </GradientCard>
@@ -75,7 +79,7 @@ const HomeGradients = () => {
               fontWeight="SemiBold"
               fontSize={16}
               color={theme.palette.colors.white}>
-              Join with Code
+              {t('cards.join')}
             </Text>
           </GradientCard.Row>
         </GradientCard>

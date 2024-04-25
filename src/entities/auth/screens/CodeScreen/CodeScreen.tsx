@@ -46,7 +46,7 @@ const CodeScreen = () => {
   const email = route.params.email ?? '';
 
   const onHandleVerifyOpt = useCallback(() => {
-    if (value.length !== 5) return;
+    if (value.length !== 6) return;
     verifyOtp({
       variables: {
         userRecoveryVerifyOtpInput: {
@@ -54,10 +54,9 @@ const CodeScreen = () => {
           tokenOTP: value,
         },
       },
-
-      onCompleted: date => {
+      onCompleted(data) {
         navigator.navigate(AUTH_ROUTES.recovery, {
-          token: date.recoveryPassVerifyOtp.token,
+          token: data.recoveryPassVerifyOtp.token,
           email,
         });
       },

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { HeaderBar } from '@core/components';
-import { useNavigate } from '@core/hooks';
+import { useNavigate, useSession } from '@core/hooks';
 import { SafeLayout, ScrollLayout } from '@core/layouts';
 import { Avatar, Button, Container, Text } from '@core/ui';
+
 import {
   ProfileEditForm,
   ProfileList,
@@ -17,6 +18,9 @@ const URL = 'https://avatars.githubusercontent.com/u/43711671?v=4';
 
 const MoreScreen = () => {
   const navigation = useNavigate();
+  const { user } = useSession();
+  const [editing, setEditing] = useState(false);
+
   return (
     <SafeLayout>
       <HeaderBar onBack={() => navigation.goBack()} title="Mi Perfil" />
@@ -28,17 +32,22 @@ const MoreScreen = () => {
           <Container p={2} spacing={2} alignItems="center">
             <Avatar source={{ uri: URL }} size="xlarge" />
             <Text fontWeight="SemiBold" fontSize={20}>
-              Erick Andrade
+              {user?.name}
             </Text>
             <Container direction="row" spacing={4}>
               <ProfileRankingText title="100" subtitle="Ventas" />
               <ProfileRankingText title="4/5" subtitle="Calificacion" />
               <ProfileRankingText title="100" subtitle="Compras" />
             </Container>
-            <Button sx={{ button: styles.button }} title="Editar" />
+            {!editing && (
+              <Button
+                sx={{ button: styles.button }}
+                title="Editar"
+                onPress={() => setEditing(true)}
+              />
+            )}
           </Container>
-          {/* <ProfileList /> */}
-          <ProfileEditForm />
+          {editing ? <ProfileEditForm /> : <ProfileList />}
         </KeyboardAwareScrollView>
       </ScrollLayout>
     </SafeLayout>
