@@ -24,3 +24,6 @@ export { default as FacebookIcon } from './FacebookIcon';
 export { default as WalletIcon } from './WalletIcon';
 export { default as ArrowTrendingDownIcon } from './ArrowTrendingDownIcon';
 export { default as QRCodeIcon } from './QRCodeIcon';
+export { default as MapPinIcon } from './MapPinIcon';
+export { default as StoreIcon } from './StoreIcon';
+export { default as LogOutIcon } from './LogOutIcon';
