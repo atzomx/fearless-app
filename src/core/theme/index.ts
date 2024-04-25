@@ -14,7 +14,7 @@ import type {
   BadgeBase,
   ButtonBase,
   InputTextBase,
-  PalletBase,
+  PaletteBase,
   TextBase,
 } from './types';
 import { fade, spacing, font, spacingSingle } from './utils';
@@ -24,7 +24,7 @@ declare module 'styled-components' {
 }
 
 export type Theme = {
-  palette: PalletBase;
+  palette: PaletteBase;
   components: {
     InputText: InputTextBase;
     Text: TextBase;

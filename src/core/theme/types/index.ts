@@ -47,7 +47,7 @@ export type AvatarBase = {
   xlarge: CSSObject;
 };
 
-export type paletteColor = {
+export type PaletteColor = {
   primary: string;
   secondary: string;
   disabled: string;
@@ -61,7 +61,7 @@ export type paletteColor = {
   white: string;
 };
 
-export type ThemeColor = keyof paletteColor;
+export type ThemeColor = keyof PaletteColor;
 
 export type paletteFullColor = {
   50: string;
@@ -147,10 +147,10 @@ export type PaletteBase = {
   primary: paletteMainColor;
   secondary: paletteMainColor;
   grey: paletteFullColor;
-  colors: paletteColor & {
+  colors: PaletteColor & {
     [key in SubColor]: string;
   };
-  text: paletteColor & {
+  text: PaletteColor & {
     [key in SubColor]: string;
   };
   error: paletteMainColor;
