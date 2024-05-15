@@ -17,7 +17,7 @@ import Button from '../Button';
 import Container from '../Container';
 import { InputBaseProps, RefElement, defaultInputEvent } from '../InputBase';
 import Modal from '../Modal';
-import WhelSelector from '../WhelSelector';
+import WhelSelector from '../WheelSelector';
 
 function Selector(
   {

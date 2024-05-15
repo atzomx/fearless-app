@@ -16,7 +16,7 @@ import Button from '../Button';
 import Container from '../Container';
 import { InputBaseProps, defaultInputEvent } from '../InputBase';
 import Modal from '../Modal';
-import WhelSelector from '../WhelSelector';
+import WheelSelector from '../WheelSelector';
 
 type RefElement = { focus: () => void };
 
@@ -97,7 +97,7 @@ const Select = forwardRef<
         <Modal open={isOpen} onClose={handleOnClose} title="Selecciona">
           {({ animatedClose }) => (
             <>
-              <WhelSelector
+              <WheelSelector
                 data={DATA}
                 onChangeIndex={handleOnChangeValue}
                 index={index}

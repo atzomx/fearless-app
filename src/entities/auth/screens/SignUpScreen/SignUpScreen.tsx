@@ -7,12 +7,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import yup from 'yup';
 
 import { HeaderBar, InputControl } from '@core/components';
-import { useSignUpMutation } from '@core/graphql';
+import { useAuthSignUpMutation } from '@core/graphql';
 import { useNavigate } from '@core/hooks';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
 import theme from '@core/theme';
 import { Button, Container, InputText, Text } from '@core/ui';
-import { pick } from '@core/utils/Object';
+import { omit } from '@core/utils/Object';
 import Session from '@core/utils/Session';
 
 import signUpSchema from '@e/auth/schemas/signUp.schema';
@@ -21,7 +21,7 @@ import HOME_ROUTES from '@e/home/constants/routes';
 type TForm = yup.InferType<typeof signUpSchema>;
 
 const SignUpScreen = () => {
-  const [userSingUp] = useSignUpMutation();
+  const [userSingUp, { loading: loadingSignUp }] = useAuthSignUpMutation();
   const navigator = useNavigate();
   const { t } = useTranslation();
 
@@ -37,15 +37,14 @@ const SignUpScreen = () => {
   });
 
   const onSubmit = (values: TForm) => {
-    const createUserInput = pick(values, ['name', 'email', 'password']);
+    const createUserInput = omit(values, ['confirmation']);
     userSingUp({
       variables: { createUserInput },
-      async onCompleted({ signUp }) {
-        const { refreshToken, token } = signUp;
+      async onCompleted({ authSignUp }) {
+        const { refreshToken, token } = authSignUp;
         await Session.create({ token, refreshToken });
-        navigator.navigate(HOME_ROUTES.home);
+        navigator.navigate(HOME_ROUTES.base);
       },
-      onError() {},
     });
   };
 
@@ -120,6 +119,7 @@ const SignUpScreen = () => {
         <SafeAreaView edges={['bottom']}>
           <Container spacing={2} fullWidth p={2} flexDirection="row">
             <Button
+              loading={loadingSignUp}
               onPress={handleSubmit(onSubmit)}
               title={t('auth.signup.text.action')}
             />

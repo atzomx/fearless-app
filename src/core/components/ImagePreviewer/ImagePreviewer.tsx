@@ -44,7 +44,7 @@ const ImagePreviewer: FC<ImagePreviewerProps> = ({ images, maxShowed }) => {
 
   return (
     <>
-      <Container alignSelf="center" direction="row">
+      <Container alignSelf="center" direction="row" spacing={1}>
         {RENDER}
       </Container>
       <ImageCarrouselViewer

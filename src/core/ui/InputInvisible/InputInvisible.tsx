@@ -14,7 +14,7 @@ import * as S from './InputInvisible.style';
 import { InputTextProps } from '../InputText';
 import Text from '../Text';
 
-export type InputInvisibleProps = InputTextProps & {
+export type InputInvisibleProps = InputTextProps<string> & {
   fontSize?: number;
   fontWeight?: TextWeight;
 };

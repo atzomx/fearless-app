@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useTheme } from 'styled-components/native';
+import * as yup from 'yup';
 
 import { HeaderBar, InputControl } from '@core/components';
 import { useNavigate, useWizard } from '@core/hooks';
@@ -15,7 +16,7 @@ import { newDealStepOne } from '@e/deals/schemas/NewDeal';
 
 import NewDealHeader from '../NewDealHeader';
 
-type FormStep1 = { name: string; description: string };
+type FormStep1 = yup.InferType<typeof newDealStepOne>;
 
 const NewDealStepOne = () => {
   const { t } = useTranslation();
@@ -26,7 +27,7 @@ const NewDealStepOne = () => {
 
   const { control, handleSubmit } = useForm<FormStep1>({
     resolver: yupResolver(newDealStepOne),
-    defaultValues: { name: '', description: '' },
+    defaultValues: { name: '', description: '', brand: '' },
     mode: 'onBlur',
   });
 
@@ -47,7 +48,7 @@ const NewDealStepOne = () => {
             title={t('deals.wizard.one.title')}
             subtitle={t('deals.wizard.one.subtitle')}
           />
-          <Container pt={6} spacing={6}>
+          <Container pt={6} spacing={3}>
             <InputControl
               control={control}
               name="name"
@@ -59,9 +60,19 @@ const NewDealStepOne = () => {
             />
             <InputControl
               control={control}
+              name="brand"
+              component={InputInvisible}
+              label={t('deals.wizard.one.brand')}
+              placeholder={t('common.schemas.placeholder')}
+              fontSize={16}
+              fontWeight="SemiBold"
+              color={theme.palette.grey['900']}
+            />
+            <InputControl
+              control={control}
               name="description"
               component={InputInvisible}
-              label={t('deals.wizard.one.name')}
+              label={t('deals.wizard.one.description')}
               placeholder={t('common.schemas.placeholder')}
               fontSize={16}
               fontWeight="Regular"

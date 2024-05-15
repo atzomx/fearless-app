@@ -1,5 +1,32 @@
 import { PaletteBase } from '../types';
 
+export const ColorError = {
+  main: '#d32f2f',
+  light: '#ef5350',
+  dark: '#c62828',
+  contrastText: '#fff',
+};
+export const ColorWarning = {
+  main: '#ed6c02',
+  light: '#ff9800',
+  dark: '#e65100',
+  contrastText: '#fff',
+};
+
+export const ColorInfo = {
+  main: '#0288d1',
+  light: '#03a0f4',
+  dark: '#01579b',
+  contrastText: '#fff',
+};
+
+export const ColorSuccess = {
+  main: '#2e7d32',
+  light: '#4caf50',
+  dark: '#1b5e20',
+  contrastText: '#fff',
+};
+
 export const ColorPrimary = {
   light: '#000',
   main: '#000',
@@ -20,6 +47,7 @@ export const CommonColors = {
 };
 
 export const ColorsTheme = {
+  ...CommonColors,
   primary: '#262626dd',
   secondary: '#50505099',
   disabled: '#93939360',
@@ -29,7 +57,22 @@ export const ColorsTheme = {
   'secondary.main': ColorSecondary.main,
   'secondary.light': ColorSecondary.light,
   'secondary.dark': ColorSecondary.dark,
-  ...CommonColors,
+
+  'success.main': ColorSuccess.main,
+  'success.light': ColorSuccess.light,
+  'success.dark': ColorSuccess.dark,
+
+  'warning.main': ColorWarning.main,
+  'warning.light': ColorWarning.light,
+  'warning.dark': ColorWarning.dark,
+
+  'error.main': ColorError.main,
+  'error.light': ColorError.light,
+  'error.dark': ColorError.dark,
+
+  'info.main': ColorInfo.main,
+  'info.light': ColorInfo.light,
+  'info.dark': ColorInfo.dark,
 };
 
 export const palette: PaletteBase = {
@@ -55,30 +98,10 @@ export const palette: PaletteBase = {
   },
   colors: ColorsTheme,
   text: ColorsTheme,
-  error: {
-    main: '#d32f2f',
-    light: '#ef5350',
-    dark: '#c62828',
-    contrastText: '#fff',
-  },
-  warning: {
-    main: '#ed6c02',
-    light: '#ff9800',
-    dark: '#e65100',
-    contrastText: '#fff',
-  },
-  info: {
-    main: '#0288d1',
-    light: '#03a0f4',
-    dark: '#01579b',
-    contrastText: '#fff',
-  },
-  success: {
-    main: '#2e7d32',
-    light: '#4caf50',
-    dark: '#1b5e20',
-    contrastText: '#fff',
-  },
+  error: ColorError,
+  warning: ColorWarning,
+  info: ColorInfo,
+  success: ColorSuccess,
 };
 
 export default palette;

@@ -63,28 +63,40 @@ const InputFile: FC<InputFileProps> = ({
 
   const onChooseFile = async () => {
     setModal(false);
-    const result = (await ImagePicker.openPicker({
-      cropping: true,
-      multiple,
-      maxFiles: limit,
-    })) as unknown as ImageOrVideo[];
-    handleImageSelector(result);
+    try {
+      const result = (await ImagePicker.openPicker({
+        cropping: true,
+        multiple,
+        maxFiles: limit,
+      })) as unknown as ImageOrVideo[];
+      handleImageSelector(result);
+    } catch (error) {
+      handleImageSelector([]);
+    }
   };
 
   const onChooseCamera = async () => {
     setModal(false);
-    const result = await ImagePicker.openCamera({ cropping: true });
-    handleImageSelector([result]);
+    try {
+      const result = await ImagePicker.openCamera({ cropping: true });
+      handleImageSelector([result]);
+    } catch (error) {
+      handleImageSelector([]);
+    }
   };
 
   const onChooseGallery = async () => {
     setModal(false);
-    const result = (await ImagePicker.openPicker({
-      cropping: true,
-      multiple,
-      maxFiles: limit,
-    })) as unknown as ImageOrVideo | ImageOrVideo[];
-    handleImageSelector(result);
+    try {
+      const result = (await ImagePicker.openPicker({
+        cropping: true,
+        multiple,
+        maxFiles: limit,
+      })) as unknown as ImageOrVideo | ImageOrVideo[];
+      handleImageSelector(result);
+    } catch (error) {
+      handleImageSelector([]);
+    }
   };
 
   const onLongPress = () => {

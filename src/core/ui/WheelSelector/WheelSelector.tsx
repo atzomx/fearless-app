@@ -12,13 +12,13 @@ import { useSharedValue } from 'react-native-reanimated';
 import { useDebouncedCallback } from 'use-debounce';
 
 import SelectItem, { SELECT_OPTION_HEIGHT } from './SelectItem';
-import * as S from './WhelSelector.style';
+import * as S from './WheelSelector.style';
 
 import Container from '../Container';
 
 type ItemSelector = { value?: string; label: string };
 
-export type WhelSelector = {
+export type WheelSelectorProps = {
   data: ItemSelector[];
   onChangeIndex: (index: number) => void;
   index: number;
@@ -26,7 +26,7 @@ export type WhelSelector = {
   style?: StyleProp<ViewStyle>;
 };
 
-const WhelSelector: FC<WhelSelector> = ({
+const WheelSelector: FC<WheelSelectorProps> = ({
   data,
   index,
   onChangeIndex,
@@ -56,7 +56,7 @@ const WhelSelector: FC<WhelSelector> = ({
     }, 0);
   }, [scrollRef, index, data]);
 
-  const renderItam = useCallback(
+  const renderItem = useCallback(
     ({ item, index: actualIndex }: { item: ItemSelector; index: number }) => (
       <SelectItem
         disabled={!item.value}
@@ -94,7 +94,7 @@ const WhelSelector: FC<WhelSelector> = ({
         style={styles.scroll}
         contentContainerStyle={styles.content}
         keyExtractor={({ value }) => value?.toString() ?? 'unselect'}
-        renderItem={renderItam}
+        renderItem={renderItem}
       />
       <S.Selector />
     </Container>
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(WhelSelector);
+export default memo(WheelSelector);

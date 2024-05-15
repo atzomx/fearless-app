@@ -8,7 +8,7 @@ import { useTheme } from 'styled-components/native';
 import * as yup from 'yup';
 
 import { InputControl } from '@core/components';
-import { useSignInMutation } from '@core/graphql';
+import { useAuthSignInMutation } from '@core/graphql';
 import { useNavigate } from '@core/hooks';
 import { FacebookIcon, GoogleIcon } from '@core/icons';
 import { ContentLayout, KeyboardAvoidLayout, SafeLayout } from '@core/layouts';
@@ -22,7 +22,7 @@ import HOME_ROUTES from '@e/home/constants/routes';
 type TForm = yup.InferType<typeof loginSchema>;
 
 const SignInScreen = () => {
-  const [userLogin] = useSignInMutation();
+  const [userLogin, { loading: loadingLogin }] = useAuthSignInMutation();
   const theme = useTheme();
   const navigator = useNavigate();
   const { t } = useTranslation();
@@ -38,8 +38,8 @@ const SignInScreen = () => {
 
     userLogin({
       variables: { user },
-      async onCompleted({ signIn }) {
-        const { refreshToken, token } = signIn;
+      async onCompleted({ authSignIn }) {
+        const { refreshToken, token } = authSignIn;
         await Session.create({ token, refreshToken });
         navigator.replace(HOME_ROUTES.base);
       },
@@ -61,14 +61,31 @@ const SignInScreen = () => {
       <SafeLayout>
         <KeyboardAvoidLayout>
           <SafeAreaView>
-            <Container mt={8} mb={5}>
-              <Text
-                fontSize={60}
-                fontWeight="Bold"
-                align="center"
-                color="black">
-                DealZ
-              </Text>
+            <Container mt={8} mb={5} display="flex" alignItems="center">
+              <Container
+                mb={3}
+                alignItems="center"
+                borderRadius={10}
+                ph={3}
+                width={100}
+                height={100}
+                spacing={-2}
+                backgroundColor={theme.palette.colors.black}>
+                <Text
+                  fontSize={60}
+                  fontWeight="Bold"
+                  align="center"
+                  color="white">
+                  D
+                </Text>
+                <Text
+                  fontSize={20}
+                  fontWeight="Medium"
+                  align="center"
+                  color="white">
+                  dealz
+                </Text>
+              </Container>
               <Text fontSize={24} fontWeight="SemiBold" align="center">
                 {t('auth.signin.text.gretting')}
               </Text>
@@ -105,6 +122,7 @@ const SignInScreen = () => {
             </Container>
             <Container spacing={2} p={2} flexDirection="row">
               <Button
+                loading={loadingLogin}
                 disable={!formState.isValid}
                 onPress={handleSubmit(onSubmit)}
                 title={t('auth.signin.text.action')}

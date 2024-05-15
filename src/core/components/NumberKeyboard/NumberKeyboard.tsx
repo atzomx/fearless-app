@@ -81,7 +81,7 @@ const NumberKeyboard: FC<NumberKeyboardProps> = ({
         </Container>
       )}
       <Container mb={2}>
-        <Text color="black" align="center" fontWeight="Regular" fontSize={32}>
+        <Text color="black" align="center" fontWeight="Medium" fontSize={40}>
           {Money.fromString(value, 0).toFormat()}
         </Text>
       </Container>

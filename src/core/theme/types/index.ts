@@ -132,7 +132,19 @@ export type SubColor =
   | 'primary.dark'
   | 'secondary.main'
   | 'secondary.light'
-  | 'secondary.dark';
+  | 'secondary.dark'
+  | 'success.main'
+  | 'success.light'
+  | 'success.dark'
+  | 'error.main'
+  | 'error.light'
+  | 'error.dark'
+  | 'warning.main'
+  | 'warning.light'
+  | 'warning.dark'
+  | 'info.main'
+  | 'info.light'
+  | 'info.dark';
 
 export type PaletteBase = {
   background: string;

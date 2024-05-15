@@ -1,5 +1,5 @@
-mutation SignIn($user: LoginUserInput!) {
-  signIn(User: $user) {
+mutation AuthSignIn($user: LoginUserInput!) {
+  authSignIn(User: $user) {
     refreshToken
     token
     user {
@@ -8,37 +8,57 @@ mutation SignIn($user: LoginUserInput!) {
   }
 }
 
-mutation SignUp($createUserInput: CreateUserInput!) {
-  signUp(createUserInput: $createUserInput) {
+mutation AuthSignUp($createUserInput: CreateUserInput!) {
+  authSignUp(createUserInput: $createUserInput) {
     refreshToken
     token
     user {
-      ...UserFragment
+     ...UserFragment
     }
   }
 }
 
-mutation RecoveryPass($userRecoveryInput: UserRecoveryInput!) {
-  recoveryPass(UserRecoveryInput: $userRecoveryInput)
+mutation AuthRecoveryPass($userRecoveryInput: UserRecoveryInput!) {
+  authRecoveryPass(UserRecoveryInput: $userRecoveryInput)
 }
 
-mutation RefreshTokens($refreshToken: String!) {
-  refreshTokens(refreshToken: $refreshToken) {
+mutation AuthRefreshTokens($refreshToken: String!) {
+  authRefreshTokens(refreshToken: $refreshToken) {
     refreshToken
     token
   }
 }
 
-mutation RecoveryPassVerifyOtp(
-  $userRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput!
-) {
-  recoveryPassVerifyOtp(
-    UserRecoveryVerifyOtpInput: $userRecoveryVerifyOtpInput
-  ) {
+mutation AuthRecoveryPassVerifyOtp($userRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput!) {
+  authRecoveryPassVerifyOtp(UserRecoveryVerifyOtpInput: $userRecoveryVerifyOtpInput) {
     token
   }
 }
 
-mutation RecoveryPassConfirm($userRecoveryInput: UserRecoveryConfirmInput!) {
-  recoveryPassConfirm(UserRecoveryInput: $userRecoveryInput)
+mutation AuthRecoveryPassConfirm($userRecoveryInput: UserRecoveryConfirmInput!) {
+  authRecoveryPassConfirm(UserRecoveryInput: $userRecoveryInput)
+}
+
+mutation DealCreate($createDealInput: CreateDealInput!) {
+  dealCreate(createDealInput: $createDealInput) {
+    _id
+    amount
+    code
+    customerId
+    dealType
+    evidence
+    paymentLimitDate
+    payments
+    product {
+      ...ProductFragment
+    }
+    productId
+    rejectReason
+    salesman {
+      ...UserFragment
+    }
+    salesmanId
+    shipmentId
+    status
+  }
 }
