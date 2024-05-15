@@ -5,7 +5,7 @@ import * as S from './InputText.style';
 
 import InputBase, { InputBaseProps, RefElement } from '../InputBase';
 
-type InputTextProps<T> = Omit<InputBaseProps<T>, 'children' | 'ref'> &
+export type InputTextProps<T> = Omit<InputBaseProps<T>, 'children' | 'ref'> &
   Omit<TextInputProps, 'onChangeText' | 'ref'>;
 
 function InputText(

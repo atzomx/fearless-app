@@ -11,6 +11,7 @@ import { ButtonVariant, ColorVariant } from '@core/theme';
 import * as S from './Button.style';
 
 import ButtonBase from '../ButtonBase';
+import Loading from '../Loading';
 
 export type ButtonProps = ButtonPropsRN & {
   title: string;
@@ -25,6 +26,7 @@ export type ButtonProps = ButtonPropsRN & {
   };
   startAdorment?: JSX.Element;
   endAdorment?: JSX.Element;
+  loading?: boolean;
 };
 
 const Button: FC<ButtonProps> = ({
@@ -38,6 +40,7 @@ const Button: FC<ButtonProps> = ({
   startAdorment,
   endAdorment,
   sx,
+  loading,
   ...props
 }) => {
   return (
@@ -49,17 +52,21 @@ const Button: FC<ButtonProps> = ({
           variant={variant}
           color={color}
           disabled={disable}
-          onPress={disable ? undefined : onPress}
+          onPress={disable || loading ? undefined : onPress}
           style={sx?.button}
           {...props}>
           {startAdorment}
-          <S.Text
-            style={sx?.text}
-            color={color}
-            variant={variant}
-            disabled={disable}>
-            {title}
-          </S.Text>
+          {loading ? (
+            <Loading />
+          ) : (
+            <S.Text
+              style={sx?.text}
+              color={color}
+              variant={variant}
+              disabled={disable}>
+              {title}
+            </S.Text>
+          )}
           {endAdorment}
         </S.Button>
       )}

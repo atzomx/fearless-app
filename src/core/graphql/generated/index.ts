@@ -34,10 +34,10 @@ export type Scalars = {
 export type Address = {
   __typename?: 'Address';
   _id: Scalars['ID']['output'];
-  address_type: AddressTypeEnum;
+  addressType: AddressTypeEnum;
   city: Scalars['String']['output'];
   country: Scalars['String']['output'];
-  customer_id?: Maybe<Scalars['ID']['output']>;
+  customerId?: Maybe<Scalars['ID']['output']>;
   neighborhood: Scalars['String']['output'];
   number: Scalars['String']['output'];
   phone: Scalars['String']['output'];
@@ -62,11 +62,11 @@ export type Amount = {
 export type Claim = {
   __typename?: 'Claim';
   _id: Scalars['ID']['output'];
-  created_by: ClaimByEnum;
-  deal_id: Scalars['ID']['output'];
+  createdBy: ClaimByEnum;
+  dealId: Scalars['ID']['output'];
   description: Scalars['String']['output'];
   evidence: Array<Scalars['ID']['output']>;
-  incharge_by: Scalars['ID']['output'];
+  inchargeBy: Scalars['ID']['output'];
   reason: ClaimReasonEnum;
   status: ClaimStatusEnum;
 };
@@ -94,7 +94,7 @@ export enum ClaimStatusEnum {
 }
 
 export type CreateAddressInput = {
-  address_type?: AddressTypeEnum;
+  addressType?: AddressTypeEnum;
   city: Scalars['String']['input'];
   country: Scalars['String']['input'];
   neighborhood: Scalars['String']['input'];
@@ -112,38 +112,38 @@ export type CreateAmountInput = {
 
 export type CreateClaimInput = {
   _id: Scalars['ID']['input'];
-  created_by: ClaimByEnum;
-  deal_id: Scalars['ID']['input'];
+  createdBy: ClaimByEnum;
+  dealId: Scalars['ID']['input'];
   description: Scalars['String']['input'];
   evidence: Array<Scalars['ID']['input']>;
-  incharge_by: Scalars['ID']['input'];
+  inchargeBy: Scalars['ID']['input'];
   reason: ClaimReasonEnum;
   status: ClaimStatusEnum;
 };
 
 export type CreateDealInput = {
   amount: Scalars['String']['input'];
-  payment_limit_date: Scalars['String']['input'];
+  paymentLimitDate: Scalars['String']['input'];
   product: CreateProductInput;
 };
 
 export type CreateEvidenceInput = {
   description: Scalars['String']['input'];
-  evidence_type: EvidenceStatusEnum;
+  evidenceType: EvidenceStatusEnum;
   files: Scalars['String']['input'];
   name: Scalars['String']['input'];
-  user_id: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 export type CreateFeatureflagInput = {
-  feature_name: Scalars['String']['input'];
-  user_id: Scalars['ID']['input'];
+  featureName: Scalars['String']['input'];
+  userId: Scalars['ID']['input'];
 };
 
 export type CreatePaymentInput = {
   amounts: Array<Scalars['ID']['input']>;
   status: PaymentStatusEnum;
-  total_amount: Scalars['String']['input'];
+  totalAmount: Scalars['String']['input'];
   type: PaymentTypeEnum;
 };
 
@@ -152,14 +152,14 @@ export type CreateProductInput = {
   description: Scalars['String']['input'];
   media: Scalars['String']['input'];
   name: Scalars['String']['input'];
-  product_status: ProductStatusEnum;
+  productStatus: ProductStatusEnum;
   save: Scalars['Boolean']['input'];
 };
 
 export type CreateShipmentInput = {
-  address_id: Scalars['ID']['input'];
+  addressId: Scalars['ID']['input'];
   provider?: InputMaybe<Scalars['String']['input']>;
-  tracking_number?: InputMaybe<Scalars['String']['input']>;
+  trackingNumber?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateTransactionInput = {
@@ -177,30 +177,30 @@ export type CreateUserInput = {
 };
 
 export type CreateValidationInput = {
-  costumer_id: Scalars['ID']['input'];
+  costumerId: Scalars['ID']['input'];
   evidence: Array<Scalars['ID']['input']>;
-  incharge_by?: InputMaybe<Scalars['ID']['input']>;
+  inchargeBy?: InputMaybe<Scalars['ID']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Deal = {
   __typename?: 'Deal';
-  User?: Maybe<UserResponse>;
   _id: Scalars['ID']['output'];
   amount: Scalars['String']['output'];
-  code: Scalars['String']['output'];
-  customer_id?: Maybe<Scalars['ID']['output']>;
-  deal_type?: Maybe<Scalars['String']['output']>;
+  code?: Maybe<Scalars['String']['output']>;
+  customer?: Maybe<UserResponse>;
+  customerId?: Maybe<Scalars['ID']['output']>;
+  dealType?: Maybe<Scalars['String']['output']>;
   evidence?: Maybe<Array<Scalars['ID']['output']>>;
-  payment_limit_date: Scalars['DateTime']['output'];
+  paymentLimitDate: Scalars['DateTime']['output'];
   payments?: Maybe<Array<Scalars['ID']['output']>>;
   product?: Maybe<Product>;
-  product_id: Scalars['ID']['output'];
-  reject_reason?: Maybe<Scalars['String']['output']>;
+  productId: Scalars['ID']['output'];
+  rejectReason?: Maybe<Scalars['String']['output']>;
   salesman?: Maybe<UserResponse>;
-  salesman_id: Scalars['ID']['output'];
-  shipment_id?: Maybe<Scalars['ID']['output']>;
+  salesmanId: Scalars['ID']['output'];
+  shipmentId?: Maybe<Scalars['ID']['output']>;
   status: DealStatusEnum;
 };
 
@@ -220,18 +220,18 @@ export enum DealStatusEnum {
 }
 
 export type DecideDealInput = {
-  deal_status?: InputMaybe<DealDecideStatusEnum>;
-  reject_reason?: InputMaybe<Scalars['String']['input']>;
+  dealStatus?: InputMaybe<DealDecideStatusEnum>;
+  rejectReason?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Evidence = {
   __typename?: 'Evidence';
   _id: Scalars['ID']['output'];
   description: Scalars['String']['output'];
-  evidence_type: EvidenceStatusEnum;
+  evidenceType: EvidenceStatusEnum;
   files: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  user_id: Scalars['ID']['output'];
+  userId: Scalars['ID']['output'];
 };
 
 export enum EvidenceStatusEnum {
@@ -244,17 +244,22 @@ export enum EvidenceStatusEnum {
 export type Featureflag = {
   __typename?: 'Featureflag';
   _id: Scalars['ID']['output'];
-  feature_name: Scalars['String']['output'];
-  user_id: Scalars['ID']['output'];
+  featureName: Scalars['String']['output'];
+  userId: Scalars['ID']['output'];
 };
 
 export type FindDealParams = {
   code?: InputMaybe<Scalars['String']['input']>;
-  deal_status?: InputMaybe<DealStatusEnum>;
-  end_date?: InputMaybe<Scalars['DateTime']['input']>;
-  product_name?: InputMaybe<Scalars['String']['input']>;
-  product_status?: InputMaybe<ProductStatusEnum>;
-  start_date?: InputMaybe<Scalars['DateTime']['input']>;
+  dealStatus?: InputMaybe<DealStatusEnum>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  productName?: InputMaybe<Scalars['String']['input']>;
+  productStatus?: InputMaybe<ProductStatusEnum>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type InviteDealOtp = {
+  __typename?: 'InviteDealOTP';
+  code: Scalars['String']['output'];
 };
 
 export type LoginUserInput = {
@@ -271,207 +276,212 @@ export type LoginUserResult = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createAddress: Address;
-  createAmount: Amount;
-  createClaim: Claim;
-  createDeal: Deal;
-  createEvidence: Evidence;
-  createFeatureflag: Featureflag;
-  createPayment: Payment;
-  createProduct: Product;
-  createShipment: Shipment;
-  createTransaction: Transaction;
-  createValidation: Validation;
-  decideDeal: Deal;
-  recoveryPass: Scalars['Boolean']['output'];
-  recoveryPassConfirm: Scalars['Boolean']['output'];
-  recoveryPassVerifyOtp: RecoveryVerifyOtTokenResult;
-  refreshTokens: RefreshTokenResult;
-  removeAddress: Address;
-  removeClaim: Claim;
-  removeCostumer: UserResponse;
-  removeDeal: Deal;
-  removeEvidence: Evidence;
-  removeFeatureflag: Featureflag;
-  removePayment: Payment;
-  removeProduct: Product;
-  removeShipment: Shipment;
-  removeValidation: Validation;
-  signIn: LoginUserResult;
-  signUp: LoginUserResult;
-  updateAddress: Address;
-  updateAmount: Amount;
-  updateClaim: Claim;
-  updateCostumer: User;
-  updateDeal: Deal;
-  updateEvidence: Evidence;
-  updatePayment: Payment;
-  updateProduct: Product;
-  updateShipment: Shipment;
-  updateValidation: Validation;
+  addressCreate: Address;
+  addressRemove: Address;
+  addressUpdate: Address;
+  amountCreate: Amount;
+  amountUpdate: Amount;
+  authRecoveryPass: Scalars['Boolean']['output'];
+  authRecoveryPassConfirm: Scalars['Boolean']['output'];
+  authRecoveryPassVerifyOtp: RecoveryVerifyOtTokenResult;
+  authRefreshTokens: RefreshTokenResult;
+  authSignIn: LoginUserResult;
+  authSignUp: LoginUserResult;
+  claimCreate: Claim;
+  claimRemove: Claim;
+  claimUpdate: Claim;
+  dealCreate: Deal;
+  dealDecision: Deal;
+  dealJoin: Deal;
+  dealRemove: Deal;
+  dealUpdate: Deal;
+  evidenceCreate: Evidence;
+  evidenceRemove: Evidence;
+  evidenceUpdate: Evidence;
+  featureFlagCreate: Featureflag;
+  featureFlagRemove: Featureflag;
+  paymentCreate: Payment;
+  paymentRemove: Payment;
+  paymentUpdate: Payment;
+  productCreate: Product;
+  productRemove: Product;
+  productUpdate: Product;
+  shipmentCreate: Shipment;
+  shipmentRemove: Shipment;
+  shipmentUpdate: Shipment;
+  transactionCreate: Transaction;
+  userRemove: UserResponse;
+  userUpdate: User;
+  validationCreate: Validation;
+  validationRemove: Validation;
+  validationUpdate: Validation;
 };
 
-export type MutationCreateAddressArgs = {
+export type MutationAddressCreateArgs = {
   createAddressInput: CreateAddressInput;
 };
 
-export type MutationCreateAmountArgs = {
-  createAmountInput: CreateAmountInput;
+export type MutationAddressRemoveArgs = {
+  idAddress: Scalars['String']['input'];
 };
 
-export type MutationCreateClaimArgs = {
-  createClaimInput: CreateClaimInput;
-};
-
-export type MutationCreateDealArgs = {
-  createDealInput: CreateDealInput;
-};
-
-export type MutationCreateEvidenceArgs = {
-  createEvidenceInput: CreateEvidenceInput;
-};
-
-export type MutationCreateFeatureflagArgs = {
-  createFeatureflagInput: CreateFeatureflagInput;
-};
-
-export type MutationCreatePaymentArgs = {
-  createPaymentInput: CreatePaymentInput;
-};
-
-export type MutationCreateProductArgs = {
-  createProductInput: CreateProductInput;
-};
-
-export type MutationCreateShipmentArgs = {
-  createShipmentInput: CreateShipmentInput;
-};
-
-export type MutationCreateTransactionArgs = {
-  createTransactionInput: CreateTransactionInput;
-};
-
-export type MutationCreateValidationArgs = {
-  createValidationInput: CreateValidationInput;
-};
-
-export type MutationDecideDealArgs = {
-  decideDealInput: DecideDealInput;
-  id_deal: Scalars['String']['input'];
-};
-
-export type MutationRecoveryPassArgs = {
-  UserRecoveryInput: UserRecoveryInput;
-};
-
-export type MutationRecoveryPassConfirmArgs = {
-  UserRecoveryInput: UserRecoveryConfirmInput;
-};
-
-export type MutationRecoveryPassVerifyOtpArgs = {
-  UserRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput;
-};
-
-export type MutationRefreshTokensArgs = {
-  refreshToken: Scalars['String']['input'];
-};
-
-export type MutationRemoveAddressArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationRemoveClaimArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationRemoveCostumerArgs = {
-  id_User: Scalars['String']['input'];
-};
-
-export type MutationRemoveDealArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationRemoveEvidenceArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationRemoveFeatureflagArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationRemovePaymentArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationRemoveProductArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationRemoveShipmentArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationRemoveValidationArgs = {
-  id: Scalars['String']['input'];
-};
-
-export type MutationSignInArgs = {
-  User: LoginUserInput;
-};
-
-export type MutationSignUpArgs = {
-  createUserInput: CreateUserInput;
-};
-
-export type MutationUpdateAddressArgs = {
-  id_address: Scalars['String']['input'];
+export type MutationAddressUpdateArgs = {
+  idAddress: Scalars['String']['input'];
   updateAddressInput: UpdateAddressInput;
 };
 
-export type MutationUpdateAmountArgs = {
-  id_amount: Scalars['String']['input'];
+export type MutationAmountCreateArgs = {
+  createAmountInput: CreateAmountInput;
+};
+
+export type MutationAmountUpdateArgs = {
+  amountId: Scalars['String']['input'];
   updateAmountInput: UpdateAmountInput;
 };
 
-export type MutationUpdateClaimArgs = {
-  id_claim: Scalars['String']['input'];
+export type MutationAuthRecoveryPassArgs = {
+  UserRecoveryInput: UserRecoveryInput;
+};
+
+export type MutationAuthRecoveryPassConfirmArgs = {
+  UserRecoveryInput: UserRecoveryConfirmInput;
+};
+
+export type MutationAuthRecoveryPassVerifyOtpArgs = {
+  UserRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput;
+};
+
+export type MutationAuthRefreshTokensArgs = {
+  refreshToken: Scalars['String']['input'];
+};
+
+export type MutationAuthSignInArgs = {
+  User: LoginUserInput;
+};
+
+export type MutationAuthSignUpArgs = {
+  createUserInput: CreateUserInput;
+};
+
+export type MutationClaimCreateArgs = {
+  createClaimInput: CreateClaimInput;
+};
+
+export type MutationClaimRemoveArgs = {
+  claimId: Scalars['String']['input'];
+};
+
+export type MutationClaimUpdateArgs = {
+  claimId: Scalars['String']['input'];
   updateClaimInput: UpdateClaimInput;
 };
 
-export type MutationUpdateCostumerArgs = {
-  id_User: Scalars['String']['input'];
-  updateUserInput: UpdateUserInput;
+export type MutationDealCreateArgs = {
+  createDealInput: CreateDealInput;
 };
 
-export type MutationUpdateDealArgs = {
-  id_deal: Scalars['String']['input'];
+export type MutationDealDecisionArgs = {
+  dealId: Scalars['String']['input'];
+  decideDealInput: DecideDealInput;
+};
+
+export type MutationDealJoinArgs = {
+  code: Scalars['String']['input'];
+};
+
+export type MutationDealRemoveArgs = {
+  dealId: Scalars['String']['input'];
+};
+
+export type MutationDealUpdateArgs = {
+  dealId: Scalars['String']['input'];
   updateDealInput: UpdateDealInput;
 };
 
-export type MutationUpdateEvidenceArgs = {
-  id_evidence: Scalars['String']['input'];
+export type MutationEvidenceCreateArgs = {
+  createEvidenceInput: CreateEvidenceInput;
+};
+
+export type MutationEvidenceRemoveArgs = {
+  evidenceId: Scalars['String']['input'];
+};
+
+export type MutationEvidenceUpdateArgs = {
+  evidenceId: Scalars['String']['input'];
   updateEvidenceInput: UpdateEvidenceInput;
 };
 
-export type MutationUpdatePaymentArgs = {
-  id_payment: Scalars['String']['input'];
+export type MutationFeatureFlagCreateArgs = {
+  createFeatureflagInput: CreateFeatureflagInput;
+};
+
+export type MutationFeatureFlagRemoveArgs = {
+  featureFlagId: Scalars['String']['input'];
+};
+
+export type MutationPaymentCreateArgs = {
+  createPaymentInput: CreatePaymentInput;
+};
+
+export type MutationPaymentRemoveArgs = {
+  paymentId: Scalars['String']['input'];
+};
+
+export type MutationPaymentUpdateArgs = {
+  paymentId: Scalars['String']['input'];
   updatePaymentInput: UpdatePaymentInput;
 };
 
-export type MutationUpdateProductArgs = {
-  id_product: Scalars['String']['input'];
+export type MutationProductCreateArgs = {
+  createProductInput: CreateProductInput;
+};
+
+export type MutationProductRemoveArgs = {
+  productId: Scalars['String']['input'];
+};
+
+export type MutationProductUpdateArgs = {
+  productId: Scalars['String']['input'];
   updateProductInput: UpdateProductInput;
 };
 
-export type MutationUpdateShipmentArgs = {
-  id_shipment: Scalars['String']['input'];
+export type MutationShipmentCreateArgs = {
+  createShipmentInput: CreateShipmentInput;
+};
+
+export type MutationShipmentRemoveArgs = {
+  shipmentId: Scalars['String']['input'];
+};
+
+export type MutationShipmentUpdateArgs = {
+  shipmentId: Scalars['String']['input'];
   updateShipmentInput: UpdateShipmentInput;
 };
 
-export type MutationUpdateValidationArgs = {
-  id_validation: Scalars['String']['input'];
+export type MutationTransactionCreateArgs = {
+  createTransactionInput: CreateTransactionInput;
+};
+
+export type MutationUserRemoveArgs = {
+  userId: Scalars['String']['input'];
+};
+
+export type MutationUserUpdateArgs = {
+  updateUserInput: UpdateUserInput;
+  userId: Scalars['String']['input'];
+};
+
+export type MutationValidationCreateArgs = {
+  createValidationInput: CreateValidationInput;
+};
+
+export type MutationValidationRemoveArgs = {
+  validationId: Scalars['String']['input'];
+};
+
+export type MutationValidationUpdateArgs = {
   updateValidationInput: UpdateValidationInput;
+  validationId: Scalars['String']['input'];
 };
 
 export type Payment = {
@@ -479,7 +489,7 @@ export type Payment = {
   _id: Scalars['ID']['output'];
   amounts: Array<Scalars['ID']['output']>;
   status: PaymentStatusEnum;
-  total_amount: Scalars['String']['output'];
+  totalAmount: Scalars['String']['output'];
   type: PaymentTypeEnum;
 };
 
@@ -501,11 +511,11 @@ export type Product = {
   __typename?: 'Product';
   _id: Scalars['ID']['output'];
   brand: Scalars['String']['output'];
-  costumer_id?: Maybe<Scalars['ID']['output']>;
+  costumerId?: Maybe<Scalars['ID']['output']>;
   description: Scalars['String']['output'];
   media: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  product_status: ProductStatusEnum;
+  productStatus: ProductStatusEnum;
 };
 
 export enum ProductStatusEnum {
@@ -519,76 +529,88 @@ export enum ProductStatusEnum {
 
 export type Query = {
   __typename?: 'Query';
-  address: Address;
-  amount: Amount;
-  claim: Claim;
-  deal: Deal;
-  evidence: Evidence;
-  findAddressByUser: Array<Address>;
-  findAllFeaturesFlagsByid: Array<Scalars['String']['output']>;
-  findDealsByUser: Array<Deal>;
-  findOneCostumer: UserResponse;
-  payment: Payment;
-  product: Product;
-  productsbycostumer: Array<Product>;
-  shipment: Shipment;
-  transaction: Transaction;
-  transactions: Array<Transaction>;
+  addressByUser: Array<Address>;
+  addressFindOne: Address;
+  amountFindOne: Amount;
+  claimFindAll: Array<Claim>;
+  claimFindOne: Claim;
+  dealFindOne: Deal;
+  dealGetInviteCode: InviteDealOtp;
+  dealsByUser: Array<Deal>;
+  evidenceByUser: Array<Evidence>;
+  evidenceFindOne: Evidence;
+  featuresFlagsByUser: Array<Scalars['String']['output']>;
+  paymentFindOne: Payment;
+  productFindOne: Product;
+  productsByCostumer: Array<Product>;
+  shipmentFindAll: Array<Shipment>;
+  shipmentFindOne: Shipment;
+  transactionFindAll: Array<Transaction>;
+  transactionFindOne: Transaction;
+  userFindOne: UserResponse;
   userMe: UserResponse;
-  validation: Validation;
-  validations: Array<Validation>;
+  validationFindAll: Array<Validation>;
+  validationFindOne: Validation;
 };
 
-export type QueryAddressArgs = {
-  id: Scalars['String']['input'];
+export type QueryAddressFindOneArgs = {
+  idAddress: Scalars['String']['input'];
 };
 
-export type QueryAmountArgs = {
-  id: Scalars['String']['input'];
+export type QueryAmountFindOneArgs = {
+  amountId: Scalars['String']['input'];
 };
 
-export type QueryClaimArgs = {
-  id: Scalars['String']['input'];
+export type QueryClaimFindOneArgs = {
+  claimId: Scalars['String']['input'];
 };
 
-export type QueryDealArgs = {
-  id: Scalars['String']['input'];
+export type QueryDealFindOneArgs = {
+  dealId: Scalars['String']['input'];
 };
 
-export type QueryEvidenceArgs = {
-  id: Scalars['String']['input'];
+export type QueryDealGetInviteCodeArgs = {
+  dealId: Scalars['String']['input'];
 };
 
-export type QueryFindDealsByUserArgs = {
-  findDealParams: FindDealParams;
+export type QueryDealsByUserArgs = {
+  dealsByUserParams: FindDealParams;
 };
 
-export type QueryFindOneCostumerArgs = {
-  id: Scalars['String']['input'];
+export type QueryEvidenceByUserArgs = {
+  userId: Scalars['String']['input'];
 };
 
-export type QueryPaymentArgs = {
-  id: Scalars['String']['input'];
+export type QueryEvidenceFindOneArgs = {
+  evidenceId: Scalars['String']['input'];
 };
 
-export type QueryProductArgs = {
-  id: Scalars['String']['input'];
+export type QueryPaymentFindOneArgs = {
+  paymentId: Scalars['String']['input'];
 };
 
-export type QueryProductsbycostumerArgs = {
-  costumer_id: Scalars['String']['input'];
+export type QueryProductFindOneArgs = {
+  productId: Scalars['String']['input'];
 };
 
-export type QueryShipmentArgs = {
-  id: Scalars['String']['input'];
+export type QueryProductsByCostumerArgs = {
+  costumerId: Scalars['String']['input'];
 };
 
-export type QueryTransactionArgs = {
-  id: Scalars['String']['input'];
+export type QueryShipmentFindOneArgs = {
+  shipmentId: Scalars['String']['input'];
 };
 
-export type QueryValidationArgs = {
-  id: Scalars['String']['input'];
+export type QueryTransactionFindOneArgs = {
+  transactionId: Scalars['String']['input'];
+};
+
+export type QueryUserFindOneArgs = {
+  userId: Scalars['String']['input'];
+};
+
+export type QueryValidationFindOneArgs = {
+  validationId: Scalars['String']['input'];
 };
 
 export type RecoveryVerifyOtTokenResult = {
@@ -605,9 +627,9 @@ export type RefreshTokenResult = {
 export type Shipment = {
   __typename?: 'Shipment';
   _id: Scalars['ID']['output'];
-  address_id: Scalars['ID']['output'];
+  addressId: Scalars['ID']['output'];
   provider?: Maybe<Scalars['String']['output']>;
-  tracking_number?: Maybe<Scalars['String']['output']>;
+  trackingNumber?: Maybe<Scalars['String']['output']>;
 };
 
 export type Subscription = {
@@ -635,7 +657,7 @@ export enum TransactionTypesEnum {
 }
 
 export type UpdateAddressInput = {
-  address_type?: InputMaybe<AddressTypeEnum>;
+  addressType?: InputMaybe<AddressTypeEnum>;
   city?: InputMaybe<Scalars['String']['input']>;
   country?: InputMaybe<Scalars['String']['input']>;
   neighborhood?: InputMaybe<Scalars['String']['input']>;
@@ -653,33 +675,33 @@ export type UpdateAmountInput = {
 
 export type UpdateClaimInput = {
   _id?: InputMaybe<Scalars['ID']['input']>;
-  created_by?: InputMaybe<ClaimByEnum>;
-  deal_id?: InputMaybe<Scalars['ID']['input']>;
+  createdBy?: InputMaybe<ClaimByEnum>;
+  dealId?: InputMaybe<Scalars['ID']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   evidence?: InputMaybe<Array<Scalars['ID']['input']>>;
-  incharge_by?: InputMaybe<Scalars['ID']['input']>;
+  inchargeBy?: InputMaybe<Scalars['ID']['input']>;
   reason?: InputMaybe<ClaimReasonEnum>;
   status?: InputMaybe<ClaimStatusEnum>;
 };
 
 export type UpdateDealInput = {
   amount?: InputMaybe<Scalars['String']['input']>;
-  payment_limit_date?: InputMaybe<Scalars['String']['input']>;
+  paymentLimitDate?: InputMaybe<Scalars['String']['input']>;
   product?: InputMaybe<CreateProductInput>;
 };
 
 export type UpdateEvidenceInput = {
   description?: InputMaybe<Scalars['String']['input']>;
-  evidence_type?: InputMaybe<EvidenceStatusEnum>;
+  evidenceType?: InputMaybe<EvidenceStatusEnum>;
   files?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  user_id?: InputMaybe<Scalars['String']['input']>;
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdatePaymentInput = {
   amounts?: InputMaybe<Array<Scalars['ID']['input']>>;
   status?: InputMaybe<PaymentStatusEnum>;
-  total_amount?: InputMaybe<Scalars['String']['input']>;
+  totalAmount?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<PaymentTypeEnum>;
 };
 
@@ -688,14 +710,14 @@ export type UpdateProductInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   media?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  product_status?: InputMaybe<ProductStatusEnum>;
+  productStatus?: InputMaybe<ProductStatusEnum>;
   save?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UpdateShipmentInput = {
-  address_id?: InputMaybe<Scalars['ID']['input']>;
+  addressId?: InputMaybe<Scalars['ID']['input']>;
   provider?: InputMaybe<Scalars['String']['input']>;
-  tracking_number?: InputMaybe<Scalars['String']['input']>;
+  trackingNumber?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateUserInput = {
@@ -707,7 +729,7 @@ export type UpdateUserInput = {
 
 export type UpdateValidationInput = {
   evidence: Array<Scalars['ID']['input']>;
-  incharge_by?: InputMaybe<Scalars['ID']['input']>;
+  inchargeBy?: InputMaybe<Scalars['ID']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<ValidationStatusEnum>;
 };
@@ -718,7 +740,6 @@ export type User = {
   birthday?: Maybe<Scalars['String']['output']>;
   clabe?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
-  lowercaseEmail: Scalars['String']['output'];
   name: Scalars['String']['output'];
   otpToken?: Maybe<Scalars['String']['output']>;
   password: Scalars['String']['output'];
@@ -754,8 +775,8 @@ export type UserResponse = {
 };
 
 export enum UserRoleEnum {
+  Admin = 'Admin',
   User = 'User',
-  Admin = 'admin',
 }
 
 export enum UserStatusEnum {
@@ -768,9 +789,9 @@ export enum UserStatusEnum {
 export type Validation = {
   __typename?: 'Validation';
   _id: Scalars['ID']['output'];
-  costumer_id: Scalars['ID']['output'];
+  costumerId: Scalars['ID']['output'];
   evidence: Array<Scalars['ID']['output']>;
-  incharge_by?: Maybe<Scalars['ID']['output']>;
+  inchargeBy?: Maybe<Scalars['ID']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
   status: ValidationStatusEnum;
 };
@@ -792,13 +813,24 @@ export type UserFragmentFragment = {
   status?: string | null;
 };
 
-export type SignInMutationVariables = Exact<{
+export type ProductFragmentFragment = {
+  __typename?: 'Product';
+  _id: string;
+  brand: string;
+  costumerId?: string | null;
+  description: string;
+  media: string;
+  name: string;
+  productStatus: ProductStatusEnum;
+};
+
+export type AuthSignInMutationVariables = Exact<{
   user: LoginUserInput;
 }>;
 
-export type SignInMutation = {
+export type AuthSignInMutation = {
   __typename?: 'Mutation';
-  signIn: {
+  authSignIn: {
     __typename?: 'LoginUserResult';
     refreshToken: string;
     token: string;
@@ -814,13 +846,13 @@ export type SignInMutation = {
   };
 };
 
-export type SignUpMutationVariables = Exact<{
+export type AuthSignUpMutationVariables = Exact<{
   createUserInput: CreateUserInput;
 }>;
 
-export type SignUpMutation = {
+export type AuthSignUpMutation = {
   __typename?: 'Mutation';
-  signUp: {
+  authSignUp: {
     __typename?: 'LoginUserResult';
     refreshToken: string;
     token: string;
@@ -836,47 +868,90 @@ export type SignUpMutation = {
   };
 };
 
-export type RecoveryPassMutationVariables = Exact<{
+export type AuthRecoveryPassMutationVariables = Exact<{
   userRecoveryInput: UserRecoveryInput;
 }>;
 
-export type RecoveryPassMutation = {
+export type AuthRecoveryPassMutation = {
   __typename?: 'Mutation';
-  recoveryPass: boolean;
+  authRecoveryPass: boolean;
 };
 
-export type RefreshTokensMutationVariables = Exact<{
+export type AuthRefreshTokensMutationVariables = Exact<{
   refreshToken: Scalars['String']['input'];
 }>;
 
-export type RefreshTokensMutation = {
+export type AuthRefreshTokensMutation = {
   __typename?: 'Mutation';
-  refreshTokens: {
+  authRefreshTokens: {
     __typename?: 'RefreshTokenResult';
     refreshToken: string;
     token: string;
   };
 };
 
-export type RecoveryPassVerifyOtpMutationVariables = Exact<{
+export type AuthRecoveryPassVerifyOtpMutationVariables = Exact<{
   userRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput;
 }>;
 
-export type RecoveryPassVerifyOtpMutation = {
+export type AuthRecoveryPassVerifyOtpMutation = {
   __typename?: 'Mutation';
-  recoveryPassVerifyOtp: {
+  authRecoveryPassVerifyOtp: {
     __typename?: 'RecoveryVerifyOtTokenResult';
     token?: string | null;
   };
 };
 
-export type RecoveryPassConfirmMutationVariables = Exact<{
+export type AuthRecoveryPassConfirmMutationVariables = Exact<{
   userRecoveryInput: UserRecoveryConfirmInput;
 }>;
 
-export type RecoveryPassConfirmMutation = {
+export type AuthRecoveryPassConfirmMutation = {
   __typename?: 'Mutation';
-  recoveryPassConfirm: boolean;
+  authRecoveryPassConfirm: boolean;
+};
+
+export type DealCreateMutationVariables = Exact<{
+  createDealInput: CreateDealInput;
+}>;
+
+export type DealCreateMutation = {
+  __typename?: 'Mutation';
+  dealCreate: {
+    __typename?: 'Deal';
+    _id: string;
+    amount: string;
+    code?: string | null;
+    customerId?: string | null;
+    dealType?: string | null;
+    evidence?: Array<string> | null;
+    paymentLimitDate: Date;
+    payments?: Array<string> | null;
+    productId: string;
+    rejectReason?: string | null;
+    salesmanId: string;
+    shipmentId?: string | null;
+    status: DealStatusEnum;
+    product?: {
+      __typename?: 'Product';
+      _id: string;
+      brand: string;
+      costumerId?: string | null;
+      description: string;
+      media: string;
+      name: string;
+      productStatus: ProductStatusEnum;
+    } | null;
+    salesman?: {
+      __typename?: 'UserResponse';
+      _id: string;
+      birthday?: string | null;
+      email: string;
+      name: string;
+      role?: string | null;
+      status?: string | null;
+    } | null;
+  };
 };
 
 export type UserMeQueryVariables = Exact<{ [key: string]: never }>;
@@ -904,9 +979,20 @@ export const UserFragmentFragmentDoc = gql`
     status
   }
 `;
-export const SignInDocument = gql`
-  mutation SignIn($user: LoginUserInput!) {
-    signIn(User: $user) {
+export const ProductFragmentFragmentDoc = gql`
+  fragment ProductFragment on Product {
+    _id
+    brand
+    costumerId
+    description
+    media
+    name
+    productStatus
+  }
+`;
+export const AuthSignInDocument = gql`
+  mutation AuthSignIn($user: LoginUserInput!) {
+    authSignIn(User: $user) {
       refreshToken
       token
       user {
@@ -916,49 +1002,52 @@ export const SignInDocument = gql`
   }
   ${UserFragmentFragmentDoc}
 `;
-export type SignInMutationFn = Apollo.MutationFunction<
-  SignInMutation,
-  SignInMutationVariables
+export type AuthSignInMutationFn = Apollo.MutationFunction<
+  AuthSignInMutation,
+  AuthSignInMutationVariables
 >;
 
 /**
- * __useSignInMutation__
+ * __useAuthSignInMutation__
  *
- * To run a mutation, you first call `useSignInMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSignInMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAuthSignInMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAuthSignInMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [signInMutation, { data, loading, error }] = useSignInMutation({
+ * const [authSignInMutation, { data, loading, error }] = useAuthSignInMutation({
  *   variables: {
  *      user: // value for 'user'
  *   },
  * });
  */
-export function useSignInMutation(
+export function useAuthSignInMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    SignInMutation,
-    SignInMutationVariables
+    AuthSignInMutation,
+    AuthSignInMutationVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<SignInMutation, SignInMutationVariables>(
-    SignInDocument,
+  return Apollo.useMutation<AuthSignInMutation, AuthSignInMutationVariables>(
+    AuthSignInDocument,
     options,
   );
 }
-export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
-export type SignInMutationResult = Apollo.MutationResult<SignInMutation>;
-export type SignInMutationOptions = Apollo.BaseMutationOptions<
-  SignInMutation,
-  SignInMutationVariables
+export type AuthSignInMutationHookResult = ReturnType<
+  typeof useAuthSignInMutation
 >;
-export const SignUpDocument = gql`
-  mutation SignUp($createUserInput: CreateUserInput!) {
-    signUp(createUserInput: $createUserInput) {
+export type AuthSignInMutationResult =
+  Apollo.MutationResult<AuthSignInMutation>;
+export type AuthSignInMutationOptions = Apollo.BaseMutationOptions<
+  AuthSignInMutation,
+  AuthSignInMutationVariables
+>;
+export const AuthSignUpDocument = gql`
+  mutation AuthSignUp($createUserInput: CreateUserInput!) {
+    authSignUp(createUserInput: $createUserInput) {
       refreshToken
       token
       user {
@@ -968,246 +1057,322 @@ export const SignUpDocument = gql`
   }
   ${UserFragmentFragmentDoc}
 `;
-export type SignUpMutationFn = Apollo.MutationFunction<
-  SignUpMutation,
-  SignUpMutationVariables
+export type AuthSignUpMutationFn = Apollo.MutationFunction<
+  AuthSignUpMutation,
+  AuthSignUpMutationVariables
 >;
 
 /**
- * __useSignUpMutation__
+ * __useAuthSignUpMutation__
  *
- * To run a mutation, you first call `useSignUpMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSignUpMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAuthSignUpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAuthSignUpMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [signUpMutation, { data, loading, error }] = useSignUpMutation({
+ * const [authSignUpMutation, { data, loading, error }] = useAuthSignUpMutation({
  *   variables: {
  *      createUserInput: // value for 'createUserInput'
  *   },
  * });
  */
-export function useSignUpMutation(
+export function useAuthSignUpMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    SignUpMutation,
-    SignUpMutationVariables
+    AuthSignUpMutation,
+    AuthSignUpMutationVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(
-    SignUpDocument,
+  return Apollo.useMutation<AuthSignUpMutation, AuthSignUpMutationVariables>(
+    AuthSignUpDocument,
     options,
   );
 }
-export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
-export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
-export type SignUpMutationOptions = Apollo.BaseMutationOptions<
-  SignUpMutation,
-  SignUpMutationVariables
+export type AuthSignUpMutationHookResult = ReturnType<
+  typeof useAuthSignUpMutation
 >;
-export const RecoveryPassDocument = gql`
-  mutation RecoveryPass($userRecoveryInput: UserRecoveryInput!) {
-    recoveryPass(UserRecoveryInput: $userRecoveryInput)
+export type AuthSignUpMutationResult =
+  Apollo.MutationResult<AuthSignUpMutation>;
+export type AuthSignUpMutationOptions = Apollo.BaseMutationOptions<
+  AuthSignUpMutation,
+  AuthSignUpMutationVariables
+>;
+export const AuthRecoveryPassDocument = gql`
+  mutation AuthRecoveryPass($userRecoveryInput: UserRecoveryInput!) {
+    authRecoveryPass(UserRecoveryInput: $userRecoveryInput)
   }
 `;
-export type RecoveryPassMutationFn = Apollo.MutationFunction<
-  RecoveryPassMutation,
-  RecoveryPassMutationVariables
+export type AuthRecoveryPassMutationFn = Apollo.MutationFunction<
+  AuthRecoveryPassMutation,
+  AuthRecoveryPassMutationVariables
 >;
 
 /**
- * __useRecoveryPassMutation__
+ * __useAuthRecoveryPassMutation__
  *
- * To run a mutation, you first call `useRecoveryPassMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRecoveryPassMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAuthRecoveryPassMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAuthRecoveryPassMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [recoveryPassMutation, { data, loading, error }] = useRecoveryPassMutation({
+ * const [authRecoveryPassMutation, { data, loading, error }] = useAuthRecoveryPassMutation({
  *   variables: {
  *      userRecoveryInput: // value for 'userRecoveryInput'
  *   },
  * });
  */
-export function useRecoveryPassMutation(
+export function useAuthRecoveryPassMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    RecoveryPassMutation,
-    RecoveryPassMutationVariables
+    AuthRecoveryPassMutation,
+    AuthRecoveryPassMutationVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
-    RecoveryPassMutation,
-    RecoveryPassMutationVariables
-  >(RecoveryPassDocument, options);
+    AuthRecoveryPassMutation,
+    AuthRecoveryPassMutationVariables
+  >(AuthRecoveryPassDocument, options);
 }
-export type RecoveryPassMutationHookResult = ReturnType<
-  typeof useRecoveryPassMutation
+export type AuthRecoveryPassMutationHookResult = ReturnType<
+  typeof useAuthRecoveryPassMutation
 >;
-export type RecoveryPassMutationResult =
-  Apollo.MutationResult<RecoveryPassMutation>;
-export type RecoveryPassMutationOptions = Apollo.BaseMutationOptions<
-  RecoveryPassMutation,
-  RecoveryPassMutationVariables
+export type AuthRecoveryPassMutationResult =
+  Apollo.MutationResult<AuthRecoveryPassMutation>;
+export type AuthRecoveryPassMutationOptions = Apollo.BaseMutationOptions<
+  AuthRecoveryPassMutation,
+  AuthRecoveryPassMutationVariables
 >;
-export const RefreshTokensDocument = gql`
-  mutation RefreshTokens($refreshToken: String!) {
-    refreshTokens(refreshToken: $refreshToken) {
+export const AuthRefreshTokensDocument = gql`
+  mutation AuthRefreshTokens($refreshToken: String!) {
+    authRefreshTokens(refreshToken: $refreshToken) {
       refreshToken
       token
     }
   }
 `;
-export type RefreshTokensMutationFn = Apollo.MutationFunction<
-  RefreshTokensMutation,
-  RefreshTokensMutationVariables
+export type AuthRefreshTokensMutationFn = Apollo.MutationFunction<
+  AuthRefreshTokensMutation,
+  AuthRefreshTokensMutationVariables
 >;
 
 /**
- * __useRefreshTokensMutation__
+ * __useAuthRefreshTokensMutation__
  *
- * To run a mutation, you first call `useRefreshTokensMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRefreshTokensMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAuthRefreshTokensMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAuthRefreshTokensMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [refreshTokensMutation, { data, loading, error }] = useRefreshTokensMutation({
+ * const [authRefreshTokensMutation, { data, loading, error }] = useAuthRefreshTokensMutation({
  *   variables: {
  *      refreshToken: // value for 'refreshToken'
  *   },
  * });
  */
-export function useRefreshTokensMutation(
+export function useAuthRefreshTokensMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    RefreshTokensMutation,
-    RefreshTokensMutationVariables
+    AuthRefreshTokensMutation,
+    AuthRefreshTokensMutationVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
-    RefreshTokensMutation,
-    RefreshTokensMutationVariables
-  >(RefreshTokensDocument, options);
+    AuthRefreshTokensMutation,
+    AuthRefreshTokensMutationVariables
+  >(AuthRefreshTokensDocument, options);
 }
-export type RefreshTokensMutationHookResult = ReturnType<
-  typeof useRefreshTokensMutation
+export type AuthRefreshTokensMutationHookResult = ReturnType<
+  typeof useAuthRefreshTokensMutation
 >;
-export type RefreshTokensMutationResult =
-  Apollo.MutationResult<RefreshTokensMutation>;
-export type RefreshTokensMutationOptions = Apollo.BaseMutationOptions<
-  RefreshTokensMutation,
-  RefreshTokensMutationVariables
+export type AuthRefreshTokensMutationResult =
+  Apollo.MutationResult<AuthRefreshTokensMutation>;
+export type AuthRefreshTokensMutationOptions = Apollo.BaseMutationOptions<
+  AuthRefreshTokensMutation,
+  AuthRefreshTokensMutationVariables
 >;
-export const RecoveryPassVerifyOtpDocument = gql`
-  mutation RecoveryPassVerifyOtp(
+export const AuthRecoveryPassVerifyOtpDocument = gql`
+  mutation AuthRecoveryPassVerifyOtp(
     $userRecoveryVerifyOtpInput: UserRecoveryVerifyOtpInput!
   ) {
-    recoveryPassVerifyOtp(
+    authRecoveryPassVerifyOtp(
       UserRecoveryVerifyOtpInput: $userRecoveryVerifyOtpInput
     ) {
       token
     }
   }
 `;
-export type RecoveryPassVerifyOtpMutationFn = Apollo.MutationFunction<
-  RecoveryPassVerifyOtpMutation,
-  RecoveryPassVerifyOtpMutationVariables
+export type AuthRecoveryPassVerifyOtpMutationFn = Apollo.MutationFunction<
+  AuthRecoveryPassVerifyOtpMutation,
+  AuthRecoveryPassVerifyOtpMutationVariables
 >;
 
 /**
- * __useRecoveryPassVerifyOtpMutation__
+ * __useAuthRecoveryPassVerifyOtpMutation__
  *
- * To run a mutation, you first call `useRecoveryPassVerifyOtpMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRecoveryPassVerifyOtpMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAuthRecoveryPassVerifyOtpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAuthRecoveryPassVerifyOtpMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [recoveryPassVerifyOtpMutation, { data, loading, error }] = useRecoveryPassVerifyOtpMutation({
+ * const [authRecoveryPassVerifyOtpMutation, { data, loading, error }] = useAuthRecoveryPassVerifyOtpMutation({
  *   variables: {
  *      userRecoveryVerifyOtpInput: // value for 'userRecoveryVerifyOtpInput'
  *   },
  * });
  */
-export function useRecoveryPassVerifyOtpMutation(
+export function useAuthRecoveryPassVerifyOtpMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    RecoveryPassVerifyOtpMutation,
-    RecoveryPassVerifyOtpMutationVariables
+    AuthRecoveryPassVerifyOtpMutation,
+    AuthRecoveryPassVerifyOtpMutationVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
-    RecoveryPassVerifyOtpMutation,
-    RecoveryPassVerifyOtpMutationVariables
-  >(RecoveryPassVerifyOtpDocument, options);
+    AuthRecoveryPassVerifyOtpMutation,
+    AuthRecoveryPassVerifyOtpMutationVariables
+  >(AuthRecoveryPassVerifyOtpDocument, options);
 }
-export type RecoveryPassVerifyOtpMutationHookResult = ReturnType<
-  typeof useRecoveryPassVerifyOtpMutation
+export type AuthRecoveryPassVerifyOtpMutationHookResult = ReturnType<
+  typeof useAuthRecoveryPassVerifyOtpMutation
 >;
-export type RecoveryPassVerifyOtpMutationResult =
-  Apollo.MutationResult<RecoveryPassVerifyOtpMutation>;
-export type RecoveryPassVerifyOtpMutationOptions = Apollo.BaseMutationOptions<
-  RecoveryPassVerifyOtpMutation,
-  RecoveryPassVerifyOtpMutationVariables
->;
-export const RecoveryPassConfirmDocument = gql`
-  mutation RecoveryPassConfirm($userRecoveryInput: UserRecoveryConfirmInput!) {
-    recoveryPassConfirm(UserRecoveryInput: $userRecoveryInput)
+export type AuthRecoveryPassVerifyOtpMutationResult =
+  Apollo.MutationResult<AuthRecoveryPassVerifyOtpMutation>;
+export type AuthRecoveryPassVerifyOtpMutationOptions =
+  Apollo.BaseMutationOptions<
+    AuthRecoveryPassVerifyOtpMutation,
+    AuthRecoveryPassVerifyOtpMutationVariables
+  >;
+export const AuthRecoveryPassConfirmDocument = gql`
+  mutation AuthRecoveryPassConfirm(
+    $userRecoveryInput: UserRecoveryConfirmInput!
+  ) {
+    authRecoveryPassConfirm(UserRecoveryInput: $userRecoveryInput)
   }
 `;
-export type RecoveryPassConfirmMutationFn = Apollo.MutationFunction<
-  RecoveryPassConfirmMutation,
-  RecoveryPassConfirmMutationVariables
+export type AuthRecoveryPassConfirmMutationFn = Apollo.MutationFunction<
+  AuthRecoveryPassConfirmMutation,
+  AuthRecoveryPassConfirmMutationVariables
 >;
 
 /**
- * __useRecoveryPassConfirmMutation__
+ * __useAuthRecoveryPassConfirmMutation__
  *
- * To run a mutation, you first call `useRecoveryPassConfirmMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRecoveryPassConfirmMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAuthRecoveryPassConfirmMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAuthRecoveryPassConfirmMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [recoveryPassConfirmMutation, { data, loading, error }] = useRecoveryPassConfirmMutation({
+ * const [authRecoveryPassConfirmMutation, { data, loading, error }] = useAuthRecoveryPassConfirmMutation({
  *   variables: {
  *      userRecoveryInput: // value for 'userRecoveryInput'
  *   },
  * });
  */
-export function useRecoveryPassConfirmMutation(
+export function useAuthRecoveryPassConfirmMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    RecoveryPassConfirmMutation,
-    RecoveryPassConfirmMutationVariables
+    AuthRecoveryPassConfirmMutation,
+    AuthRecoveryPassConfirmMutationVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
-    RecoveryPassConfirmMutation,
-    RecoveryPassConfirmMutationVariables
-  >(RecoveryPassConfirmDocument, options);
+    AuthRecoveryPassConfirmMutation,
+    AuthRecoveryPassConfirmMutationVariables
+  >(AuthRecoveryPassConfirmDocument, options);
 }
-export type RecoveryPassConfirmMutationHookResult = ReturnType<
-  typeof useRecoveryPassConfirmMutation
+export type AuthRecoveryPassConfirmMutationHookResult = ReturnType<
+  typeof useAuthRecoveryPassConfirmMutation
 >;
-export type RecoveryPassConfirmMutationResult =
-  Apollo.MutationResult<RecoveryPassConfirmMutation>;
-export type RecoveryPassConfirmMutationOptions = Apollo.BaseMutationOptions<
-  RecoveryPassConfirmMutation,
-  RecoveryPassConfirmMutationVariables
+export type AuthRecoveryPassConfirmMutationResult =
+  Apollo.MutationResult<AuthRecoveryPassConfirmMutation>;
+export type AuthRecoveryPassConfirmMutationOptions = Apollo.BaseMutationOptions<
+  AuthRecoveryPassConfirmMutation,
+  AuthRecoveryPassConfirmMutationVariables
+>;
+export const DealCreateDocument = gql`
+  mutation DealCreate($createDealInput: CreateDealInput!) {
+    dealCreate(createDealInput: $createDealInput) {
+      _id
+      amount
+      code
+      customerId
+      dealType
+      evidence
+      paymentLimitDate
+      payments
+      product {
+        ...ProductFragment
+      }
+      productId
+      rejectReason
+      salesman {
+        ...UserFragment
+      }
+      salesmanId
+      shipmentId
+      status
+    }
+  }
+  ${ProductFragmentFragmentDoc}
+  ${UserFragmentFragmentDoc}
+`;
+export type DealCreateMutationFn = Apollo.MutationFunction<
+  DealCreateMutation,
+  DealCreateMutationVariables
+>;
+
+/**
+ * __useDealCreateMutation__
+ *
+ * To run a mutation, you first call `useDealCreateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDealCreateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dealCreateMutation, { data, loading, error }] = useDealCreateMutation({
+ *   variables: {
+ *      createDealInput: // value for 'createDealInput'
+ *   },
+ * });
+ */
+export function useDealCreateMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DealCreateMutation,
+    DealCreateMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<DealCreateMutation, DealCreateMutationVariables>(
+    DealCreateDocument,
+    options,
+  );
+}
+export type DealCreateMutationHookResult = ReturnType<
+  typeof useDealCreateMutation
+>;
+export type DealCreateMutationResult =
+  Apollo.MutationResult<DealCreateMutation>;
+export type DealCreateMutationOptions = Apollo.BaseMutationOptions<
+  DealCreateMutation,
+  DealCreateMutationVariables
 >;
 export const UserMeDocument = gql`
   query UserMe {

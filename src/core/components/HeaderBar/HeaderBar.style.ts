@@ -12,10 +12,7 @@ export const ContainerTitle = styled.View({
   justifyContent: 'center',
 });
 
-export const ContainerBack = styled.View({
-  height: 36,
-  width: 36,
-});
+export const ContainerBack = styled.View({});
 
 export const ContainerView = styled(SafeAreaView)(({ theme }) => ({
   backgroundColor: theme.palette.common.white,

@@ -75,3 +75,9 @@ export * from './List';
 
 export { default as InputBase } from './InputBase';
 export * from './InputBase';
+
+export { default as Loading } from './Loading';
+export * from './Loading';
+
+export { default as Alert } from './Alert';
+export * from './Alert';

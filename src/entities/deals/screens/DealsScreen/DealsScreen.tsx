@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 import Animated, {
@@ -8,6 +8,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { HomeHeaderBar } from '@core/components';
 import { useModal, useNavigate } from '@core/hooks';
@@ -35,7 +36,7 @@ const deal: BaseDeal = {
   dealer: 'Jose Arevalos Martinex',
 };
 
-const DEALS = Array.from({ length: 20 }).map(() => deal);
+const DEALS = Array.from({ length: 10 }).map(() => deal);
 
 const HIDDEN_POSITION = 80;
 const INTERPOLATE = [HIDDEN_POSITION / 2, HIDDEN_POSITION, HIDDEN_POSITION * 2];
@@ -106,19 +107,19 @@ const DealsScreen = () => {
 
   return (
     <SafeLayout>
-      <HomeHeaderBar />
-      <AnimatedContainer ph={2} spacing={1} style={rStyleHeaderTop}>
-        <DealFilters ref={ref} onPress={modal.open} />
-        <Tabs value={tab} onChange={current => setTab(current)}>
-          <Tab>{t('deals.screen.tabs.active')}</Tab>
-          <Tab>{t('deals.screen.tabs.finished')}</Tab>
-        </Tabs>
-      </AnimatedContainer>
-      <ScrollLayout
-        onScroll={scrollHandler}
-        showsVerticalScrollIndicator={false}
-        scrollEventThrottle={16}>
-        <SafeAreaView>
+      <SafeAreaView>
+        <HomeHeaderBar />
+        <AnimatedContainer ph={2} spacing={1} style={rStyleHeaderTop}>
+          <DealFilters ref={ref} onPress={modal.open} />
+          <Tabs value={tab} onChange={current => setTab(current)}>
+            <Tab>{t('deals.screen.tabs.active')}</Tab>
+            <Tab>{t('deals.screen.tabs.finished')}</Tab>
+          </Tabs>
+        </AnimatedContainer>
+        <ScrollLayout
+          onScroll={scrollHandler}
+          showsVerticalScrollIndicator={false}
+          scrollEventThrottle={16}>
           <AnimatedContainer
             ph={2}
             spacing={1}
@@ -137,8 +138,8 @@ const DealsScreen = () => {
           <TabPanel value={tab} index={1}>
             <DealList deals={DEALS} />
           </TabPanel>
-        </SafeAreaView>
-      </ScrollLayout>
+        </ScrollLayout>
+      </SafeAreaView>
       <FloatButton onPress={onPressNew}>
         <PlusIcon color="white" />
       </FloatButton>

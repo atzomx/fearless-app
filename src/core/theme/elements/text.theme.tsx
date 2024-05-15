@@ -54,9 +54,7 @@ const Text: TextBase = {
   },
   button: {
     fontSize: 16,
-    // letterSpacing: 0.078,
-    textTransform: 'capitalize',
-    fontFamily: font[500],
+    fontFamily: font[600],
   },
   caption: {
     fontSize: 10,

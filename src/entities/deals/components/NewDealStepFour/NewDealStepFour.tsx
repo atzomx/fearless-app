@@ -30,7 +30,7 @@ const NewDealStepFour = () => {
           title={newDeal.data.name}
           subtitle={newDeal.data.description}
         />
-        <Container pb={12} pt={0}>
+        <Container pb={12} pt={0} flex={1}>
           <ImagePreviewer images={newDeal.data.files} maxShowed={3} />
           <DealSummary
             product={Money.fromString(newDeal.data.amount).toNumber()}

@@ -31,7 +31,7 @@ const NewDealStepThree = () => {
           title={newDeal.data.name}
           subtitle={newDeal.data.description}
         />
-        <Container pb={12} pt={0}>
+        <Container flex={1} pb={1} pt={0} spacing={1}>
           <ImagePreviewer images={newDeal.data.files} maxShowed={3} />
           <NumberKeyboard
             title={t('deals.wizard.three.description')}

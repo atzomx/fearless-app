@@ -17,6 +17,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { CSSObject } from 'styled-components';
 import { useTheme } from 'styled-components/native';
 
 import * as S from './Modal.style';
@@ -28,6 +29,7 @@ type ModalProps = {
   open: boolean;
   onClose: () => void;
   title?: string;
+  style?: CSSObject;
   children:
     | React.ReactNode
     | ((props: { animatedClose: () => void }) => JSX.Element);
@@ -42,7 +44,7 @@ const AnimatedDrag = Animated.createAnimatedComponent(S.GestureContainer);
 
 const INITIAL_POSITION = Dimensions.get('screen').height;
 
-const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
+const Modal: FC<ModalProps> = ({ open, onClose, title, children, style }) => {
   const theme = useTheme();
   const translateY = useSharedValue(0);
   const holding = useSharedValue(0);
@@ -148,7 +150,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
           <AnimatedBackdrop style={rBackdropStyle} />
         </S.BackdropPressable>
         <GestureHandlerRootView>
-          <AnimatedModal ref={aref} style={rBottomSheetStyle}>
+          <AnimatedModal ref={aref} style={[rBottomSheetStyle, style]}>
             <PanGestureHandler onGestureEvent={panGestureEvent}>
               <AnimatedDrag>
                 <AnimatedLine style={rHoldStyle} />

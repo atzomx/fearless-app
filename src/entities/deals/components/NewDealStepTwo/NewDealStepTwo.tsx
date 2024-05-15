@@ -12,7 +12,7 @@ import { useNewDeal } from '@e/deals/hooks';
 
 import NewDealHeader from '../NewDealHeader';
 
-const MIN_FILES = 8;
+const MIN_FILES = 2;
 
 const NewDealStepTwo = () => {
   const { t } = useTranslation();
@@ -55,7 +55,11 @@ const NewDealStepTwo = () => {
         </ScrollLayout>
       </Wizard.Body>
       <Wizard.Actions>
-        <Button title={t('deals.wizard.one.action')} onPress={onSubmit} />
+        <Button
+          disable={file.length < MIN_FILES}
+          title={t('deals.wizard.one.action')}
+          onPress={onSubmit}
+        />
       </Wizard.Actions>
     </Wizard.Page>
   );

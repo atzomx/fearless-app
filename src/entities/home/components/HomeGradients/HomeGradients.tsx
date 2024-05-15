@@ -2,14 +2,22 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import { useNavigate } from '@core/hooks';
 import { ArrowTrendingDownIcon, PlusIcon, QRCodeIcon } from '@core/icons';
 import theme from '@core/theme';
 import { Container, Text } from '@core/ui';
+
+import DEALS_ROUTES from '@e/deals/constants/routes';
 
 import GradientCard from '../GradientCard';
 
 const HomeGradients = () => {
   const { t } = useTranslation('', { keyPrefix: 'home.home' });
+  const navigate = useNavigate();
+
+  const goToNewDeal = () => {
+    navigate.navigate(DEALS_ROUTES.base, { screen: DEALS_ROUTES.new });
+  };
 
   return (
     <>
@@ -41,7 +49,7 @@ const HomeGradients = () => {
         </GradientCard.Row>
       </GradientCard>
       <Container direction="row" spacing={1}>
-        <GradientCard colors={['#6157ff', '#ee49fd']}>
+        <GradientCard colors={['#6157ff', '#ee49fd']} onPress={goToNewDeal}>
           <GradientCard.Row>
             <Container
               justifyContent="center"
